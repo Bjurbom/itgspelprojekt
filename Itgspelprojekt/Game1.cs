@@ -13,12 +13,17 @@ namespace Itgspelprojekt
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-
+        Camera camera;
         Map map;
+
+        Vector2 position;
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
+            graphics.PreferredBackBufferHeight = 700;
+            graphics.PreferredBackBufferWidth = 1280;
         }
 
         /// <summary>
@@ -30,7 +35,10 @@ namespace Itgspelprojekt
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            
             map = new Map();
+            position = new Vector2();
+            camera = new Camera();
 
             base.Initialize();
         }
@@ -45,21 +53,21 @@ namespace Itgspelprojekt
             Tiless.Content = Content;
 
             map.Generate(new int[,]
-            {//  1,2,3,4,5,6,7,8,9,10,11
-                {1,1,1,1,1,1,1,1,1,1,1},
-                {1,0,0,0,0,0,0,0,0,0,1},
-                {1,0,0,0,0,0,0,0,0,0,1},
-                {1,0,0,0,0,0,0,0,0,0,1},
-                {1,0,0,0,0,0,0,0,0,0,1},
-                {1,0,0,0,0,0,0,0,0,0,1},
-                {1,0,0,0,0,0,0,0,0,0,1},
-                {1,0,0,0,0,0,0,0,0,0,1},
-                {1,0,0,0,0,0,0,0,0,0,1},
-                {1,0,0,0,0,0,0,0,0,0,1},
-                {1,0,0,0,0,0,0,0,0,0,1},
-                {1,0,0,0,0,0,0,0,0,0,0},
-                {1,0,0,0,0,0,1,0,0,0,0},
-                {1,1,1,1,1,1,1,1,1,1,1},
+            {//  1,2,3,4,5,6,7,8,9,1,1,2,3,4,5,6,7,8,9,1
+                {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}, //1
+                {1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1}, //2
+                {1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1}, //3
+                {1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1}, //4
+                {1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1}, //5
+                {1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1}, //6
+                {1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1}, //7
+                {1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1}, //8
+                {1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1}, //9
+                {1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1}, //10
+                {1,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1,1,1,1,1}, //11
+                {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, //12
+                {1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0}, //13
+                {1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0}, //14
             }, 64);
 
             spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -86,6 +94,29 @@ namespace Itgspelprojekt
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            //temporär movements för kamran
+            if (Keyboard.GetState().IsKeyDown(Keys.W))
+            {
+                position.Y-= 10;
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.S))
+            {
+                position.Y+= 10;
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.A))
+            {
+                position.X-=10;
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.D))
+            {
+                position.X+=10;
+            }
+            //Kamran upptateras
+            camera.Update(position);
+
             // TODO: Add your update logic here
 
             base.Update(gameTime);
@@ -99,7 +130,7 @@ namespace Itgspelprojekt
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            spriteBatch.Begin();
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, camera.ViewMatrix);
             map.Draw(spriteBatch);
             spriteBatch.End();
 
