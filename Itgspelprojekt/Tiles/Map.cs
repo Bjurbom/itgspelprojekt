@@ -26,6 +26,8 @@ namespace Itgspelprojekt.Tiles
 
         public void Generate(int[,] map, int size)
         {
+
+            //tar varje block 
             for (int x = 0; x < map.GetLength(1); x++)
             {
                 for (int y = 0; y < map.GetLength(0); y++)
@@ -37,7 +39,6 @@ namespace Itgspelprojekt.Tiles
                         collisionTiles.Add(new CollisionTiles(number, new Rectangle(x * size, y * size, size, size)));
                     }
 
-                    
                 }
             }   
         }

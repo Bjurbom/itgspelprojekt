@@ -13,7 +13,7 @@ namespace Itgspelprojekt.Tiles
     {
         public CollisionTiles(int i, Rectangle newRectangle)
         {
-            this.texture = Content.Load<Texture2D>("" + 1); 
+            this.texture = Content.Load<Texture2D>("tile" + 1); 
             this.Rectangle = newRectangle;
         }
     }
