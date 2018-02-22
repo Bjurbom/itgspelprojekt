@@ -12,8 +12,9 @@ namespace Itgspelprojekt
     class Tiless
     {
         protected Texture2D texture;
-
         private Rectangle rectangle;
+        private static ContentManager content;
+
         public Rectangle Rectangle
         {
             get { return rectangle; }
@@ -21,7 +22,7 @@ namespace Itgspelprojekt
 
         }
 
-        private static ContentManager content;
+        
         public static ContentManager Content
         {
             protected get { return content; }
