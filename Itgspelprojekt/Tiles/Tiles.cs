@@ -9,26 +9,27 @@ using System.Threading.Tasks;
 
 namespace Itgspelprojekt
 {
-    class Tiless
+    abstract class Tiless
     {
+        //variabler /m content
         protected Texture2D texture;
         private Rectangle rectangle;
         private static ContentManager content;
 
+        //inkappsling
         public Rectangle Rectangle
         {
             get { return rectangle; }
             protected set { rectangle = value; }
 
         }
-
-        
         public static ContentManager Content
         {
             protected get { return content; }
             set { content = value; }
         }
 
+        //ritar
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, rectangle, Color.White);
