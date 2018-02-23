@@ -38,7 +38,7 @@ namespace Itgspelprojekt
             
             map = new Map();
             position = new Vector2();
-            camera = new Camera();
+            camera = new Camera(GraphicsDeviceManager.DefaultBackBufferWidth, GraphicsDeviceManager.DefaultBackBufferHeight);
 
             base.Initialize();
         }

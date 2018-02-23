@@ -16,27 +16,25 @@ namespace Itgspelprojekt
     {
         Vector2 position;
         Matrix viewMatrix;
+        public int screenWidth = 1280, screenHeight = 700;
+
+        public Camera (int screenWidth, int screenHeight)
+        {
+            this.screenHeight = screenHeight;
+            this.screenWidth = screenWidth;
+        }
 
         public Matrix ViewMatrix
         {
             get { return viewMatrix; }
         }
 
-        public int ScreenWidth
-        {
-            get { return 1280; }
-        }
-
-        public int ScreenHeight
-        {
-            get { return 700; }
-        }
 
         public void Update(Vector2 playerPosition)
         {
             // sätter ut mittpunkten på spelaren
-            position.X = playerPosition.X - (ScreenWidth / 2);
-            position.Y = playerPosition.Y - (ScreenHeight / 2);
+            position.X = playerPosition.X - (screenWidth / 2);
+            position.Y = playerPosition.Y - (screenHeight / 2);
 
             // där magi händer
             viewMatrix = Matrix.CreateTranslation(new Vector3(-position, 0));
