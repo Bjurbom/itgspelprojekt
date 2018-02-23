@@ -32,11 +32,11 @@ namespace Itgspelprojekt
             get { return 700; }
         }
 
-        public void Update(Vector2 playerPosistion)
+        public void Update(Vector2 playerPosition)
         {
-            // sätter ut mmittpunkten på spelaren
-            position.X = playerPosistion.X - (ScreenWidth / 2);
-            position.Y = playerPosistion.Y - (ScreenHeight / 2);
+            // sätter ut mittpunkten på spelaren
+            position.X = playerPosition.X - (ScreenWidth / 2);
+            position.Y = playerPosition.Y - (ScreenHeight / 2);
 
             // där magi händer
             viewMatrix = Matrix.CreateTranslation(new Vector3(-position, 0));
