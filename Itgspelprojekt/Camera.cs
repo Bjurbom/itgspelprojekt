@@ -1,4 +1,5 @@
 ﻿
+++
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace Itgspelprojekt
     {
         Vector2 position;
         Matrix viewMatrix;
-        public int screenWidth = 1280, screenHeight = 700;
+        public int screenWidth, screenHeight;
 
         public Camera (int screenWidth, int screenHeight)
         {
