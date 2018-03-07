@@ -18,26 +18,32 @@ namespace Itgspelprojekt.Creatures
 
         public void PlayerUpdate()
         {
-            // up
-            if (Keyboard.GetState().IsKeyDown(Keys.W))
+            if (position == targetPosition)
             {
-                targetPosition.Y = position.Y + (float)64;
-            }
-            // down
-            if (Keyboard.GetState().IsKeyDown(Keys.S))
-            {
-
-            }
-            // right 
-            if (Keyboard.GetState().IsKeyDown(Keys.D))
-            {
-
-            }
-            // left
-            if (Keyboard.GetState().IsKeyDown(Keys.A))
-            {
-
+                // up
+                if (Keyboard.GetState().IsKeyDown(Keys.W))
+                {
+                    targetPosition.Y = position.Y - 64;
+                }
+                // down
+                else if (Keyboard.GetState().IsKeyDown(Keys.S))
+                {
+                    targetPosition.Y = position.Y + 64;
+                }
+                // right 
+                else if (Keyboard.GetState().IsKeyDown(Keys.D))
+                {
+                    targetPosition.X = position.X + 64;
+                }
+                // left
+                else if (Keyboard.GetState().IsKeyDown(Keys.A))
+                {
+                    targetPosition.X = position.X - 64;
+                }
             }
         }
+
+        
+        
     }
 }

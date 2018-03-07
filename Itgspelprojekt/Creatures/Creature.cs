@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Itgspelprojekt.Creatures
 {
-    class Creature
+    abstract class Creature
     {
         // Det här är en Creature i the Overworld. TODO: items, creatures in battle
 
@@ -20,11 +20,13 @@ namespace Itgspelprojekt.Creatures
         public Texture2D texture;
         public Rectangle hitbox; // will be set to texture.Bounds in the constructor
         public string name;
+        public int sizeX = 64, sizeY = 64;
 
         public Creature (string name, Vector2 position, float moveSpeed, Texture2D texture)
         {
             this.name = name;
             this.position = position;
+            this.targetPosition = position;
             this.moveSpeed = moveSpeed;
             this.texture = texture;
             this.hitbox = texture.Bounds;
@@ -32,19 +34,19 @@ namespace Itgspelprojekt.Creatures
         
         public void Update()
         {
-            if (targetPosition.X - 0.1 > position.X) // player only has to move 90% of the distance, so will only move at 90% of moveSpeed
-                direction.X = 0.9f;
-            else if (targetPosition.X + 0.1 < position.X)
-                direction.X = -0.9f;
+            if (targetPosition.X - 4 > position.X) // player only has to move 90% of the distance, so will only move at 90% of moveSpeed
+                direction.X = 1f;
+            else if (targetPosition.X + 4 < position.X)
+                direction.X = -1f;
             else
             {
                 direction.X = 0;
                 position.X = targetPosition.X;
 
-                if (targetPosition.Y - 0.1 > position.Y) // When X is correct, move on Y axis
-                    direction.Y = 0.9f;
-                else if (targetPosition.Y + 0.1 < position.Y)
-                    direction.Y = -0.9f;
+                if (targetPosition.Y - 4 > position.Y) // When X is correct, move on Y axis
+                    direction.Y = 1f;
+                else if (targetPosition.Y + 4 < position.Y)
+                    direction.Y = -1f;
                 else
                 {
                     direction.Y = 0;
@@ -55,9 +57,10 @@ namespace Itgspelprojekt.Creatures
             position += direction * moveSpeed;
         }
         
-        public void Draw(SpriteBatch spriteBatch)
+        public virtual void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, position, Color.White);
+            Rectangle drawPosition = new Rectangle((int)position.X, (int)position.Y, sizeX, sizeY);
+            spriteBatch.Draw(texture, drawPosition, Color.White);
         }
         
     }

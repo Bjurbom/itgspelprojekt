@@ -15,9 +15,8 @@ namespace Itgspelprojekt
         SpriteBatch spriteBatch;
         Camera camera;
         Map map;
-        protected Vector2 pos; 
+        Player player;
 
-        Vector2 position;
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -38,9 +37,10 @@ namespace Itgspelprojekt
             // TODO: Add your initialization logic here
             
             map = new Map();
-            position = new Vector2();
 
             camera = new Camera(GraphicsDeviceManager.DefaultBackBufferWidth, GraphicsDeviceManager.DefaultBackBufferHeight);
+
+            player = new Player("bob", new Vector2(1024, 1024), 10, Content.Load<Texture2D>("tile2"));
 
             base.Initialize();
         }
@@ -50,12 +50,6 @@ namespace Itgspelprojekt
         /// all of your content.
         /// </summary>
         protected override void LoadContent()
-
-
-
-
-
-
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             //map generator
@@ -125,7 +119,7 @@ namespace Itgspelprojekt
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            //temporär movements för kamran
+            /*/temporär movements för kamran
             if (Keyboard.GetState().IsKeyDown(Keys.W))
             {
                 position.Y-= 10;
@@ -146,7 +140,11 @@ namespace Itgspelprojekt
                 position.X+=10;
             }
             //Kamran upptateras
-            camera.Update(position);
+            camera.Update(position); */
+            player.Update();
+            player.PlayerUpdate();
+            camera.Update(player.position);
+
 
             // TODO: Add your update logic here
 
@@ -163,6 +161,7 @@ namespace Itgspelprojekt
 
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, camera.ViewMatrix);
             map.Draw(spriteBatch);
+            player.Draw(spriteBatch);
             spriteBatch.End();
 
             // TODO: Add your drawing code here
