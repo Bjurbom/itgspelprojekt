@@ -37,3 +37,8 @@
 /processorParam:TextureFormat=Color
 /build:tile2.jpg
 
+#begin Creatures.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Creatures.xml
+

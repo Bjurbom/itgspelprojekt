@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Camera.cs" />
     <Compile Include="Creatures\Creature.cs" />
+    <Compile Include="Creatures\Creatures.cs" />
     <Compile Include="Creatures\Player.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="inventory.cs" />
@@ -73,7 +74,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Creatures\Creatures.txt" />
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
