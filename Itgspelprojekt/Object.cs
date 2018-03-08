@@ -15,11 +15,11 @@ namespace Itgspelprojekt
         Vector2 position;
         public Texture2D texture;
         public Rectangle hitbox; // will be set to texture.Bounds in the constructor
-        public string ID;
+        public string name;
         
-        public void Creature(string ID, Vector2 position, Texture2D texture)
+        public void Creature(string name, Vector2 position, Texture2D texture)
         {
-            this.ID = ID;
+            this.name = name;
             this.position = position;
             this.texture = texture;
             this.hitbox = texture.Bounds;
