@@ -18,6 +18,11 @@ namespace Itgspelprojekt.Creatures
 
         public void PlayerUpdate()
         {
+            if (Keyboard.GetState().IsKeyDown(Keys.LeftShift))
+                moveSpeed = 20;
+            else
+                moveSpeed = 6;
+
             if (position == targetPosition)
             {
                 // up

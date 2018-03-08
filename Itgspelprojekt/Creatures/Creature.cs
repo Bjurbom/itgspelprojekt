@@ -34,18 +34,18 @@ namespace Itgspelprojekt.Creatures
         
         public void Update()
         {
-            if (targetPosition.X - 4 > position.X) // player only has to move 90% of the distance, so will only move at 90% of moveSpeed
+            if (targetPosition.X - 6 > position.X) // player only has to move 90% of the distance, so will only move at 90% of moveSpeed
                 direction.X = 1f;
-            else if (targetPosition.X + 4 < position.X)
+            else if (targetPosition.X + 6 < position.X)
                 direction.X = -1f;
             else
             {
                 direction.X = 0;
                 position.X = targetPosition.X;
 
-                if (targetPosition.Y - 4 > position.Y) // When X is correct, move on Y axis
+                if (targetPosition.Y - 6 > position.Y) // When X is correct, move on Y axis
                     direction.Y = 1f;
-                else if (targetPosition.Y + 4 < position.Y)
+                else if (targetPosition.Y + 6 < position.Y)
                     direction.Y = -1f;
                 else
                 {
