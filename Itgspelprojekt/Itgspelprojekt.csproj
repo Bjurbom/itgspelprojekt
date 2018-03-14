@@ -74,6 +74,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Creatures\Creatures.xml" />
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>

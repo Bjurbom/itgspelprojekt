@@ -9,11 +9,9 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Itgspelprojekt.Creatures
 {
-    abstract class Creature
+    class Creature
     {
         // Det här är en Creature i the Overworld. TODO: items, creatures in battle
-
-
 
         public Vector2 position, direction, targetPosition; // targetPosition should only be used to move in a straight line.
         public float moveSpeed;
