@@ -19,9 +19,13 @@ namespace Itgspelprojekt.Creatures
 
         public void PlayerUpdate()
         {
-
-
+            
+            Rectangle hitboxUp = new Rectangle((int)position.X, (int)position.Y - 64, 64, 64);
+            Rectangle hitboxDown = new Rectangle((int)position.X, (int)position.Y +64, 64, 64);
+            Rectangle hitboxLeft = new Rectangle((int)position.X -64, (int)position.Y, 64, 64);
+            Rectangle hitboxRight = new Rectangle((int)position.X +64, (int)position.Y, 64, 64);
             hitbox = new Rectangle((int)position.X, (int)position.Y, 64, 64);
+            
 
             if (Keyboard.GetState().IsKeyDown(Keys.LeftShift))
                 moveSpeed = 20;
