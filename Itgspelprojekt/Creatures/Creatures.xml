@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XML>
+    <Creature>
+      <type>Human</type>
+      <name>Alexander W</name>
+      <texture>Alexander.png</texture>
+    </Creature>
+</XML>
