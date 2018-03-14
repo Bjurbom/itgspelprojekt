@@ -15,6 +15,7 @@ namespace Itgspelprojekt
         protected Texture2D texture;
         private Rectangle rectangle;
         private static ContentManager content;
+        protected int id;
 
         //inkappsling
         public Rectangle Rectangle
@@ -27,6 +28,10 @@ namespace Itgspelprojekt
         {
             protected get { return content; }
             set { content = value; }
+        }
+        public int Id
+        {
+            get { return id; }
         }
 
         //ritar

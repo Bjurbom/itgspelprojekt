@@ -13,11 +13,16 @@ namespace Itgspelprojekt.Creatures
     {
         public Player(string name, Vector2 position, float moveSpeed, Texture2D texture) : base(name, position, moveSpeed, texture)
         {
+            
 
         }
 
         public void PlayerUpdate()
         {
+
+
+            hitbox = new Rectangle((int)position.X, (int)position.Y, 64, 64);
+
             if (Keyboard.GetState().IsKeyDown(Keys.LeftShift))
                 moveSpeed = 20;
             else
@@ -46,9 +51,9 @@ namespace Itgspelprojekt.Creatures
                     targetPosition.X = position.X - 64;
                 }
             }
+
+            
         }
 
-        
-        
     }
 }

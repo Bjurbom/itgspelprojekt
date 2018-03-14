@@ -18,6 +18,8 @@ namespace Itgspelprojekt.Tiles
 
             //lägger in rectangle på property i tiles
             this.Rectangle = newRectangle;
+
+            this.id = i;
         }
     }
 }
