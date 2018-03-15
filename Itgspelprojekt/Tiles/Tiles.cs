@@ -18,6 +18,7 @@ namespace Itgspelprojekt
         protected int id;
 
         //inkappsling
+
         public Rectangle Rectangle
         {
             get { return rectangle; }

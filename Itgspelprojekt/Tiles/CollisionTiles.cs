@@ -14,10 +14,14 @@ namespace Itgspelprojekt.Tiles
         public CollisionTiles(int i, Rectangle newRectangle)
         {
             //get texture med namnet tile plus ett nummer i slutet
-            this.texture = Content.Load<Texture2D>("tile" + i); 
+            this.texture = Content.Load<Texture2D>("tile" + i);
 
             //lägger in rectangle på property i tiles
+ 
+            
             this.Rectangle = newRectangle;
+            
+
 
             this.id = i;
         }

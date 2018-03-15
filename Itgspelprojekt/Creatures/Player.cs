@@ -20,9 +20,9 @@ namespace Itgspelprojekt.Creatures
         public void PlayerUpdate()
         {
             
-            hitboxUp = new Rectangle((int)position.X, (int)position.Y - 64, 64, 64);
+            hitboxUp = new Rectangle((int)position.X, (int)position.Y -124, 64, 64);
             hitboxDown = new Rectangle((int)position.X, (int)position.Y +64, 64, 64);
-            hitboxLeft = new Rectangle((int)position.X -64, (int)position.Y, 64, 64);
+            hitboxLeft = new Rectangle((int)position.X -124, (int)position.Y, 64, 64);
             hitboxRight = new Rectangle((int)position.X +64, (int)position.Y, 64, 64);
             hitbox = new Rectangle((int)position.X, (int)position.Y, 64, 64);
             
@@ -35,22 +35,22 @@ namespace Itgspelprojekt.Creatures
             if (position == targetPosition)
             {
                 // up
-                if (Keyboard.GetState().IsKeyDown(Keys.W))
-                { 
+                if (Keyboard.GetState().IsKeyDown(Keys.W) && goingUp)
+                {
                     targetPosition.Y = position.Y - 64;
                 }
                 // down
-                else if (Keyboard.GetState().IsKeyDown(Keys.S))
+                else if (Keyboard.GetState().IsKeyDown(Keys.S) && goingDown)
                 {
                     targetPosition.Y = position.Y + 64;
                 }
                 // right 
-                else if (Keyboard.GetState().IsKeyDown(Keys.D))
+                else if (Keyboard.GetState().IsKeyDown(Keys.D) && goingRight)
                 {
                     targetPosition.X = position.X + 64;
                 }
                 // left
-                else if (Keyboard.GetState().IsKeyDown(Keys.A))
+                else if (Keyboard.GetState().IsKeyDown(Keys.A) && goingLeft)
                 {
                     targetPosition.X = position.X - 64;
                 }
