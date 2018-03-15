@@ -9,13 +9,19 @@ namespace Itgspelprojekt
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
+
+    enum Gamestate { ingame, battle };
+
     public class Game1 : Game
     {
+       
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Camera camera;
         Map map;
         Player player;
+        Gamestate gamestate;
 
         public Game1()
         {
@@ -41,6 +47,8 @@ namespace Itgspelprojekt
             camera = new Camera(GraphicsDeviceManager.DefaultBackBufferWidth, GraphicsDeviceManager.DefaultBackBufferHeight);
 
             player = new Player("bob", new Vector2(1024, 1024), 10, Content.Load<Texture2D>("tile2"));
+
+            gamestate = Gamestate.ingame;
 
             base.Initialize();
         }
@@ -141,20 +149,25 @@ namespace Itgspelprojekt
             }
             //Kamran upptateras
             camera.Update(position); */
-            player.Update();
-            player.PlayerUpdate();
-            foreach(CollisionTiles item in map.CollisionTiles)
+            if (gamestate == Gamestate.ingame)
             {
-                if (item.Rectangle.Intersects(player.hitbox) == true)
+                player.Update();
+                player.PlayerUpdate();
+                foreach (CollisionTiles item in map.CollisionTiles)
                 {
-                    if (item.Id == 1)
-                    {
-                        Exit();
-                    }
+                if (player.hitboxUp.Intersects(item.Rectangle))
+                {
+                        if (item.Id == 1)
+                        {
+                            player.targetPosition.Y = player.targetPosition.Y + 64;
+                        }
+                       
                 }
-                
+               
+                }
+                camera.Update(player.position);
             }
-            camera.Update(player.position);
+
 
 
             // TODO: Add your update logic here
@@ -171,8 +184,12 @@ namespace Itgspelprojekt
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, camera.ViewMatrix);
-            map.Draw(spriteBatch);
-            player.Draw(spriteBatch);
+            if (gamestate == Gamestate.ingame)
+            {
+                map.Draw(spriteBatch);
+                player.Draw(spriteBatch);
+                
+            }
             spriteBatch.End();
 
             // TODO: Add your drawing code here
