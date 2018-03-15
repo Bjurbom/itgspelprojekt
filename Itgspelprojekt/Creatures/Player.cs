@@ -20,10 +20,10 @@ namespace Itgspelprojekt.Creatures
         public void PlayerUpdate()
         {
             
-            Rectangle hitboxUp = new Rectangle((int)position.X, (int)position.Y - 64, 64, 64);
-            Rectangle hitboxDown = new Rectangle((int)position.X, (int)position.Y +64, 64, 64);
-            Rectangle hitboxLeft = new Rectangle((int)position.X -64, (int)position.Y, 64, 64);
-            Rectangle hitboxRight = new Rectangle((int)position.X +64, (int)position.Y, 64, 64);
+            hitboxUp = new Rectangle((int)position.X, (int)position.Y - 64, 64, 64);
+            hitboxDown = new Rectangle((int)position.X, (int)position.Y +64, 64, 64);
+            hitboxLeft = new Rectangle((int)position.X -64, (int)position.Y, 64, 64);
+            hitboxRight = new Rectangle((int)position.X +64, (int)position.Y, 64, 64);
             hitbox = new Rectangle((int)position.X, (int)position.Y, 64, 64);
             
 
@@ -36,7 +36,7 @@ namespace Itgspelprojekt.Creatures
             {
                 // up
                 if (Keyboard.GetState().IsKeyDown(Keys.W))
-                {
+                { 
                     targetPosition.Y = position.Y - 64;
                 }
                 // down

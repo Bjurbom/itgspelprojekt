@@ -154,12 +154,16 @@ namespace Itgspelprojekt
                 player.Update();
                 player.PlayerUpdate();
                 foreach (CollisionTiles item in map.CollisionTiles)
-                {/*
-                if (player.hitboxUp.intersect(item.Rectangle))
                 {
-                    player.targetPosition
+                if (player.hitboxUp.Intersects(item.Rectangle))
+                {
+                        if (item.Id == 1)
+                        {
+                            player.targetPosition.Y = player.targetPosition.Y + 64;
+                        }
+                       
                 }
-               */
+               
                 }
                 camera.Update(player.position);
             }
