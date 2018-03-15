@@ -13,7 +13,7 @@ namespace Itgspelprojekt.Creatures
     class Creatures
     {
         string creaturesFile = string.Empty;
-        List<Creature> creatures = new List<Creature>();
+        public List<Creature> creatures = new List<Creature>();
 
         public void ParseCreaturesFile(Microsoft.Xna.Framework.Content.ContentManager contentManager)
         {
@@ -21,6 +21,16 @@ namespace Itgspelprojekt.Creatures
             string position;
             string moveSpeed;
             string texture;
+
+            // USE SYSTEM.IO INSTEAD
+
+
+
+
+
+
+
+            /*
             XmlReaderSettings settings = new XmlReaderSettings();
             settings.DtdProcessing = DtdProcessing.Parse;
             XmlReader reader = XmlReader.Create("creatures/creatures.xml", settings);
@@ -29,9 +39,10 @@ namespace Itgspelprojekt.Creatures
             // Parse the file and display each of the nodes.
             while (reader.Read())
             {
-                while (reader.ReadToFollowing("Creature") != false)
+                while (reader.ReadToFollowing("name") != false)
                 {
-                    name = reader.GetAttribute("name");
+
+                    name = reader.Value;
                     position = reader.GetAttribute("startingPosition");
                     moveSpeed = reader.GetAttribute("moveSpeed");
                     texture = reader.GetAttribute("texture");
@@ -41,7 +52,7 @@ namespace Itgspelprojekt.Creatures
                                   float.Parse(moveSpeed), contentManager.Load<Texture2D>(texture)));
                 }
 
-            }
+            }*/
         }
     }
 }

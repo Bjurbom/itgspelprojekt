@@ -21,6 +21,7 @@ namespace Itgspelprojekt
         Camera camera;
         Map map;
         Player player;
+        Creatures.Creatures creatures;
         Gamestate gamestate;
 
         public Game1()
@@ -47,6 +48,9 @@ namespace Itgspelprojekt
             camera = new Camera(GraphicsDeviceManager.DefaultBackBufferWidth, GraphicsDeviceManager.DefaultBackBufferHeight);
 
             player = new Player("bob", new Vector2(1024, 1024), 10, Content.Load<Texture2D>("tile2"));
+
+            creatures = new Creatures.Creatures();
+            creatures.ParseCreaturesFile(Content);
 
             gamestate = Gamestate.ingame;
 
@@ -153,6 +157,10 @@ namespace Itgspelprojekt
             {
                 player.Update();
                 player.PlayerUpdate();
+                foreach (Creature creature in creatures.creatures)
+                {
+                    creature.Update();
+                }
                 foreach (CollisionTiles item in map.CollisionTiles)
                 {
                     if (player.hitboxUp.Intersects(item.Rectangle))
@@ -234,6 +242,10 @@ namespace Itgspelprojekt
             {
                 map.Draw(spriteBatch);
                 player.Draw(spriteBatch);
+                foreach (Creature creature in creatures.creatures)
+                {
+                    creature.Draw(spriteBatch);
+                }
                 
             }
             spriteBatch.End();
