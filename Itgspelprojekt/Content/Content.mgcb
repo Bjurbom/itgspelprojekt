@@ -61,3 +61,10 @@
 /processorParam:TextureFormat=Color
 /build:tile3.png
 
+#begin Ffont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Ffont.spritefont
+
