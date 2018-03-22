@@ -219,11 +219,11 @@ namespace Itgspelprojekt
             if (gamestate == Gamestate.ingame)
             {
                 map.Draw(spriteBatch);
-                player.Draw(spriteBatch);
                 foreach (Creature creature in creatures.creatures)
                 {
                     creature.Draw(spriteBatch);
                 }
+                player.Draw(spriteBatch);
                 
             }
             spriteBatch.End();
