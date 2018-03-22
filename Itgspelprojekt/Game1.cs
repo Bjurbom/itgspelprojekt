@@ -24,6 +24,8 @@ namespace Itgspelprojekt
         Creatures.Creatures creatures;
         Gamestate gamestate;
 
+        KeyboardState lastUpdate;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -136,6 +138,11 @@ namespace Itgspelprojekt
                 {
                     camera.Rotation -= 0.1f;
                 }
+                if (Keyboard.GetState().IsKeyDown(Keys.M) && !lastUpdate.IsKeyDown(Keys.M))
+                {
+                    camera.Zoom = 500;
+                }
+                
 
                 foreach (Creature creature in creatures.creatures)
                 {
@@ -199,6 +206,7 @@ namespace Itgspelprojekt
                         {
                             camera.Zoom += 0.5f;
                             camera.Rotation += 0.5f;
+                            player.PlayerStop();
                             if (camera.Zoom >= 20)
                             {
                                 gamestate = Gamestate.battle;

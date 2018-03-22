@@ -58,6 +58,13 @@ namespace Itgspelprojekt.Creatures
 
             
         }
+        public void PlayerStop()
+        {
+            goingUp = false;
+            goingRight = false;
+            goingLeft = false;
+            goingDown = false;
+        }
 
     }
 }
