@@ -26,7 +26,7 @@ namespace Itgspelprojekt.Creatures
         {
             this.name = name;
             this.position = position;
-            this.targetPosition = position;
+            this.targetPosition = new Vector2(position.X - position.X % 64, position.Y - position.Y % 64);
             this.moveSpeed = moveSpeed;
             this.texture = texture;
             this.hitbox = texture.Bounds;
