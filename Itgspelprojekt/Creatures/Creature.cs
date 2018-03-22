@@ -38,7 +38,7 @@ namespace Itgspelprojekt.Creatures
         
         public void Update()
         {
-            if (targetPosition.X - 6 > position.X) // player only has to move 90% of the distance, so will only move at 90% of moveSpeed
+            if (targetPosition.X - 6 > position.X)
                 direction.X = 1f;
             else if (targetPosition.X + 6 < position.X)
                 direction.X = -1f;

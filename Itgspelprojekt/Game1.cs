@@ -117,13 +117,26 @@ namespace Itgspelprojekt
             camera.Update(position); */
             if (gamestate == Gamestate.ingame)
             {
-                player.Update();
                 player.PlayerUpdate();
+                player.Update();
 
                 if (Keyboard.GetState().IsKeyDown(Keys.R))
                 {
                     camera.Zoom += 0.1f;
                 }
+                if (Keyboard.GetState().IsKeyDown(Keys.T))
+                {
+                    camera.Zoom -= 0.1f;
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.F))
+                {
+                    camera.Rotation += 0.1f;
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.G))
+                {
+                    camera.Rotation -= 0.1f;
+                }
+
                 foreach (Creature creature in creatures.creatures)
                 {
                     creature.Update();
