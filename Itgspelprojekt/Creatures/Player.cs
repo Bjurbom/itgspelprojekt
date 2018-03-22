@@ -20,10 +20,10 @@ namespace Itgspelprojekt.Creatures
         public void PlayerUpdate()
         {
             
-            hitboxUp = new Rectangle((int)position.X, (int)position.Y -124, 64, 64);
-            hitboxDown = new Rectangle((int)position.X, (int)position.Y +64, 64, 64);
-            hitboxLeft = new Rectangle((int)position.X -124, (int)position.Y, 64, 64);
-            hitboxRight = new Rectangle((int)position.X +64, (int)position.Y, 64, 64);
+            hitboxUp = new Rectangle((int)position.X, (int)position.Y -60, 56, 56);
+            hitboxDown = new Rectangle((int)position.X, (int)position.Y +60, 56, 56);
+            hitboxLeft = new Rectangle((int)position.X -60, (int)position.Y, 56, 56);
+            hitboxRight = new Rectangle((int)position.X +60, (int)position.Y, 56, 56);
             hitbox = new Rectangle((int)position.X, (int)position.Y, 64, 64);
             
 
