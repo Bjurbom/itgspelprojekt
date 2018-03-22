@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XML>
+  <Creature>
+    <name>Alexander</name>
+    <texture>tile2</texture>
+    <moveSpeed>10</moveSpeed>
+    <startingPosition>1087, 1024</startingPosition>
+  </Creature>
+  <Creature>
+    <name>Martin</name>
+    <texture>tile2</texture>
+    <moveSpeed>10</moveSpeed>
+    <startingPosition>1163, 1024</startingPosition>
+  </Creature>
+  <Creature>
+    <name>ANKA</name>
+    <texture>tile2</texture>
+    <moveSpeed>10</moveSpeed>
+    <startingPosition>1221, 1024</startingPosition>
+  </Creature>
+</XML>

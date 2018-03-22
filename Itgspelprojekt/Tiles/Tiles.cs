@@ -9,11 +9,15 @@ using System.Threading.Tasks;
 
 namespace Itgspelprojekt
 {
-    class Tiless
+    abstract class Tiless
     {
+        //variabler /m content
         protected Texture2D texture;
         private Rectangle rectangle;
         private static ContentManager content;
+        protected int id;
+
+        //inkappsling
 
         public Rectangle Rectangle
         {
@@ -21,14 +25,18 @@ namespace Itgspelprojekt
             protected set { rectangle = value; }
 
         }
-
-        
         public static ContentManager Content
         {
             protected get { return content; }
             set { content = value; }
         }
+        public int Id
+        {
+            get { return id; }
+            set { id = value; }
+        }
 
+        //ritar
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, rectangle, Color.White);
