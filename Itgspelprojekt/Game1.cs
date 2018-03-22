@@ -45,7 +45,7 @@ namespace Itgspelprojekt
             
             map = new Map();
 
-            camera = new Camera(GraphicsDeviceManager.DefaultBackBufferWidth, GraphicsDeviceManager.DefaultBackBufferHeight);
+            camera = new Camera(graphics.GraphicsDevice.Viewport);
 
             player = new Player("bob", new Vector2(896, 896), 10, Content.Load<Texture2D>("knuc"));
 
@@ -119,6 +119,11 @@ namespace Itgspelprojekt
             {
                 player.Update();
                 player.PlayerUpdate();
+
+                if (Keyboard.GetState().IsKeyDown(Keys.R))
+                {
+                    camera.Zoom += 0.1f;
+                }
                 foreach (Creature creature in creatures.creatures)
                 {
                     creature.Update();
@@ -175,10 +180,21 @@ namespace Itgspelprojekt
                             player.goingRight = true;
                         }
                     }
+                    if (player.hitbox.Intersects(item.Rectangle))
+                    {
+                        if (item.Id == 3)
+                        {
+                            camera.Zoom += 0.5f;
+                            camera.Rotation += 0.5f;
+                            if (camera.Zoom >= 20)
+                            {
+                                gamestate = Gamestate.battle;
+                                item.Id = 2;
+                            }
+                        
+                        }
 
-
-
-
+                    }
 
                 }
                 camera.Update(player.position);
@@ -199,7 +215,7 @@ namespace Itgspelprojekt
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, camera.ViewMatrix);
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, camera.Transform);
             if (gamestate == Gamestate.ingame)
             {
                 map.Draw(spriteBatch);
