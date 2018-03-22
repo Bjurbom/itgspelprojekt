@@ -47,7 +47,7 @@ namespace Itgspelprojekt
 
             camera = new Camera(GraphicsDeviceManager.DefaultBackBufferWidth, GraphicsDeviceManager.DefaultBackBufferHeight);
 
-            player = new Player("bob", new Vector2(896, 896), 10, Content.Load<Texture2D>("tile2"));
+            player = new Player("bob", new Vector2(896, 896), 10, Content.Load<Texture2D>("knuc"));
 
             creatures = new Creatures.Creatures();
             creatures.ParseCreaturesFile(Content);
