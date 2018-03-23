@@ -19,7 +19,7 @@ namespace Itgspelprojekt.Creatures
 
         public void PlayerUpdate()
         {
-            
+            //skapar hitboxen åt spelarna
             hitboxUp = new Rectangle((int)position.X, (int)position.Y -60, 56, 56);
             hitboxDown = new Rectangle((int)position.X, (int)position.Y +60, 56, 56);
             hitboxLeft = new Rectangle((int)position.X -60, (int)position.Y, 56, 56);
@@ -58,6 +58,7 @@ namespace Itgspelprojekt.Creatures
 
             
         }
+        //snabb sätt att stänga av spelarens movements
         public void PlayerStop()
         {
             goingUp = false;

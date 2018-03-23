@@ -3,6 +3,7 @@ using Itgspelprojekt.Creatures;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Itgspelprojekt.battle;
 
 namespace Itgspelprojekt
 {
@@ -14,8 +15,8 @@ namespace Itgspelprojekt
 
     public class Game1 : Game
     {
-       
 
+        animationForBattle battleAnimation, battleMenuAnimation;
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Camera camera;
@@ -23,7 +24,7 @@ namespace Itgspelprojekt
         Player player;
         Creatures.Creatures creatures;
         Gamestate gamestate;
-        Texture2D fadein;
+        Texture2D fadeIn, battle, menuBattle, healthMenuBattle;
 
         KeyboardState lastUpdate;
 
@@ -53,7 +54,13 @@ namespace Itgspelprojekt
 
             player = new Player("bob", new Vector2(896, 896), 10, Content.Load<Texture2D>("knuc"));
 
-            fadein = Content.Load<Texture2D>("blackspace");
+            fadeIn = Content.Load<Texture2D>("blackspace");
+            battle = Content.Load<Texture2D>("backroundForBattle");
+            menuBattle = Content.Load<Texture2D>("battleMenu");
+            healthMenuBattle = Content.Load<Texture2D>("healthMenu");
+            battleAnimation = new animationForBattle(battle, new Vector2(0, 0), new Vector2(0, 0));
+            battleMenuAnimation = new animationForBattle(menuBattle, new Vector2(1200, 400), new Vector2(0,0));
+            
 
             creatures = new Creatures.Creatures();
             creatures.ParseCreaturesFile(Content);
@@ -218,9 +225,18 @@ namespace Itgspelprojekt
 
                     }
 
-                }
                 camera.Update(player.position);
+                }
             }
+            else if (gamestate == Gamestate.battle)
+            {
+                camera.Update(new Vector2(battle.Width / 2, battle.Height / 2));
+
+                battleAnimation.Update(gameTime);
+                battleMenuAnimation.Update(gameTime);
+          
+            }
+
 
 
 
@@ -252,6 +268,15 @@ namespace Itgspelprojekt
             if (gamestate == Gamestate.battle)
             {
                 GraphicsDevice.Clear(Color.Black);
+
+                // återstälelr kamra inställningarna
+                camera.Zoom = 1;
+                camera.Rotation = 0;
+
+                battleAnimation.Draw(spriteBatch);
+                battleMenuAnimation.Draw(spriteBatch);
+
+
             }
             spriteBatch.End();
 
