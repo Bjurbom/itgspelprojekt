@@ -23,6 +23,7 @@ namespace Itgspelprojekt
         Player player;
         Creatures.Creatures creatures;
         Gamestate gamestate;
+        Texture2D fadein;
 
         KeyboardState lastUpdate;
 
@@ -48,8 +49,11 @@ namespace Itgspelprojekt
             map = new Map();
 
             camera = new Camera(graphics.GraphicsDevice.Viewport);
+            
 
             player = new Player("bob", new Vector2(896, 896), 10, Content.Load<Texture2D>("knuc"));
+
+            fadein = Content.Load<Texture2D>("blackspace");
 
             creatures = new Creatures.Creatures();
             creatures.ParseCreaturesFile(Content);
@@ -138,10 +142,7 @@ namespace Itgspelprojekt
                 {
                     camera.Rotation -= 0.1f;
                 }
-                if (Keyboard.GetState().IsKeyDown(Keys.M) && !lastUpdate.IsKeyDown(Keys.M))
-                {
-                    camera.Zoom = 500;
-                }
+
                 
 
                 foreach (Creature creature in creatures.creatures)
@@ -207,7 +208,7 @@ namespace Itgspelprojekt
                             camera.Zoom += 0.5f;
                             camera.Rotation += 0.5f;
                             player.PlayerStop();
-                            if (camera.Zoom >= 20)
+                            if (camera.Zoom >= 30)
                             {
                                 gamestate = Gamestate.battle;
                                 item.Id = 2;
@@ -245,7 +246,12 @@ namespace Itgspelprojekt
                     creature.Draw(spriteBatch);
                 }
                 player.Draw(spriteBatch);
+
                 
+            }
+            if (gamestate == Gamestate.battle)
+            {
+                GraphicsDevice.Clear(Color.Black);
             }
             spriteBatch.End();
 
