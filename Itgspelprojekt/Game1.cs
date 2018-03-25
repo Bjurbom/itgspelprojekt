@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Itgspelprojekt.battle;
+using System.Collections.Generic;
 
 namespace Itgspelprojekt
 {
@@ -26,6 +27,8 @@ namespace Itgspelprojekt
         Gamestate gamestate;
         Texture2D fadeIn, battle, menuBattle, healthMenuBattle;
         KeyboardState lastUpdate;
+        SpriteFont nameInBattle;
+        List<UI> UIList;
 
 
         public Game1()
@@ -48,29 +51,33 @@ namespace Itgspelprojekt
             // TODO: Add your initialization logic here
             
             map = new Map();
-
             camera = new Camera(graphics.GraphicsDevice.Viewport);
-            
-
             player = new Player("bob", new Vector2(896, 896), 10, Content.Load<Texture2D>("knuc"));
 
+            UIList = new List<UI>();
 
 
+            //laddar in textures / text
             fadeIn = Content.Load<Texture2D>("blackspace");
             battle = Content.Load<Texture2D>("backroundForBattle");
             menuBattle = Content.Load<Texture2D>("battleMenu");
             healthMenuBattle = Content.Load<Texture2D>("healthMenu");
+            nameInBattle = Content.Load<SpriteFont>("textForName");
+
 
             //battle animationer
             battleAnimation = new animationForBattle(battle, new Vector2(0, 0), new Vector2(0,0));
             battleMenuAnimation = new animationForBattle(menuBattle, new Vector2(1200,1200), new Vector2(-1,-1));
             battleHealthbars = new animationForBattle(healthMenuBattle, new Vector2(1200, 0), new Vector2(-1, 60));
-            
+
+            //battle UI
+            UIList.Add(new UI(new Vector2(170, 90), nameInBattle, player.name));
+
 
             creatures = new Creatures.Creatures();
             creatures.ParseCreaturesFile(Content);
 
-            gamestate = Gamestate.battle;
+            gamestate = Gamestate.ingame;
             
 
             base.Initialize();
@@ -244,6 +251,7 @@ namespace Itgspelprojekt
                 camera.Update(new Vector2(battle.Width / 2, battle.Height / 2));
 
 
+
                 battleAnimation.Update(gameTime);
                 battleMenuAnimation.Update(gameTime);
                 battleHealthbars.Update(gameTime);
@@ -291,6 +299,15 @@ namespace Itgspelprojekt
                 battleHealthbars.Draw(spriteBatch);
 
 
+                if (battleMenuAnimation.InPosition == true)
+                {
+                    foreach (UI textItem in UIList)
+                    {
+                        textItem.Draw(spriteBatch);
+                    }
+                }
+                
+                
             }
             spriteBatch.End();
 

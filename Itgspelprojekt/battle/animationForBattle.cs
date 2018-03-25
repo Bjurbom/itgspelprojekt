@@ -13,12 +13,22 @@ namespace Itgspelprojekt.battle
         private Texture2D sprite;
         private Vector2 endPosition;
         private Vector2 currentPosition;
+        private bool inPosition;
 
         public animationForBattle(Texture2D sprite, Vector2 startPosition, Vector2 endPosition)
         {
             this.sprite = sprite;
             this.endPosition = endPosition;
             currentPosition = startPosition;
+            inPosition = false;
+        }
+
+        public bool InPosition
+        {
+            get
+            {
+                return inPosition;
+            }
         }
 
         public void Update(GameTime gameTime)
@@ -31,8 +41,11 @@ namespace Itgspelprojekt.battle
             {
                 currentPosition.Y += endPosition.Y * 4;
             }
-                
-            
+
+            if (currentPosition.Y <= endPosition.Y && currentPosition.X <= endPosition.X)
+            {
+                inPosition = true;
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)
