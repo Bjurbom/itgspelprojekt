@@ -16,7 +16,7 @@ namespace Itgspelprojekt
     public class Game1 : Game
     {
 
-        animationForBattle battleAnimation, battleMenuAnimation;
+        animationForBattle battleAnimation, battleMenuAnimation, battleHealthbars;
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Camera camera;
@@ -25,8 +25,8 @@ namespace Itgspelprojekt
         Creatures.Creatures creatures;
         Gamestate gamestate;
         Texture2D fadeIn, battle, menuBattle, healthMenuBattle;
-
         KeyboardState lastUpdate;
+
 
         public Game1()
         {
@@ -54,18 +54,23 @@ namespace Itgspelprojekt
 
             player = new Player("bob", new Vector2(896, 896), 10, Content.Load<Texture2D>("knuc"));
 
+
+
             fadeIn = Content.Load<Texture2D>("blackspace");
             battle = Content.Load<Texture2D>("backroundForBattle");
             menuBattle = Content.Load<Texture2D>("battleMenu");
             healthMenuBattle = Content.Load<Texture2D>("healthMenu");
-            battleAnimation = new animationForBattle(battle, new Vector2(0, 0), new Vector2(0, 0));
-            battleMenuAnimation = new animationForBattle(menuBattle, new Vector2(1200, 400), new Vector2(0,0));
+
+            //battle animationer
+            battleAnimation = new animationForBattle(battle, new Vector2(0, 0), new Vector2(0,0));
+            battleMenuAnimation = new animationForBattle(menuBattle, new Vector2(1200,1200), new Vector2(-1,-1));
+            battleHealthbars = new animationForBattle(healthMenuBattle, new Vector2(1200, 0), new Vector2(-1, 60));
             
 
             creatures = new Creatures.Creatures();
             creatures.ParseCreaturesFile(Content);
 
-            gamestate = Gamestate.ingame;
+            gamestate = Gamestate.battle;
             
 
             base.Initialize();
@@ -128,6 +133,8 @@ namespace Itgspelprojekt
             }
             //Kamran upptateras
             camera.Update(position); */
+
+            // in game
             if (gamestate == Gamestate.ingame)
             {
                 player.PlayerUpdate();
@@ -156,6 +163,8 @@ namespace Itgspelprojekt
                 {
                     creature.Update();
                 }
+
+                //hitdetection
                 foreach (CollisionTiles item in map.CollisionTiles)
                 {
                     if (player.hitboxUp.Intersects(item.Rectangle))
@@ -228,12 +237,16 @@ namespace Itgspelprojekt
                 camera.Update(player.position);
                 }
             }
+
+            //battle
             else if (gamestate == Gamestate.battle)
             {
                 camera.Update(new Vector2(battle.Width / 2, battle.Height / 2));
 
+
                 battleAnimation.Update(gameTime);
                 battleMenuAnimation.Update(gameTime);
+                battleHealthbars.Update(gameTime);
           
             }
 
@@ -275,6 +288,7 @@ namespace Itgspelprojekt
 
                 battleAnimation.Draw(spriteBatch);
                 battleMenuAnimation.Draw(spriteBatch);
+                battleHealthbars.Draw(spriteBatch);
 
 
             }

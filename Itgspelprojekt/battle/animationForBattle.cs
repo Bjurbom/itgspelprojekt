@@ -23,10 +23,16 @@ namespace Itgspelprojekt.battle
 
         public void Update(GameTime gameTime)
         {
-            if (gameTime.ElapsedGameTime.TotalMilliseconds >= 500)
+            if (currentPosition.X >= endPosition.X)
             {
-                currentPosition += endPosition;
+                currentPosition.X += endPosition.X * 4;
             }
+            if (currentPosition.Y >= endPosition.Y)
+            {
+                currentPosition.Y += endPosition.Y * 4;
+            }
+                
+            
         }
 
         public void Draw(SpriteBatch spriteBatch)
