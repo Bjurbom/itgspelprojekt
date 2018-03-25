@@ -25,5 +25,8 @@ namespace Itgspelprojekt.battle
         {
             spriteBatch.DrawString(font, text, position, Color.Black);
         }
+
+
+
     }
 }

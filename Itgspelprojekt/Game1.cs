@@ -29,6 +29,10 @@ namespace Itgspelprojekt
         KeyboardState lastUpdate;
         SpriteFont nameInBattle;
         List<UI> UIList;
+        Vector2 selectorPosition;
+        int selectorPositionX, selectorPositionY;
+
+        controlForUI mainBattleMenu;
 
 
         public Game1()
@@ -54,8 +58,11 @@ namespace Itgspelprojekt
             camera = new Camera(graphics.GraphicsDevice.Viewport);
             player = new Player("bob", new Vector2(896, 896), 10, Content.Load<Texture2D>("knuc"));
 
+            //för UI
             UIList = new List<UI>();
-
+            selectorPosition = new Vector2(730, 550);
+            selectorPositionX = 0;
+            selectorPositionY = 0;
 
             //laddar in textures / text
             fadeIn = Content.Load<Texture2D>("blackspace");
@@ -70,9 +77,14 @@ namespace Itgspelprojekt
             battleMenuAnimation = new animationForBattle(menuBattle, new Vector2(1200,1200), new Vector2(-1,-1));
             battleHealthbars = new animationForBattle(healthMenuBattle, new Vector2(1200, 0), new Vector2(-1, 60));
 
-            //battle UI
+            //battle UI Main
             UIList.Add(new UI(new Vector2(170, 90), nameInBattle, player.name));
+            UIList.Add(new UI(new Vector2(750, 550), nameInBattle, "Attack"));
+            UIList.Add(new UI(new Vector2(750, 650), nameInBattle, "Stats"));
+            UIList.Add(new UI(new Vector2(1000, 550), nameInBattle, "Inventory"));
+            UIList.Add(new UI(new Vector2(1000, 650), nameInBattle, "Run"));
 
+            mainBattleMenu = new controlForUI(nameInBattle,new Vector2(740, 550), 2, 2);
 
             creatures = new Creatures.Creatures();
             creatures.ParseCreaturesFile(Content);
@@ -233,8 +245,10 @@ namespace Itgspelprojekt
                             player.PlayerStop();
                             if (camera.Zoom >= 30)
                             {
-                                gamestate = Gamestate.battle;
+
                                 item.Id = 2;
+                                gamestate = Gamestate.battle;
+                                
                             }
                         
                         }
@@ -250,12 +264,14 @@ namespace Itgspelprojekt
             {
                 camera.Update(new Vector2(battle.Width / 2, battle.Height / 2));
 
-
-
                 battleAnimation.Update(gameTime);
                 battleMenuAnimation.Update(gameTime);
                 battleHealthbars.Update(gameTime);
-          
+
+                if (battleHealthbars.InPosition == true)
+                {
+                    mainBattleMenu.Update(gameTime);
+                }
             }
 
 
@@ -305,6 +321,8 @@ namespace Itgspelprojekt
                     {
                         textItem.Draw(spriteBatch);
                     }
+
+                    mainBattleMenu.Draw(spriteBatch);
                 }
                 
                 
