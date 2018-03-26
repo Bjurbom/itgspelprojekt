@@ -16,6 +16,7 @@ namespace Itgspelprojekt.battle
         private int selectorPositionX;
         private int sizeX, sizeY;
         private SpriteFont font;
+        private double elapsedTime, interval;
 
         /// <summary>
         /// 
@@ -29,51 +30,64 @@ namespace Itgspelprojekt.battle
             this.sizeX = sizeX;
             this.sizeY = sizeY;
             selectorPositionX = 1;
-            selectorPositionY = 2;
+            selectorPositionY = 1;
             this.font = font;
+            interval = 150;
         }
 
         public void Update(GameTime gameTime)
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.W))
+            if (elapsedTime > interval)
             {
-                if (selectorPositionY != sizeY)
-                {
-                    selectorPosition.Y -= 100;
-                    selectorPositionY++;
-                }
 
-            }
-            else if (Keyboard.GetState().IsKeyDown(Keys.S))
-            {
-                if (selectorPositionY != 1)
-                {
-                    selectorPosition.Y += 100;
-                    selectorPositionY--;
-                }
-            }
-            else if (Keyboard.GetState().IsKeyDown(Keys.A))
-            {
-                if (selectorPositionX != 1)
-                {
-                    selectorPosition.X -= 250;
-                    selectorPositionX--;
-                }
+                elapsedTime -= interval;
 
-            }
-            else if (Keyboard.GetState().IsKeyDown(Keys.D))
-            {
-                if (selectorPositionX != sizeX)
+                if (Keyboard.GetState().IsKeyDown(Keys.W))
                 {
-                    selectorPosition.X += 250;
-                    selectorPositionX++;
-                }
+                    if (selectorPositionY != 1)
+                    {
+                        selectorPosition.Y -= 50;
+                        selectorPositionY--;
+                    }
 
+                }
+                else if (Keyboard.GetState().IsKeyDown(Keys.S))
+                {
+                    if (selectorPositionY != sizeY)
+                    {
+                        selectorPosition.Y += 50;
+                        selectorPositionY++;
+                    }
+                }
+                else if (Keyboard.GetState().IsKeyDown(Keys.A))
+                {
+                    if (selectorPositionX != 1)
+                    {
+                        selectorPosition.X -= 100;
+                        selectorPositionX--;
+                    }
+
+                }
+                else if (Keyboard.GetState().IsKeyDown(Keys.D))
+                {
+                    if (selectorPositionX != sizeX)
+                    {
+                        selectorPosition.X += 100;
+                        selectorPositionX++;
+                    }
+
+                }
             }
+
+            elapsedTime += gameTime.ElapsedGameTime.TotalMilliseconds;
+
         }
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.DrawString(font, ">", selectorPosition, Color.Black);
+
+            spriteBatch.DrawString(font, Convert.ToString(selectorPositionX), new Vector2(300, 300), Color.Black);
+            spriteBatch.DrawString(font, Convert.ToString(selectorPositionY), new Vector2(300, 350), Color.Black);
         }
     }
 }

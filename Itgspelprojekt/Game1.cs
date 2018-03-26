@@ -80,9 +80,9 @@ namespace Itgspelprojekt
             //battle UI Main
             UIList.Add(new UI(new Vector2(170, 90), nameInBattle, player.name));
             UIList.Add(new UI(new Vector2(750, 550), nameInBattle, "Attack"));
-            UIList.Add(new UI(new Vector2(750, 650), nameInBattle, "Stats"));
-            UIList.Add(new UI(new Vector2(1000, 550), nameInBattle, "Inventory"));
-            UIList.Add(new UI(new Vector2(1000, 650), nameInBattle, "Run"));
+            UIList.Add(new UI(new Vector2(750, 600), nameInBattle, "Stats"));
+            UIList.Add(new UI(new Vector2(850, 550), nameInBattle, "Inventory"));
+            UIList.Add(new UI(new Vector2(850, 600), nameInBattle, "Run"));
 
             mainBattleMenu = new controlForUI(nameInBattle,new Vector2(740, 550), 2, 2);
 
