@@ -12,7 +12,9 @@ namespace Itgspelprojekt
     /// This is the main type for your game.
     /// </summary>
 
-    enum Gamestate { ingame, battle };
+    public enum Gamestate { ingame, battle };
+
+
 
     public class Game1 : Game
     {
@@ -24,13 +26,14 @@ namespace Itgspelprojekt
         Map map;
         Player player;
         Creatures.Creatures creatures;
-        Gamestate gamestate;
         Texture2D fadeIn, battle, menuBattle, healthMenuBattle;
         KeyboardState lastUpdate;
         SpriteFont nameInBattle;
         List<UI> UIList;
         Vector2 selectorPosition;
-        int selectorPositionX, selectorPositionY;
+
+        Gamestate gamestate;
+
 
         controlForUI mainBattleMenu;
 
@@ -61,8 +64,7 @@ namespace Itgspelprojekt
             //för UI
             UIList = new List<UI>();
             selectorPosition = new Vector2(730, 550);
-            selectorPositionX = 0;
-            selectorPositionY = 0;
+
 
             //laddar in textures / text
             fadeIn = Content.Load<Texture2D>("blackspace");
@@ -130,28 +132,6 @@ namespace Itgspelprojekt
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            /*/temporär movements för kamran
-            if (Keyboard.GetState().IsKeyDown(Keys.W))
-            {
-                position.Y-= 10;
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.S))
-            {
-                position.Y+= 10;
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.A))
-            {
-                position.X-=10;
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.D))
-            {
-                position.X+=10;
-            }
-            //Kamran upptateras
-            camera.Update(position); */
 
             // in game
             if (gamestate == Gamestate.ingame)
@@ -186,77 +166,13 @@ namespace Itgspelprojekt
                 //hitdetection
                 foreach (CollisionTiles item in map.CollisionTiles)
                 {
-                    if (player.hitboxUp.Intersects(item.Rectangle))
-                    {
-                        if (item.Id == 1)
-                        {
-                            player.goingUp = false;
-                            
-                        }
-                        else
-                        {
-                            player.goingUp = true;
-                        }
-                    }
+
+                    player.PlayerHitdetection(item,camera, gamestate);
 
 
-                    if (player.hitboxDown.Intersects(item.Rectangle))
-                    {
-                        if (item.Id == 1)
-                        {
-                            player.goingDown = false;
-                        }
-                        else
-                        {
-                            player.goingDown = true;
-                        }
-                    }
-
-                    if (player.hitboxLeft.Intersects(item.Rectangle))
-                    {
-                        if (item.Id == 1)
-                        {
-                            player.goingLeft = false;
-                        }
-                        else
-                        {
-                            player.goingLeft = true;
-                        }
-                    }
-
-
-                    if (player.hitboxRight.Intersects(item.Rectangle))
-                    {
-                        if (item.Id == 1)
-                        {
-                            player.goingRight = false;
-                        }
-                        else
-                        {
-                            player.goingRight = true;
-                        }
-                    }
-                    if (player.hitbox.Intersects(item.Rectangle))
-                    {
-                        if (item.Id == 3)
-                        {
-                            camera.Zoom += 0.5f;
-                            camera.Rotation += 0.5f;
-                            player.PlayerStop();
-                            if (camera.Zoom >= 30)
-                            {
-
-                                item.Id = 2;
-                                gamestate = Gamestate.battle;
-                                
-                            }
-                        
-                        }
-
-                    }
+                }
 
                 camera.Update(player.position);
-                }
             }
 
             //battle
@@ -271,6 +187,11 @@ namespace Itgspelprojekt
                 if (battleHealthbars.InPosition == true)
                 {
                     mainBattleMenu.Update(gameTime);
+                }
+                
+                if (Keyboard.GetState().IsKeyDown(Keys.Enter) && mainBattleMenu.SelectorPositionX == 2 && mainBattleMenu.SelectorPositionY == 2)
+                {
+                    gamestate = Gamestate.ingame;
                 }
             }
 

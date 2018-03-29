@@ -6,11 +6,14 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Itgspelprojekt.Tiles;
 
 namespace Itgspelprojekt.Creatures
 {
     class Player : Creature
     {
+
+
         public Player(string name, Vector2 position, float moveSpeed, Texture2D texture) : base(name, position, moveSpeed, texture)
         {
             
@@ -65,6 +68,78 @@ namespace Itgspelprojekt.Creatures
             goingRight = false;
             goingLeft = false;
             goingDown = false;
+        }
+
+        public void PlayerHitdetection(CollisionTiles item, Camera camera, Gamestate gamestate)
+        {
+            if (hitboxUp.Intersects(item.Rectangle))
+            {
+                if (item.Id == 1)
+                {
+                    goingUp = false;
+
+                }
+                else
+                {
+                    goingUp = true;
+                }
+            }
+
+
+            if (hitboxDown.Intersects(item.Rectangle))
+            {
+                if (item.Id == 1)
+                {
+                    goingDown = false;
+                }
+                else
+                {
+                    goingDown = true;
+                }
+            }
+
+            if (hitboxLeft.Intersects(item.Rectangle))
+            {
+                if (item.Id == 1)
+                {
+                    goingLeft = false;
+                }
+                else
+                {
+                    goingLeft = true;
+                }
+            }
+
+
+            if (hitboxRight.Intersects(item.Rectangle))
+            {
+                if (item.Id == 1)
+                {
+                    goingRight = false;
+                }
+                else
+                {
+                    goingRight = true;
+                }
+            }
+            if (hitbox.Intersects(item.Rectangle))
+            {
+                if (item.Id == 3)
+                {
+                    camera.Zoom += 0.5f;
+                    camera.Rotation += 0.5f;
+                    PlayerStop();
+                    if (camera.Zoom >= 30)
+                    {
+
+                        item.Id = 2;
+                        gamestate  = Gamestate.battle;
+                        
+                    }
+
+                }
+
+            }
         }
 
     }

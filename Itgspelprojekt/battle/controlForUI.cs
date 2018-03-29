@@ -9,14 +9,17 @@ using System.Threading.Tasks;
 
 namespace Itgspelprojekt.battle
 {
+
+    enum typeOfBattleMenu {main_Menu};
+
     class controlForUI
     {
-        private int selectorPositionY;
-        private Vector2 selectorPosition;
-        private int selectorPositionX;
-        private int sizeX, sizeY;
-        private SpriteFont font;
-        private double elapsedTime, interval;
+        protected int selectorPositionY;
+        protected Vector2 selectorPosition;
+        protected int selectorPositionX;
+        protected int sizeX, sizeY;
+        protected SpriteFont font;
+        protected double elapsedTime, interval;
 
         /// <summary>
         /// 
@@ -33,6 +36,22 @@ namespace Itgspelprojekt.battle
             selectorPositionY = 1;
             this.font = font;
             interval = 150;
+        }
+
+        public int SelectorPositionX
+        {
+            get
+            {
+                return selectorPositionX ;
+            }
+        }
+
+        public int SelectorPositionY
+        {
+            get
+            {
+                return selectorPositionY;
+            }
         }
 
         public void Update(GameTime gameTime)
@@ -78,6 +97,8 @@ namespace Itgspelprojekt.battle
 
                 }
             }
+
+            
 
             elapsedTime += gameTime.ElapsedGameTime.TotalMilliseconds;
 
