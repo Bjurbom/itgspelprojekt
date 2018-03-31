@@ -46,6 +46,8 @@ namespace Itgspelprojekt
             graphics.PreferredBackBufferHeight = 700;
             graphics.PreferredBackBufferWidth = 1280;
         }
+        
+
 
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
@@ -134,7 +136,7 @@ namespace Itgspelprojekt
 
 
             // in game
-            if (gamestate == Gamestate.ingame)
+            if (player.gamestate == Gamestate.ingame)
             {
                 player.PlayerUpdate();
                 player.Update();
@@ -169,14 +171,14 @@ namespace Itgspelprojekt
 
                     player.PlayerHitdetection(item,camera, gamestate);
 
-
+                    camera.Update(player.position);
                 }
 
-                camera.Update(player.position);
+                
             }
 
             //battle
-            else if (gamestate == Gamestate.battle)
+            else if (player.gamestate == Gamestate.battle)
             {
                 camera.Update(new Vector2(battle.Width / 2, battle.Height / 2));
 
