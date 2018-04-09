@@ -32,7 +32,7 @@ namespace Itgspelprojekt
         List<UI> UIList;
         Vector2 selectorPosition;
 
-        Gamestate gamestate;
+        public Gamestate gamestate;
 
 
         controlForUI mainBattleMenu;
@@ -169,7 +169,7 @@ namespace Itgspelprojekt
                 foreach (CollisionTiles item in map.CollisionTiles)
                 {
 
-                    player.PlayerHitdetection(item,camera, gamestate);
+                    player.PlayerHitdetection(item,camera);
 
                     camera.Update(player.position);
                 }
@@ -181,6 +181,8 @@ namespace Itgspelprojekt
             else if (player.gamestate == Gamestate.battle)
             {
                 camera.Update(new Vector2(battle.Width / 2, battle.Height / 2));
+                camera.Zoom = 1;
+                camera.Rotation = 0;
 
                 battleAnimation.Update(gameTime);
                 battleMenuAnimation.Update(gameTime);

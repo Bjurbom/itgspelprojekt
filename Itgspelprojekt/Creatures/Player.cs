@@ -70,7 +70,7 @@ namespace Itgspelprojekt.Creatures
             goingDown = false;
         }
 
-        public void PlayerHitdetection(CollisionTiles item, Camera camera, Gamestate gamestate)
+        public void PlayerHitdetection(CollisionTiles item, Camera camera)
         {
             if (hitboxUp.Intersects(item.Rectangle))
             {
