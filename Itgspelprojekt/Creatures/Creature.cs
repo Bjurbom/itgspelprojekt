@@ -13,7 +13,7 @@ namespace Itgspelprojekt.Creatures
     {
         // Det här är en Creature i the Overworld. TODO: items, creatures in battle
 
-        public Vector2 position, direction, targetPosition, oldTargetPosistion; // targetPosition should only be used to move in a straight line.
+        public Vector2 position, direction, targetPosition; // targetPosition should only be used to move in a straight line.
         public float moveSpeed;
         public Texture2D texture;
         public Rectangle hitbox ,hitboxUp, hitboxDown, hitboxLeft, hitboxRight; // will be set to texture.Bounds in the constructor

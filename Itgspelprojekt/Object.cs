@@ -11,7 +11,6 @@ namespace Itgspelprojekt
 {
     class Object
     {
-        bool canBePickedUp, hasCollisions, isPushable;
         Vector2 position;
         public Texture2D texture;
         public Rectangle hitbox; // will be set to texture.Bounds in the constructor

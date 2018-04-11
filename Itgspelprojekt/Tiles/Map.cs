@@ -16,9 +16,7 @@ namespace Itgspelprojekt.Tiles
 
         //gör listan
         List<CollisionTiles> collisionTiles = new List<CollisionTiles>();
-
-        //behöves inte??
-        private int width, height;
+        
 
         //property av listan
         public List<CollisionTiles> CollisionTiles

@@ -25,8 +25,10 @@ namespace Itgspelprojekt.Creatures
                 float moveSpeed;
                 string texture;
 
-                XmlReaderSettings settings = new XmlReaderSettings();
-                settings.DtdProcessing = DtdProcessing.Parse;
+                XmlReaderSettings settings = new XmlReaderSettings
+                {
+                    DtdProcessing = DtdProcessing.Parse
+                };
                 XmlReader reader = XmlReader.Create("creatures/creatures.xml", settings);
 
                 reader.MoveToContent();

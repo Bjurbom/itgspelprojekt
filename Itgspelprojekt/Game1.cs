@@ -27,7 +27,6 @@ namespace Itgspelprojekt
         Player player;
         Creatures.Creatures creatures;
         Texture2D fadeIn, battle, menuBattle, healthMenuBattle;
-        KeyboardState lastUpdate;
         SpriteFont nameInBattle;
         List<UI> UIList;
         Vector2 selectorPosition;
