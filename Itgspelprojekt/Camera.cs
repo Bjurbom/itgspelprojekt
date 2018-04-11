@@ -92,7 +92,7 @@ namespace Itgspelprojekt
             center = new Vector2(position.X + 32, position.Y + 32);
 
             transform = Matrix.CreateTranslation(new Vector3(-center.X, -center.Y, 0)) * Matrix.CreateRotationZ(Rotation) * Matrix.CreateScale(Zoom, Zoom, 0) * Matrix.CreateTranslation(new Vector3(viewport.Width / 2, viewport.Height / 2, 0));
-        }
+         }
 
 
 
