@@ -13,7 +13,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Itgspelprojekt
 {
-    // tors kamra kod
+    // tors kamera kod
     class Camera
     {
         Matrix transform;
