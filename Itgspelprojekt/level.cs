@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace Itgspelprojekt
 {
+    // tors statiska klass för långa variabler
+
     static class level
     {
         public static int[,] map = new int[,] {

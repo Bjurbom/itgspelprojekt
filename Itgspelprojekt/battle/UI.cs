@@ -9,6 +9,8 @@ using Microsoft.Xna.Framework;
 namespace Itgspelprojekt.battle
 {
     class UI
+
+        // Tors UI kod för bara texten
     {
         private SpriteFont font;
         private Vector2 position;

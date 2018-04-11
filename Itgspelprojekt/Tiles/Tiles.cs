@@ -11,6 +11,8 @@ namespace Itgspelprojekt
 {
     abstract class Tiless
     {
+        // Tors abstracta bas klass
+
         //variabler /m content
         protected Texture2D texture;
         private Rectangle rectangle;

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Itgspelprojekt.battle
 {
 
-    enum typeOfBattleMenu {main_Menu};
+    // Tors controll för UI kod.
 
     class controlForUI
     {

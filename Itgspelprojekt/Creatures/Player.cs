@@ -10,6 +10,8 @@ using Itgspelprojekt.Tiles;
 
 namespace Itgspelprojekt.Creatures
 {
+
+    // Tommies och Tors player kod
     class Player : Creature
     {
 

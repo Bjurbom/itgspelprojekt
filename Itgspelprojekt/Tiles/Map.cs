@@ -12,6 +12,8 @@ namespace Itgspelprojekt.Tiles
 {
     class Map
     {
+        //Tors Map kod
+
         //gör listan
         List<CollisionTiles> collisionTiles = new List<CollisionTiles>();
 

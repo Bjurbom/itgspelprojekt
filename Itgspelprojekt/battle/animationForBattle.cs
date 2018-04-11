@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Itgspelprojekt.battle
 {
+    //Tors animation för object
     class animationForBattle
     {
         private Texture2D sprite;
