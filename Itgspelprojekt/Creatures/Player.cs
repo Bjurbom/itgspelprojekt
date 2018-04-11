@@ -135,8 +135,8 @@ namespace Itgspelprojekt.Creatures
                     {
 
                         item.Id = 2;
-                        gamestate  = Gamestate.battle;
-                        
+                        Game1.gamestate = Gamestate.battle;
+
                     }
 
                 }

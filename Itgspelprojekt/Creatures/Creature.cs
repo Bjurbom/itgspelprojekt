@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Itgspelprojekt.Creatures
 {
-    class Creature : Game1
+    class Creature
     {
         // Det här är en Creature i the Overworld. TODO: items, creatures in battle
 

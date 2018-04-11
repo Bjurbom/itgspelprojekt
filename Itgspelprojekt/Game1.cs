@@ -32,7 +32,7 @@ namespace Itgspelprojekt
         List<UI> UIList;
         Vector2 selectorPosition;
 
-        public Gamestate gamestate;
+        public static Gamestate gamestate;
 
 
         controlForUI mainBattleMenu;
@@ -136,7 +136,7 @@ namespace Itgspelprojekt
 
 
             // in game
-            if (player.gamestate == Gamestate.ingame)
+            if (gamestate == Gamestate.ingame)
             {
                 player.PlayerUpdate();
                 player.Update();
@@ -178,7 +178,7 @@ namespace Itgspelprojekt
             }
 
             //battle
-            else if (player.gamestate == Gamestate.battle)
+            else if (gamestate == Gamestate.battle)
             {
                 camera.Update(new Vector2(battle.Width / 2, battle.Height / 2));
                 camera.Zoom = 1;
@@ -198,10 +198,7 @@ namespace Itgspelprojekt
                     gamestate = Gamestate.ingame;
                 }
             }
-
-
-
-
+            
             // TODO: Add your update logic here
 
             base.Update(gameTime);
