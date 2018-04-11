@@ -24,6 +24,7 @@ namespace Itgspelprojekt
         SpriteBatch spriteBatch;
         Camera camera;
         Map map;
+        Pathfinder pathfinder;
         Player player;
         Creatures.Creatures creatures;
         Texture2D fadeIn, battle, menuBattle, healthMenuBattle;
@@ -59,6 +60,7 @@ namespace Itgspelprojekt
             // TODO: Add your initialization logic here
             
             map = new Map();
+            pathfinder = new Pathfinder();
             camera = new Camera(graphics.GraphicsDevice.Viewport);
             player = new Player("bob", new Vector2(896, 896), 10, Content.Load<Texture2D>("knuc"));
 
@@ -93,6 +95,7 @@ namespace Itgspelprojekt
             creatures.ParseCreaturesFile(Content);
 
             gamestate = Gamestate.ingame;
+            
             
 
             base.Initialize();
@@ -137,6 +140,7 @@ namespace Itgspelprojekt
             // in game
             if (gamestate == Gamestate.ingame)
             {
+                pathfinder.PathFind(map);
                 player.PlayerUpdate();
                 player.Update();
 

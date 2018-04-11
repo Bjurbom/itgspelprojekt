@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Itgspelprojekt.Tiles
 {
     // Tors collision tiles
-    class CollisionTiles : Tiless
+    public class CollisionTiles : Tiless
     {
         public CollisionTiles(int i, Rectangle newRectangle)
         {

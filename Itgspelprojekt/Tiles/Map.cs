@@ -10,12 +10,13 @@ using Microsoft.Xna.Framework;
 
 namespace Itgspelprojekt.Tiles
 {
-    class Map
+    public class Map
     {
         //Tors Map kod
 
         //gör listan
-        List<CollisionTiles> collisionTiles = new List<CollisionTiles>();
+        
+        private List<CollisionTiles> collisionTiles = new List<CollisionTiles>();
         
 
         //property av listan

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Itgspelprojekt
 {
-    abstract class Tiless
+    public abstract class Tiless
     {
         // Tors abstracta bas klass
 
