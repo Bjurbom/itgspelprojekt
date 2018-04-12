@@ -29,8 +29,10 @@ namespace Itgspelprojekt
         Creatures.Creatures creatures;
         Texture2D fadeIn, battle, menuBattle, healthMenuBattle;
         SpriteFont nameInBattle;
+        SpriteFont developerFont;
         List<UI> UIList;
         Vector2 selectorPosition;
+
 
         public static Gamestate gamestate;
 
@@ -75,6 +77,7 @@ namespace Itgspelprojekt
             menuBattle = Content.Load<Texture2D>("battleMenu");
             healthMenuBattle = Content.Load<Texture2D>("healthMenu");
             nameInBattle = Content.Load<SpriteFont>("textForName");
+            developerFont = Content.Load<SpriteFont>("Ffont");
 
 
             //battle animationer
@@ -94,10 +97,13 @@ namespace Itgspelprojekt
             creatures = new Creatures.Creatures();
             creatures.ParseCreaturesFile(Content);
 
-            gamestate = Gamestate.ingame;
-
-            creatures.creatures[0].MoveTo(pathfinder.PathFind());
+            gamestate = Gamestate.ingame; 
             
+            creatures.creatures[0].MoveTo(pathfinder.PathFind(creatures.creatures[0].position, new Vector2(2560, 256)));
+            creatures.creatures[1].MoveTo(pathfinder.PathFind(creatures.creatures[1].position, new Vector2(2496, 256)));
+            creatures.creatures[2].MoveTo(pathfinder.PathFind(creatures.creatures[2].position, new Vector2(2432, 256)));
+            creatures.creatures[3].MoveTo(pathfinder.PathFind(creatures.creatures[3].position, new Vector2(2368, 256)));
+
 
             base.Initialize();
         }
@@ -224,8 +230,6 @@ namespace Itgspelprojekt
                     creature.Draw(spriteBatch);
                 }
                 player.Draw(spriteBatch);
-
-                
             }
             if (gamestate == Gamestate.battle)
             {
@@ -250,8 +254,15 @@ namespace Itgspelprojekt
                     mainBattleMenu.Draw(spriteBatch);
                 }
                 
-                
             }
+            spriteBatch.End();
+
+
+
+            spriteBatch.Begin(); // No camera transform in this one.
+
+            spriteBatch.DrawString(developerFont, player.position.ToString(), new Vector2(0, 0), Color.Black);
+
             spriteBatch.End();
 
             // TODO: Add your drawing code here

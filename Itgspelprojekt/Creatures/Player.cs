@@ -33,7 +33,7 @@ namespace Itgspelprojekt.Creatures
             
 
             if (Keyboard.GetState().IsKeyDown(Keys.LeftShift))
-                moveSpeed = 20;
+                moveSpeed = 30;
             else
                 moveSpeed = 6;
 

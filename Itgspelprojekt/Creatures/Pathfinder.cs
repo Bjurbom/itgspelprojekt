@@ -13,15 +13,13 @@ namespace Itgspelprojekt.Creatures
         // Tommies fina A* Pathfinding kod
         // return an array of coordinates for the "simple" player AI (in Player.cs) to follow.
 
-        public List<Vector2> PathFind()
+        public List<Vector2> PathFind(Vector2 startingPosition, Vector2 endPosition)
         {
-            Vector2 startPosition = new Vector2(777, 1024);
-            Vector2 endPosition = new Vector2(2560, 100);
-            int startPosX = (int)((startPosition.X + 1) / 64); // Transform coordinates so that one tile is 1x1 large.
-            int startPosY = (int)((startPosition.Y + 1) / 64); // + 1 to prevent rounding errors, not sure if necessary
+            int startPosX = (int)((startingPosition.X + 1) / 64); // Transform coordinates so that one tile is 1x1 large.
+            int startPosY = (int)((startingPosition.Y + 1) / 64); // + 1 to prevent rounding errors, not sure if necessary
             int endPosX = (int)((endPosition.X + 1) / 64);
             int endPosY = (int)((endPosition.Y + 1) / 64);
-
+            
 
             List<List<Node>> node = new List<List<Node>>(); // GetLength(0) is height, 1 is width
 

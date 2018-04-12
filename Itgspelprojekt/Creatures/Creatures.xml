@@ -3,25 +3,25 @@
   <Creature>
     <name>Alexander</name>
     <texture>knuc</texture>
-    <moveSpeed>2</moveSpeed>
-    <startingPosition>777, 1024</startingPosition>
+    <moveSpeed>3</moveSpeed>
+    <startingPosition>704, 1024</startingPosition>
   </Creature>
   <Creature>
     <name>Martin</name>
     <texture>knuc</texture>
-    <moveSpeed>1</moveSpeed>
-    <startingPosition>833, 1024</startingPosition>
+    <moveSpeed>3</moveSpeed>
+    <startingPosition>768, 1024</startingPosition>
   </Creature>
   <Creature>
     <name>ANKA</name>
     <texture>knuc</texture>
-    <moveSpeed>1</moveSpeed>
-    <startingPosition>899, 1024</startingPosition>
+    <moveSpeed>3</moveSpeed>
+    <startingPosition>832, 1024</startingPosition>
   </Creature>
   <Creature>
     <name>Fritiofsson</name>
     <texture>ANFR</texture>
-    <moveSpeed>1</moveSpeed>
-    <startingPosition>899, 960</startingPosition>
+    <moveSpeed>3</moveSpeed>
+    <startingPosition>896, 1024</startingPosition>
   </Creature>
 </XML>

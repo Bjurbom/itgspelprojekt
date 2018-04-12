@@ -50,18 +50,18 @@ namespace Itgspelprojekt.Creatures
         
         public void Update()
         {
-            if (targetPosition.X - 6 > position.X)
+            if (targetPosition.X - moveSpeed - 1 > position.X) // moveSpeed is used so that when there's one 'tick' of motion left, it can teleport to it's destination, regardless of what the movement speed is set to
                 direction.X = 1f;
-            else if (targetPosition.X + 6 < position.X)
+            else if (targetPosition.X + moveSpeed + 1 < position.X)
                 direction.X = -1f;
             else
             {
                 direction.X = 0;
                 position.X = targetPosition.X;
 
-                if (targetPosition.Y - 6 > position.Y) // When X is correct, move on Y axis
+                if (targetPosition.Y - moveSpeed - 1 > position.Y) // When X is correct, move on Y axis
                     direction.Y = 1f;
-                else if (targetPosition.Y + 6 < position.Y)
+                else if (targetPosition.Y + moveSpeed + 1 < position.Y)
                     direction.Y = -1f;
                 else
                 {
