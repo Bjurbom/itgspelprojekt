@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <XML>
+  <!-- Tommies intressanta XML fil-->
   <Creature>
     <name>Alexander</name>
     <texture>knuc</texture>

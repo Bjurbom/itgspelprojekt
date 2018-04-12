@@ -14,9 +14,11 @@ namespace Itgspelprojekt.Creatures
     {
         string creaturesFile = string.Empty;
         public List<Creature> creatures = new List<Creature>();
+
+        // Tommies mirakulösa XML-läsande kod
         
 
-        public void ParseCreaturesFile(Microsoft.Xna.Framework.Content.ContentManager contentManager)
+        public string ParseCreaturesFile(Microsoft.Xna.Framework.Content.ContentManager contentManager)
         {
             try
             {
@@ -46,7 +48,7 @@ namespace Itgspelprojekt.Creatures
                         reader.ReadToFollowing("startingPosition");
                         position = reader.ReadElementContentAsString();
 
-                        string[] pos = position.Split(',');
+                        string[] pos = position.Split(','); // Split position, e.g. "1337, 420" into "1337" and " 420", both of which can be correctly parsed as floats
                         creatures.Add(new Creature(name, new Vector2(float.Parse(pos[0]), float.Parse(pos[1])),
                                       moveSpeed, contentManager.Load<Texture2D>(texture)));
                     }
@@ -54,10 +56,9 @@ namespace Itgspelprojekt.Creatures
             }
             catch (Exception ex)
             {
-                ex.GetType(); // Öppna en dialogue ruta där det står att det var en exception, fortsätt sen köra.
-                
-                //om det kommer en exception i creatures.Add() så kan det komma en till exception senare, om creature:n görs men har felaktiga variabler.
+                return ex.ToString(); // Another exception can occur later if the creature was created, but with the wrong variables, or if one or more creatures weren't created.
             }
+            return String.Empty;
         }
     }
 }

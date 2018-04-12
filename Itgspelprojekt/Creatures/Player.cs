@@ -15,7 +15,6 @@ namespace Itgspelprojekt.Creatures
     class Player : Creature
     {
 
-
         public Player(string name, Vector2 position, float moveSpeed, Texture2D texture) : base(name, position, moveSpeed, texture)
         {
             

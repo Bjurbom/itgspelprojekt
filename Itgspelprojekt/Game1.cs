@@ -32,6 +32,7 @@ namespace Itgspelprojekt
         SpriteFont developerFont;
         List<UI> UIList;
         Vector2 selectorPosition;
+        string errorMessage;
 
 
         public static Gamestate gamestate;
@@ -95,7 +96,7 @@ namespace Itgspelprojekt
             mainBattleMenu = new controlForUI(nameInBattle,new Vector2(740, 550), 2, 2);
 
             creatures = new Creatures.Creatures();
-            creatures.ParseCreaturesFile(Content);
+            errorMessage = creatures.ParseCreaturesFile(Content);
 
             gamestate = Gamestate.ingame; 
             
@@ -235,7 +236,7 @@ namespace Itgspelprojekt
             {
                 GraphicsDevice.Clear(Color.Black);
 
-                // återstälelr kamra inställningarna
+                // återstälelr kamera inställningarna
                 camera.Zoom = 1;
                 camera.Rotation = 0;
 
@@ -259,9 +260,9 @@ namespace Itgspelprojekt
 
 
 
-            spriteBatch.Begin(); // No camera transform in this one.
+            spriteBatch.Begin(); // No camera transform in this spriteBatch.
 
-            spriteBatch.DrawString(developerFont, player.position.ToString(), new Vector2(0, 0), Color.Black);
+            spriteBatch.DrawString(developerFont, player.position.ToString() + "   " + errorMessage, new Vector2(0, 0), Color.Black); // errorMessage = String.Empty if no error has occured.
 
             spriteBatch.End();
 

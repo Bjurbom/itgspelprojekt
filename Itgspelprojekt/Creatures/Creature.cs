@@ -11,6 +11,8 @@ namespace Itgspelprojekt.Creatures
 {
     class Creature
     {
+        // Tommies och Tors Creature kod
+
         // Det här är en Creature i the Overworld. TODO: items, creatures in battle
 
         public Vector2 position, direction, targetPosition; // targetPosition should only be used to move in a straight line.
@@ -50,18 +52,18 @@ namespace Itgspelprojekt.Creatures
         
         public void Update()
         {
-            if (targetPosition.X - moveSpeed - 1 > position.X) // moveSpeed is used so that when there's one 'tick' of motion left, it can teleport to it's destination, regardless of what the movement speed is set to
+            if (targetPosition.X - moveSpeed / 2 - 1 > position.X) // moveSpeed is used so that when there's one 'tick' of motion left, it can teleport to it's destination, regardless of what the movement speed is set to
                 direction.X = 1f;
-            else if (targetPosition.X + moveSpeed + 1 < position.X)
+            else if (targetPosition.X + moveSpeed / 2+ 1 < position.X)
                 direction.X = -1f;
             else
             {
                 direction.X = 0;
                 position.X = targetPosition.X;
 
-                if (targetPosition.Y - moveSpeed - 1 > position.Y) // When X is correct, move on Y axis
+                if (targetPosition.Y - moveSpeed / 2 - 1 > position.Y) // When X is correct, move on Y axis
                     direction.Y = 1f;
-                else if (targetPosition.Y + moveSpeed + 1 < position.Y)
+                else if (targetPosition.Y + moveSpeed / 2+ 1 < position.Y)
                     direction.Y = -1f;
                 else
                 {
