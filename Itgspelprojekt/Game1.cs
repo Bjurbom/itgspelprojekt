@@ -95,7 +95,8 @@ namespace Itgspelprojekt
             creatures.ParseCreaturesFile(Content);
 
             gamestate = Gamestate.ingame;
-            
+
+            creatures.creatures[0].MoveTo(pathfinder.PathFind());
             
 
             base.Initialize();
@@ -140,7 +141,6 @@ namespace Itgspelprojekt
             // in game
             if (gamestate == Gamestate.ingame)
             {
-                pathfinder.PathFind(map);
                 player.PlayerUpdate();
                 player.Update();
 

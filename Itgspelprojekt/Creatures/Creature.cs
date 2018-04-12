@@ -20,6 +20,7 @@ namespace Itgspelprojekt.Creatures
         public string name;
         public int sizeX = 64, sizeY = 64;
         public bool goingUp, goingDown, goingLeft, goingRight;
+        private List<Vector2> futureTargetPositions = new List<Vector2>();
         
 
         public Creature (string name, Vector2 position, float moveSpeed, Texture2D texture)
@@ -36,6 +37,15 @@ namespace Itgspelprojekt.Creatures
             goingDown = true;
             goingLeft = true;
             goingRight = true;
+        }
+
+        /// <summary>
+        /// Feed a set of coordinates into the simple Creature AI, for the Creature to follow in order from index 0 to the end of the list.
+        /// </summary>
+        /// <param name="coordinates"></param>
+        public void MoveTo(List<Vector2> coordinates)
+        {
+            futureTargetPositions = coordinates;
         }
         
         public void Update()
@@ -57,6 +67,12 @@ namespace Itgspelprojekt.Creatures
                 {
                     direction.Y = 0;
                     position.Y = targetPosition.Y;
+
+                    if (futureTargetPositions.Count > 0)
+                    {
+                        targetPosition = futureTargetPositions[0];
+                        futureTargetPositions.RemoveAt(0);
+                    }
                 }
             }
             
