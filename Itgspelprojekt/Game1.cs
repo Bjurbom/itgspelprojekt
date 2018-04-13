@@ -32,6 +32,7 @@ namespace Itgspelprojekt
         SpriteFont developerFont;
         List<UI> UIList;
         Vector2 selectorPosition;
+        Battle normalBattle;
         string errorMessage;
 
 
@@ -105,6 +106,7 @@ namespace Itgspelprojekt
             creatures.creatures[2].MoveTo(pathfinder.PathFind(creatures.creatures[2].position, new Vector2(2432, 256)));
             creatures.creatures[3].MoveTo(pathfinder.PathFind(creatures.creatures[3].position, new Vector2(2368, 256)));
 
+            normalBattle = new Battle(battle, menuBattle, healthMenuBattle, mainBattleMenu, UIList);
 
             base.Initialize();
         }
@@ -190,23 +192,7 @@ namespace Itgspelprojekt
             //battle
             else if (gamestate == Gamestate.battle)
             {
-                camera.Update(new Vector2(battle.Width / 2, battle.Height / 2));
-                camera.Zoom = 1;
-                camera.Rotation = 0;
-
-                battleAnimation.Update(gameTime);
-                battleMenuAnimation.Update(gameTime);
-                battleHealthbars.Update(gameTime);
-
-                if (battleHealthbars.InPosition == true)
-                {
-                    mainBattleMenu.Update(gameTime);
-                }
-                
-                if (Keyboard.GetState().IsKeyDown(Keys.Enter) && mainBattleMenu.SelectorPositionX == 2 && mainBattleMenu.SelectorPositionY == 2)
-                {
-                    gamestate = Gamestate.ingame;
-                }
+                normalBattle.Update(camera, gameTime);
             }
             
             // TODO: Add your update logic here
@@ -234,27 +220,7 @@ namespace Itgspelprojekt
             }
             if (gamestate == Gamestate.battle)
             {
-                GraphicsDevice.Clear(Color.Black);
-
-                // återstälelr kamera inställningarna
-                camera.Zoom = 1;
-                camera.Rotation = 0;
-
-                battleAnimation.Draw(spriteBatch);
-                battleMenuAnimation.Draw(spriteBatch);
-                battleHealthbars.Draw(spriteBatch);
-
-
-                if (battleMenuAnimation.InPosition == true)
-                {
-                    foreach (UI textItem in UIList)
-                    {
-                        textItem.Draw(spriteBatch);
-                    }
-
-                    mainBattleMenu.Draw(spriteBatch);
-                }
-                
+                normalBattle.Draw(spriteBatch);
             }
             spriteBatch.End();
 

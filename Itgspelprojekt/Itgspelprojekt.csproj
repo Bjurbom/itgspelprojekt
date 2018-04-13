@@ -41,6 +41,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Battle.cs" />
     <Compile Include="battle\animationForBattle.cs" />
     <Compile Include="battle\controlForUI.cs" />
     <Compile Include="battle\UI.cs" />
