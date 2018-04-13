@@ -152,25 +152,7 @@ namespace Itgspelprojekt
             {
                 player.PlayerUpdate();
                 player.Update();
-
-                if (Keyboard.GetState().IsKeyDown(Keys.R))
-                {
-                    camera.Zoom += 0.1f;
-                }
-                if (Keyboard.GetState().IsKeyDown(Keys.T))
-                {
-                    camera.Zoom -= 0.1f;
-                }
-                if (Keyboard.GetState().IsKeyDown(Keys.F))
-                {
-                    camera.Rotation += 0.1f;
-                }
-                if (Keyboard.GetState().IsKeyDown(Keys.G))
-                {
-                    camera.Rotation -= 0.1f;
-                }
-
-                
+                CameraControls();
 
                 foreach (Creature creature in creatures.creatures)
                 {
@@ -180,13 +162,12 @@ namespace Itgspelprojekt
                 //hitdetection
                 foreach (CollisionTiles item in map.CollisionTiles)
                 {
-
-                    player.PlayerHitdetection(item,camera);
+                    player.PlayerHitdetection(item, camera);
 
                     camera.Update(player.position);
                 }
 
-                
+
             }
 
             //battle
@@ -198,6 +179,26 @@ namespace Itgspelprojekt
             // TODO: Add your update logic here
 
             base.Update(gameTime);
+        }
+
+        private void CameraControls()
+        {
+            if (Keyboard.GetState().IsKeyDown(Keys.R))
+            {
+                camera.Zoom += 0.1f;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.T))
+            {
+                camera.Zoom -= 0.1f;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.F))
+            {
+                camera.Rotation += 0.1f;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.G))
+            {
+                camera.Rotation -= 0.1f;
+            }
         }
 
         /// <summary>
