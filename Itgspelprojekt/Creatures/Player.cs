@@ -73,6 +73,11 @@ namespace Itgspelprojekt.Creatures
 
         public void PlayerHitdetection(CollisionTiles item, Camera camera)
         {
+            Collision(item, camera);
+        }
+
+        private void Collision(CollisionTiles item, Camera camera)
+        {
             if (hitboxUp.Intersects(item.Rectangle))
             {
                 if (item.Id == 1)
@@ -142,6 +147,5 @@ namespace Itgspelprojekt.Creatures
 
             }
         }
-
     }
 }

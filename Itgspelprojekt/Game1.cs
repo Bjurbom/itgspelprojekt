@@ -33,6 +33,7 @@ namespace Itgspelprojekt
         List<UI> UIList;
         Vector2 selectorPosition;
         Battle normalBattle;
+        
         string errorMessage;
 
 
@@ -101,7 +102,7 @@ namespace Itgspelprojekt
 
             gamestate = Gamestate.ingame; 
             
-            creatures.creatures[0].MoveTo(pathfinder.PathFind(creatures.creatures[0].position, new Vector2(2560, 256)));
+            creatures.creatures[0].MoveTo(pathfinder.PathFind(creatures.creatures[0].position, new Vector2(64, 768)));
             creatures.creatures[1].MoveTo(pathfinder.PathFind(creatures.creatures[1].position, new Vector2(2496, 256)));
             creatures.creatures[2].MoveTo(pathfinder.PathFind(creatures.creatures[2].position, new Vector2(2432, 256)));
             creatures.creatures[3].MoveTo(pathfinder.PathFind(creatures.creatures[3].position, new Vector2(2368, 256)));
@@ -152,7 +153,7 @@ namespace Itgspelprojekt
             {
                 player.PlayerUpdate();
                 player.Update();
-                CameraControls();
+                CameraControls(); //camera controls
 
                 foreach (Creature creature in creatures.creatures)
                 {
@@ -181,6 +182,46 @@ namespace Itgspelprojekt
             base.Update(gameTime);
         }
 
+
+        /// <summary>
+        /// This is called when the game should draw itself.
+        /// </summary>
+        /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        protected override void Draw(GameTime gameTime)
+        {
+            GraphicsDevice.Clear(Color.CornflowerBlue);
+
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, camera.Transform);
+            if (gamestate == Gamestate.ingame)
+            {
+                
+                map.Draw(spriteBatch);
+                foreach (Creature creature in creatures.creatures)
+                {
+                    creature.Draw(spriteBatch);
+                }
+                player.Draw(spriteBatch);
+                
+            }
+            if (gamestate == Gamestate.battle)
+            {
+                normalBattle.Draw(spriteBatch);
+            }
+            spriteBatch.End();
+
+
+
+            spriteBatch.Begin(); // No camera transform in this spriteBatch.
+
+            spriteBatch.DrawString(developerFont, player.position.ToString() + "   " + errorMessage, new Vector2(0, 0), Color.Black); // errorMessage = String.Empty if no error has occured.
+
+            spriteBatch.End();
+
+            // TODO: Add your drawing code here
+
+            base.Draw(gameTime);
+        }
+
         private void CameraControls()
         {
             if (Keyboard.GetState().IsKeyDown(Keys.R))
@@ -201,41 +242,5 @@ namespace Itgspelprojekt
             }
         }
 
-        /// <summary>
-        /// This is called when the game should draw itself.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        protected override void Draw(GameTime gameTime)
-        {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, camera.Transform);
-            if (gamestate == Gamestate.ingame)
-            {
-                map.Draw(spriteBatch);
-                foreach (Creature creature in creatures.creatures)
-                {
-                    creature.Draw(spriteBatch);
-                }
-                player.Draw(spriteBatch);
-            }
-            if (gamestate == Gamestate.battle)
-            {
-                normalBattle.Draw(spriteBatch);
-            }
-            spriteBatch.End();
-
-
-
-            spriteBatch.Begin(); // No camera transform in this spriteBatch.
-
-            spriteBatch.DrawString(developerFont, player.position.ToString() + "   " + errorMessage, new Vector2(0, 0), Color.Black); // errorMessage = String.Empty if no error has occured.
-
-            spriteBatch.End();
-
-            // TODO: Add your drawing code here
-
-            base.Draw(gameTime);
-        }
     }
 }
