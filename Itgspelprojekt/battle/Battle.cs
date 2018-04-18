@@ -18,19 +18,21 @@ namespace Itgspelprojekt.battle
             Texture2D battle, menuBattle, healthMenuBattle;
             controlForUI mainBattleMenu;
             List<UI> UIList;
+            SpriteFont spriteFont;
 
-            public Battle(Texture2D backround, Texture2D inventoryMenu, Texture2D healthMenu, controlForUI menyn, List<UI> listOfUI)
+            public Battle(Texture2D backround, Texture2D inventoryMenu, Texture2D healthMenu, List<UI> listOfUI, SpriteFont spriteFont)
             {
                 //texture load
                 battle = backround;
                 menuBattle = inventoryMenu;
                 healthMenuBattle = healthMenu;
+                this.spriteFont = spriteFont;
 
                 UIList = listOfUI;
-                mainBattleMenu = menyn;
+                mainBattleMenu = new controlForUI(spriteFont, new Vector2(740, 550), 2, 2);
 
-                //battle animationer
-                battleAnimation = new animationForBattle(battle, new Vector2(0, 0), new Vector2(0, 0));
+            //battle animationer
+            battleAnimation = new animationForBattle(battle, new Vector2(0, 0), new Vector2(0, 0));
                 battleMenuAnimation = new animationForBattle(menuBattle, new Vector2(1200, 1200), new Vector2(-1, -1));
                 battleHealthbars = new animationForBattle(healthMenuBattle, new Vector2(1200, 0), new Vector2(-1, 60));
             }

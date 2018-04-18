@@ -28,7 +28,7 @@ namespace Itgspelprojekt
         Player player;
         Creatures.Creatures creatures;
         Texture2D fadeIn, battle, menuBattle, healthMenuBattle;
-        SpriteFont nameInBattle;
+        SpriteFont TextInBattle;
         SpriteFont developerFont;
         List<UI> UIList;
         Vector2 selectorPosition;
@@ -79,7 +79,7 @@ namespace Itgspelprojekt
             battle = Content.Load<Texture2D>("backroundForBattle");
             menuBattle = Content.Load<Texture2D>("battleMenu");
             healthMenuBattle = Content.Load<Texture2D>("healthMenu");
-            nameInBattle = Content.Load<SpriteFont>("textForName");
+            TextInBattle = Content.Load<SpriteFont>("textForName");
             developerFont = Content.Load<SpriteFont>("Ffont");
 
 
@@ -89,13 +89,13 @@ namespace Itgspelprojekt
             battleHealthbars = new animationForBattle(healthMenuBattle, new Vector2(1200, 0), new Vector2(-1, 60));
 
             //battle UI Main
-            UIList.Add(new UI(new Vector2(170, 90), nameInBattle, player.name));
-            UIList.Add(new UI(new Vector2(750, 550), nameInBattle, "Attack"));
-            UIList.Add(new UI(new Vector2(750, 600), nameInBattle, "Stats"));
-            UIList.Add(new UI(new Vector2(850, 550), nameInBattle, "Inventory"));
-            UIList.Add(new UI(new Vector2(850, 600), nameInBattle, "Run"));
+            UIList.Add(new UI(new Vector2(170, 90), TextInBattle, player.name));
+            UIList.Add(new UI(new Vector2(750, 550), TextInBattle, "Attack"));
+            UIList.Add(new UI(new Vector2(750, 600), TextInBattle, "Stats"));
+            UIList.Add(new UI(new Vector2(850, 550), TextInBattle, "Inventory"));
+            UIList.Add(new UI(new Vector2(850, 600), TextInBattle, "Run"));
 
-            mainBattleMenu = new controlForUI(nameInBattle,new Vector2(740, 550), 2, 2);
+            mainBattleMenu = new controlForUI(TextInBattle,new Vector2(740, 550), 2, 2);
 
             creatures = new Creatures.Creatures();
             errorMessage = creatures.ParseCreaturesFile(Content);
@@ -107,7 +107,7 @@ namespace Itgspelprojekt
             creatures.creatures[2].MoveTo(pathfinder.PathFind(creatures.creatures[2].position, new Vector2(2432, 256)));
             creatures.creatures[3].MoveTo(pathfinder.PathFind(creatures.creatures[3].position, new Vector2(2368, 256)));
 
-            normalBattle = new Battle(battle, menuBattle, healthMenuBattle, mainBattleMenu, UIList);
+            normalBattle = new Battle(battle, menuBattle, healthMenuBattle, UIList, TextInBattle);
 
             base.Initialize();
         }
