@@ -44,7 +44,6 @@
     <Compile Include="battle\animationForBattle.cs" />
     <Compile Include="battle\Battle.cs" />
     <Compile Include="battle\controlForUI.cs" />
-    <Compile Include="battle\NormalBattle.cs" />
     <Compile Include="battle\UI.cs" />
     <Compile Include="Camera.cs" />
     <Compile Include="Creatures\Creature.cs" />

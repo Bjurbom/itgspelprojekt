@@ -30,6 +30,7 @@ namespace Itgspelprojekt
         Texture2D fadeIn, battle, menuBattle, healthMenuBattle;
         SpriteFont TextInBattle;
         SpriteFont developerFont;
+        Texture2D whiteBlock;
         List<UI> UIList;
         Vector2 selectorPosition;
         Battle normalBattle;
@@ -81,6 +82,7 @@ namespace Itgspelprojekt
             healthMenuBattle = Content.Load<Texture2D>("healthMenu");
             TextInBattle = Content.Load<SpriteFont>("textForName");
             developerFont = Content.Load<SpriteFont>("Ffont");
+            whiteBlock = Content.Load<Texture2D>("vitblock");
 
 
             //battle animationer
@@ -89,7 +91,7 @@ namespace Itgspelprojekt
             battleHealthbars = new animationForBattle(healthMenuBattle, new Vector2(1200, 0), new Vector2(-1, 60));
 
             //battle UI Main
-            UIList.Add(new UI(new Vector2(170, 90), TextInBattle, player.name));
+            UIList.Add(new UI(new Vector2(170, 90), TextInBattle, player.Name));
             UIList.Add(new UI(new Vector2(750, 550), TextInBattle, "Attack"));
             UIList.Add(new UI(new Vector2(750, 600), TextInBattle, "Stats"));
             UIList.Add(new UI(new Vector2(850, 550), TextInBattle, "Inventory"));
@@ -107,7 +109,7 @@ namespace Itgspelprojekt
             creatures.creatures[2].MoveTo(pathfinder.PathFind(creatures.creatures[2].position, new Vector2(2432, 256)));
             creatures.creatures[3].MoveTo(pathfinder.PathFind(creatures.creatures[3].position, new Vector2(2368, 256)));
 
-            normalBattle = new Battle(battle, menuBattle, healthMenuBattle, UIList, TextInBattle);
+            normalBattle = new Battle(battle, menuBattle, healthMenuBattle, UIList, TextInBattle, whiteBlock);
 
             base.Initialize();
         }
@@ -174,7 +176,8 @@ namespace Itgspelprojekt
             //battle
             else if (gamestate == Gamestate.battle)
             {
-                normalBattle.Update(camera, gameTime);
+    
+                normalBattle.Update(camera, gameTime, player);
             }
             
             // TODO: Add your update logic here

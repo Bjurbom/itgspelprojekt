@@ -22,6 +22,7 @@ namespace Itgspelprojekt.Creatures
         private string name;
         public int sizeX = 64, sizeY = 64;
         protected bool goingUp, goingDown, goingLeft, goingRight;
+        private int health;
         protected List<Vector2> futureTargetPositions = new List<Vector2>();
 
         public string Name
@@ -29,6 +30,18 @@ namespace Itgspelprojekt.Creatures
             get
             {
                 return name;
+            }
+        }
+
+        public int Health
+        {
+            get
+            {
+                return health;
+            }
+            set
+            {
+                health = value;
             }
         }
 
