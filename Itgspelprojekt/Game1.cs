@@ -102,10 +102,12 @@ namespace Itgspelprojekt
 
             gamestate = Gamestate.ingame; 
             
-            creatures.creatures[0].MoveTo(pathfinder.PathFind(creatures.creatures[0].position, new Vector2(64, 768)));
-            creatures.creatures[1].MoveTo(pathfinder.PathFind(creatures.creatures[1].position, new Vector2(2496, 256)));
-            creatures.creatures[2].MoveTo(pathfinder.PathFind(creatures.creatures[2].position, new Vector2(2432, 256)));
-            creatures.creatures[3].MoveTo(pathfinder.PathFind(creatures.creatures[3].position, new Vector2(2368, 256)));
+            creatures.creatures[0].MoveTo(pathfinder.Pathfind(creatures.creatures[0].position, new Vector2(128, 832), 0));
+            creatures.creatures[1].MoveTo(pathfinder.Pathfind(creatures.creatures[1].position, new Vector2(2496, 256), 0));
+            creatures.creatures[2].MoveTo(pathfinder.Pathfind(creatures.creatures[2].position, new Vector2(2432, 256), 0));
+            creatures.creatures[3].MoveTo(pathfinder.Pathfind(creatures.creatures[3].position, new Vector2(2368, 256), 0));
+            errorMessage += pathfinder.errorMessage;
+            pathfinder.errorMessage = string.Empty;
 
             normalBattle = new NormalBattle(battle,menuBattle,healthMenuBattle,mainBattleMenu,UIList);
 

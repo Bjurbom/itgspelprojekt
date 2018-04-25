@@ -5,7 +5,7 @@
     <name>Alexander</name>
     <texture>knuc</texture>
     <moveSpeed>3</moveSpeed>
-    <startingPosition>704, 1024</startingPosition>
+    <startingPosition>768, 1088</startingPosition>
   </Creature>
   <Creature>
     <name>Martin</name>
