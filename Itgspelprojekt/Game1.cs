@@ -33,7 +33,7 @@ namespace Itgspelprojekt
         List<UI> UIList;
         Vector2 selectorPosition;
         NormalBattle normalBattle;
-        
+
         string errorMessage;
 
 
@@ -51,7 +51,7 @@ namespace Itgspelprojekt
             graphics.PreferredBackBufferHeight = 700;
             graphics.PreferredBackBufferWidth = 1280;
         }
-        
+
 
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace Itgspelprojekt
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            
+
             map = new Map();
             pathfinder = new Pathfinder();
             camera = new Camera(graphics.GraphicsDevice.Viewport);
@@ -84,8 +84,8 @@ namespace Itgspelprojekt
 
 
             //battle animationer
-            battleAnimation = new animationForBattle(battle, new Vector2(0, 0), new Vector2(0,0));
-            battleMenuAnimation = new animationForBattle(menuBattle, new Vector2(1200,1200), new Vector2(-1,-1));
+            battleAnimation = new animationForBattle(battle, new Vector2(0, 0), new Vector2(0, 0));
+            battleMenuAnimation = new animationForBattle(menuBattle, new Vector2(1200, 1200), new Vector2(-1, -1));
             battleHealthbars = new animationForBattle(healthMenuBattle, new Vector2(1200, 0), new Vector2(-1, 60));
 
             //battle UI Main
@@ -95,13 +95,13 @@ namespace Itgspelprojekt
             UIList.Add(new UI(new Vector2(850, 550), nameInBattle, "Inventory"));
             UIList.Add(new UI(new Vector2(850, 600), nameInBattle, "Run"));
 
-            mainBattleMenu = new controlForUI(nameInBattle,new Vector2(740, 550), 2, 2);
+            mainBattleMenu = new controlForUI(nameInBattle, new Vector2(740, 550), 2, 2);
 
             creatures = new Creatures.Creatures();
             errorMessage = creatures.ParseCreaturesFile(Content);
 
-            gamestate = Gamestate.ingame; 
-            
+            gamestate = Gamestate.ingame;
+
             creatures.creatures[0].MoveTo(pathfinder.Pathfind(creatures.creatures[0].position, new Vector2(128, 832), 0));
             creatures.creatures[1].MoveTo(pathfinder.Pathfind(creatures.creatures[1].position, new Vector2(2496, 256), 0));
             creatures.creatures[2].MoveTo(pathfinder.Pathfind(creatures.creatures[2].position, new Vector2(2432, 256), 0));
@@ -109,7 +109,7 @@ namespace Itgspelprojekt
             errorMessage += pathfinder.errorMessage;
             pathfinder.errorMessage = string.Empty;
 
-            normalBattle = new NormalBattle(battle,menuBattle,healthMenuBattle,mainBattleMenu,UIList);
+            normalBattle = new NormalBattle(battle, menuBattle, healthMenuBattle, mainBattleMenu, UIList);
 
             base.Initialize();
         }
@@ -123,7 +123,7 @@ namespace Itgspelprojekt
             // Create a new SpriteBatch, which can be used to draw textures.
             //map generator
             Tiless.Content = Content;
-            map.Generate(level.map , 64);
+            map.Generate(level.map, 64);
 
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
@@ -178,7 +178,7 @@ namespace Itgspelprojekt
             {
                 normalBattle.Update(camera, gameTime);
             }
-            
+
             // TODO: Add your update logic here
 
             base.Update(gameTime);
@@ -196,14 +196,14 @@ namespace Itgspelprojekt
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, camera.Transform);
             if (gamestate == Gamestate.ingame)
             {
-                
+
                 map.Draw(spriteBatch);
                 foreach (Creature creature in creatures.creatures)
                 {
                     creature.Draw(spriteBatch);
                 }
                 player.Draw(spriteBatch);
-                
+
             }
             if (gamestate == Gamestate.battle)
             {
@@ -215,7 +215,10 @@ namespace Itgspelprojekt
 
             spriteBatch.Begin(); // No camera transform in this spriteBatch.
 
-            spriteBatch.DrawString(developerFont, player.position.ToString() + "   " + errorMessage, new Vector2(0, 0), Color.Black); // errorMessage = String.Empty if no error has occured.
+            if (gamestate == Gamestate.ingame)
+                spriteBatch.DrawString(developerFont, player.position.ToString() + "   " + errorMessage, new Vector2(0, 0), Color.Black); // errorMessage = String.Empty if no error has occured.
+            else if (gamestate == Gamestate.battle)
+                spriteBatch.DrawString(developerFont, errorMessage, new Vector2(0, 0), Color.Black); // errorMessage = String.Empty if no error has occured.
 
             spriteBatch.End();
 
