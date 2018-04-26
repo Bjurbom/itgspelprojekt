@@ -29,15 +29,25 @@ namespace Itgspelprojekt.battle
         /// <param name="sizeY"> storlek med Y axen</param>
         public controlForUI(SpriteFont font,Vector2 positionForCursior, int sizeX, int sizeY)
         {
+
+            //start positionen för pekaren i koodinatsystemetr
             selectorPosition = positionForCursior;
+
+            // storlek för menyn
             this.sizeX = sizeX;
             this.sizeY = sizeY;
+
+            // start positionen
             selectorPositionX = 1;
             selectorPositionY = 1;
             this.font = font;
+
+            //hur lång delay hur ofta man upptaterar pekaren
             interval = 150;
         }
 
+        // properties för var pekare
+        #region
         public int SelectorPositionX
         {
             get
@@ -53,7 +63,13 @@ namespace Itgspelprojekt.battle
                 return selectorPositionY;
             }
         }
+        #endregion
 
+        /// <summary>
+        /// Denna klass upptaterar pekaren samt ändrar positionen för den. 
+        /// Samt så Uptateras saktar på grund av Interval setting
+        /// </summary>
+        /// <param name="gameTime"></param>
         public void Update(GameTime gameTime)
         {
             if (elapsedTime > interval)
@@ -99,14 +115,17 @@ namespace Itgspelprojekt.battle
             }
 
             
-
+            // upptaterar klockan med milli sekunder
             elapsedTime += gameTime.ElapsedGameTime.TotalMilliseconds;
 
         }
+
+        // ritar ut pekaren
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.DrawString(font, ">", selectorPosition, Color.Black);
 
+            //Temp
             spriteBatch.DrawString(font, Convert.ToString(selectorPositionX), new Vector2(300, 300), Color.Black);
             spriteBatch.DrawString(font, Convert.ToString(selectorPositionY), new Vector2(300, 350), Color.Black);
         }
