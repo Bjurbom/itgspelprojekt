@@ -40,6 +40,7 @@ namespace Itgspelprojekt
         public static Gamestate gamestate;
 
 
+
         controlForUI mainBattleMenu;
 
 
@@ -67,7 +68,8 @@ namespace Itgspelprojekt
             map = new Map();
             pathfinder = new Pathfinder();
             camera = new Camera(graphics.GraphicsDevice.Viewport);
-            player = new Player("bob", new Vector2(896, 896), 10, Content.Load<Texture2D>("knuc"));
+
+
 
             //för UI
             UIList = new List<UI>();
@@ -88,6 +90,19 @@ namespace Itgspelprojekt
             battleMenuAnimation = new animationForBattle(menuBattle, new Vector2(1200, 1200), new Vector2(-1, -1));
             battleHealthbars = new animationForBattle(healthMenuBattle, new Vector2(1200, 0), new Vector2(-1, 60));
 
+
+
+            creatures = new Creatures.Creatures();
+            errorMessage = creatures.ParseCreaturesFile(Content);
+            creatures.creatures[0].MoveTo(pathfinder.Pathfind(creatures.creatures[0].position, new Vector2(128, 832), 0));
+            creatures.creatures[1].MoveTo(pathfinder.Pathfind(creatures.creatures[1].position, new Vector2(2496, 256), 0));
+            creatures.creatures[2].MoveTo(pathfinder.Pathfind(creatures.creatures[2].position, new Vector2(2432, 256), 0));
+            creatures.creatures[3].MoveTo(pathfinder.Pathfind(creatures.creatures[3].position, new Vector2(2368, 256), 0));
+            errorMessage += pathfinder.errorMessage;
+            pathfinder.errorMessage = string.Empty;
+
+            player = new Player("bob", new Vector2(896, 896), 10, Content.Load<Texture2D>("knuc"), creatures.creatures);
+
             //battle UI Main
             UIList.Add(new UI(new Vector2(170, 90), nameInBattle, player.Name));
             UIList.Add(new UI(new Vector2(750, 550), nameInBattle, "Attack"));
@@ -97,17 +112,12 @@ namespace Itgspelprojekt
 
             mainBattleMenu = new controlForUI(nameInBattle, new Vector2(740, 550), 2, 2);
 
-            creatures = new Creatures.Creatures();
-            errorMessage = creatures.ParseCreaturesFile(Content);
 
             gamestate = Gamestate.ingame;
 
-            creatures.creatures[0].MoveTo(pathfinder.Pathfind(creatures.creatures[0].position, new Vector2(128, 832), 0));
-            creatures.creatures[1].MoveTo(pathfinder.Pathfind(creatures.creatures[1].position, new Vector2(2496, 256), 0));
-            creatures.creatures[2].MoveTo(pathfinder.Pathfind(creatures.creatures[2].position, new Vector2(2432, 256), 0));
-            creatures.creatures[3].MoveTo(pathfinder.Pathfind(creatures.creatures[3].position, new Vector2(2368, 256), 0));
-            errorMessage += pathfinder.errorMessage;
-            pathfinder.errorMessage = string.Empty;
+
+
+
 
             normalBattle = new NormalBattle(battle, menuBattle, healthMenuBattle, mainBattleMenu, UIList);
 

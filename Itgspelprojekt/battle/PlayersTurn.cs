@@ -17,10 +17,10 @@ namespace Itgspelprojekt.battle
 
         public void Update()
         {
-            // startar fight
+            // Anfaller
             if ((Keyboard.GetState().IsKeyDown(Keys.Enter) && mainBattleMenu.SelectorPositionX == 1 && mainBattleMenu.SelectorPositionY == 1))
             {
-
+                Attack();
             }
             //flyr från stidern
             else if (Keyboard.GetState().IsKeyDown(Keys.Enter) && mainBattleMenu.SelectorPositionX == 2 && mainBattleMenu.SelectorPositionY == 2)
@@ -28,7 +28,23 @@ namespace Itgspelprojekt.battle
                 //ändrar gamestate så det blir tillbacka i spelet
                 Game1.gamestate = Gamestate.ingame;
             }
-           
+            // inventory should go in here
+            else if (Keyboard.GetState().IsKeyDown(Keys.Enter) && mainBattleMenu.SelectorPositionX == 2 && mainBattleMenu.SelectorPositionY == 1)
+            {
+
+            }
+            //get information about the creature
+            else if(Keyboard.GetState().IsKeyDown(Keys.Enter) && mainBattleMenu.SelectorPositionX == 1 && mainBattleMenu.SelectorPositionY == 2)
+            {
+
+            }
+
+
+        }
+
+        private void Attack()
+        {
+            
         }
     }
 }

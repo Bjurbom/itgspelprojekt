@@ -18,13 +18,15 @@ namespace Itgspelprojekt.Creatures
         public Vector2 position, direction, targetPosition; // targetPosition should only be used to move in a straight line.
         protected float moveSpeed;
         protected Texture2D texture;
-        protected Rectangle hitbox ,hitboxUp, hitboxDown, hitboxLeft, hitboxRight; // will be set to texture.Bounds in the constructor
+        protected Rectangle hitboxUp, hitboxDown, hitboxLeft, hitboxRight; // will be set to texture.Bounds in the constructor
         private string name;
         public int sizeX = 64, sizeY = 64;
         protected bool goingUp, goingDown, goingLeft, goingRight;
         private int health;
+        private Rectangle hitbox;
         protected List<Vector2> futureTargetPositions = new List<Vector2>();
 
+        // Tors properties
         public string Name
         {
             get
@@ -45,6 +47,17 @@ namespace Itgspelprojekt.Creatures
             }
         }
 
+        public Rectangle Hitbox
+        {
+            get
+            {
+                return hitbox;
+            }
+            set
+            {
+                hitbox = value;
+            }
+        }
 
 
         public Creature (string name, Vector2 position, float moveSpeed, Texture2D texture)

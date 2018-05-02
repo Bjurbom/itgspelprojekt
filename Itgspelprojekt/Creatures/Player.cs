@@ -14,10 +14,11 @@ namespace Itgspelprojekt.Creatures
     // Tommies och Tors player kod
     class Player : Creature
     {
+        private List<Creature> creatures;
 
-        public Player(string name, Vector2 position, float moveSpeed, Texture2D texture) : base(name, position, moveSpeed, texture)
+        public Player(string name, Vector2 position, float moveSpeed, Texture2D texture, List<Creature> creatures) : base(name, position, moveSpeed, texture)
         {
-            
+            this.creatures = creatures;
 
         }
 
@@ -28,7 +29,7 @@ namespace Itgspelprojekt.Creatures
             hitboxDown = new Rectangle((int)position.X, (int)position.Y +60, 56, 56);
             hitboxLeft = new Rectangle((int)position.X -60, (int)position.Y, 56, 56);
             hitboxRight = new Rectangle((int)position.X +60, (int)position.Y, 56, 56);
-            hitbox = new Rectangle((int)position.X, (int)position.Y, 64, 64);
+            Hitbox = new Rectangle((int)position.X, (int)position.Y, 64, 64);
             
 
             if (Keyboard.GetState().IsKeyDown(Keys.LeftShift))
@@ -128,13 +129,18 @@ namespace Itgspelprojekt.Creatures
                     goingRight = true;
                 }
             }
-            if (hitbox.Intersects(item.Rectangle))
+            if (Hitbox.Intersects(item.Rectangle))
             {
                 if (item.Id == 3)
                 {
+                    // Zoom in effekt
                     camera.Zoom += 0.5f;
                     camera.Rotation += 0.5f;
+
+                    //stoppar spelaren movement med en enkle metod
                     PlayerStop();
+
+                    // 
                     if (camera.Zoom >= 30)
                     {
 
@@ -145,6 +151,12 @@ namespace Itgspelprojekt.Creatures
 
                 }
 
+
+
+            }
+            if (creatures[0].Hitbox == Hitbox)
+            {
+                Game1.gamestate = Gamestate.battle;
             }
         }
     }
