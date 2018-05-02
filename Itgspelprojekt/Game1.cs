@@ -171,7 +171,7 @@ namespace Itgspelprojekt
                 foreach (Creature creature in creatures.creatures)
                 {
                     creature.Update();
-                    if (creature.Hitbox.Intersects(player.Hitbox))
+                    if (creature.canDoBattle && creature.Hitbox.Intersects(player.Hitbox))
                     {
                         gamestate = Gamestate.battle;
                         battleOpponent = creature;
