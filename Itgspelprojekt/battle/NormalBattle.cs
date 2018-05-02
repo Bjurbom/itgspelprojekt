@@ -23,7 +23,7 @@ namespace Itgspelprojekt.battle
         }
 
         /// <summary>
-        /// Denna update metod gör animation i början av battle medans den håller reda
+        /// Denna update metod gör animation i början av battle och grafiken medans den håller reda
         /// på vems tur det är i striden
         /// spelaren böjar i striden
         /// </summary>

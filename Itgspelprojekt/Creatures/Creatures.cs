@@ -15,7 +15,7 @@ namespace Itgspelprojekt.Creatures
         string creaturesFile = string.Empty;
         public List<Creature> creatures = new List<Creature>();
 
-        // Tommies mirakulösa XML-läsande kod
+        // Tommies mirakulösa XML-läsande ko
         
 
         public string ParseCreaturesFile(Microsoft.Xna.Framework.Content.ContentManager contentManager)
