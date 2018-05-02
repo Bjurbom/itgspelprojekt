@@ -38,6 +38,7 @@ namespace Itgspelprojekt
 
 
         public static Gamestate gamestate;
+        public static Creature battleOpponent;
 
 
         controlForUI mainBattleMenu;
@@ -160,6 +161,11 @@ namespace Itgspelprojekt
                 foreach (Creature creature in creatures.creatures)
                 {
                     creature.Update();
+                    if (creature.Hitbox.Intersects(player.Hitbox))
+                    {
+                        gamestate = Gamestate.battle;
+                        battleOpponent = creature;
+                    }
                 }
 
                 //hitdetection
@@ -169,7 +175,6 @@ namespace Itgspelprojekt
 
                     camera.Update(player.position);
                 }
-
 
             }
 
@@ -208,11 +213,12 @@ namespace Itgspelprojekt
             if (gamestate == Gamestate.battle)
             {
                 normalBattle.Draw(spriteBatch);
+                battleOpponent.DrawInBattle(spriteBatch, new Rectangle(1085, 155, 200, 200));
+                player.DrawInBattle(spriteBatch, new Rectangle(235, 460, 200, 200));
             }
             spriteBatch.End();
 
-
-
+            
             spriteBatch.Begin(); // No camera transform in this spriteBatch.
 
             if (gamestate == Gamestate.ingame)

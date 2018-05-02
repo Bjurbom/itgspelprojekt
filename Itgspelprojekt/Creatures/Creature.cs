@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Itgspelprojekt.Creatures
 {
-    class Creature
+    public class Creature
     {
         // Tommies och Tors Creature kod
 
@@ -18,7 +18,7 @@ namespace Itgspelprojekt.Creatures
         public Vector2 position, direction, targetPosition; // targetPosition should only be used to move in a straight line.
         protected float moveSpeed;
         protected Texture2D texture;
-        protected Rectangle hitbox ,hitboxUp, hitboxDown, hitboxLeft, hitboxRight; // will be set to texture.Bounds in the constructor
+        protected Rectangle hitbox, hitboxUp, hitboxDown, hitboxLeft, hitboxRight; // will be set to texture.Bounds in the constructor
         private string name;
         public int sizeX = 64, sizeY = 64;
         protected bool goingUp, goingDown, goingLeft, goingRight;
@@ -45,18 +45,25 @@ namespace Itgspelprojekt.Creatures
             }
         }
 
+        public Rectangle Hitbox
+        {
+            get
+            {
+                return hitbox;
+            }
+        }
 
 
-        public Creature (string name, Vector2 position, float moveSpeed, Texture2D texture)
+
+        public Creature(string name, Vector2 position, float moveSpeed, Texture2D texture)
         {
             this.name = name;
             this.position = position;
             this.targetPosition = new Vector2(position.X - position.X % 64, position.Y - position.Y % 64);
             this.moveSpeed = moveSpeed;
             this.texture = texture;
-            this.hitbox = texture.Bounds;
 
-            
+
             goingUp = true;
             goingDown = true;
             goingLeft = true;
@@ -71,12 +78,14 @@ namespace Itgspelprojekt.Creatures
         {
             futureTargetPositions = coordinates;
         }
-        
+
         public void Update()
         {
+            hitbox = new Rectangle((int)position.X, (int)position.Y, 64, 64);
+
             if (targetPosition.X - moveSpeed / 2 - 1 > position.X) // moveSpeed is used so that when there's one 'tick' of motion left, it can teleport to it's destination, regardless of what the movement speed is set to
                 direction.X = 1f;
-            else if (targetPosition.X + moveSpeed / 2+ 1 < position.X)
+            else if (targetPosition.X + moveSpeed / 2 + 1 < position.X)
                 direction.X = -1f;
             else
             {
@@ -85,7 +94,7 @@ namespace Itgspelprojekt.Creatures
 
                 if (targetPosition.Y - moveSpeed / 2 - 1 > position.Y) // When X is correct, move on Y axis
                     direction.Y = 1f;
-                else if (targetPosition.Y + moveSpeed / 2+ 1 < position.Y)
+                else if (targetPosition.Y + moveSpeed / 2 + 1 < position.Y)
                     direction.Y = -1f;
                 else
                 {
@@ -99,15 +108,19 @@ namespace Itgspelprojekt.Creatures
                     }
                 }
             }
-            
+
             position += direction * moveSpeed;
         }
-        
+
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             Rectangle drawPosition = new Rectangle((int)position.X, (int)position.Y, sizeX, sizeY);
             spriteBatch.Draw(texture, drawPosition, Color.White);
         }
-        
+        public virtual void DrawInBattle(SpriteBatch spriteBatch, Rectangle drawPosition)
+        {
+            spriteBatch.Draw(texture, drawPosition, Color.White);
+        }
+
     }
 }
