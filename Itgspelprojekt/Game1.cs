@@ -12,7 +12,7 @@ namespace Itgspelprojekt
     /// This is the main type for your game.
     /// </summary>
 
-    public enum Gamestate { ingame, battle };
+    public enum Gamestate { ingame, battle,exit,meny,settings };
 
 
 
@@ -33,6 +33,7 @@ namespace Itgspelprojekt
         List<UI> UIList;
         Vector2 selectorPosition;
         NormalBattle normalBattle;
+        Meny meny; 
 
         string errorMessage;
 
@@ -52,6 +53,7 @@ namespace Itgspelprojekt
 
             graphics.PreferredBackBufferHeight = 700;
             graphics.PreferredBackBufferWidth = 1280;
+
         }
 
 
@@ -114,11 +116,7 @@ namespace Itgspelprojekt
             mainBattleMenu = new controlForUI(nameInBattle, new Vector2(740, 550), 2, 2);
 
 
-            gamestate = Gamestate.ingame;
-
-
-
-
+            gamestate = Gamestate.meny;
 
             normalBattle = new NormalBattle(battle, menuBattle, healthMenuBattle, mainBattleMenu, UIList);
 
@@ -135,7 +133,7 @@ namespace Itgspelprojekt
             //map generator
             Tiless.Content = Content;
             map.Generate(level.map, 64);
-
+            meny = new Meny(Content);
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
@@ -160,7 +158,7 @@ namespace Itgspelprojekt
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-
+            meny.update(gameTime);
             // in game
             if (gamestate == Gamestate.ingame)
             {
@@ -246,6 +244,13 @@ namespace Itgspelprojekt
                 spriteBatch.DrawString(developerFont, errorMessage, new Vector2(0, 0), Color.Black); // errorMessage = String.Empty if no error has occured.
 
             spriteBatch.End();
+
+            if(gamestate == Gamestate.meny)
+            {
+                spriteBatch.Begin();
+                meny.Draw(spriteBatch);
+                spriteBatch.End();
+            }
 
             // TODO: Add your drawing code here
 
