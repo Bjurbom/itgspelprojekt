@@ -173,8 +173,17 @@ namespace Itgspelprojekt
                     creature.Update();
                     if (creature.canDoBattle && creature.Hitbox.Intersects(player.Hitbox))
                     {
-                        gamestate = Gamestate.battle;
-                        battleOpponent = creature;
+                        // Zoom in effekt
+                        camera.Zoom += 0.5f;
+                        camera.Rotation += 0.5f;
+
+                        if (camera.Zoom >= 30)
+                        {
+                            gamestate = Gamestate.battle;
+                            battleOpponent = creature;
+                        }
+
+                           
                     }
                 }
 

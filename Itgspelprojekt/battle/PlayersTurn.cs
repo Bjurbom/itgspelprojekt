@@ -17,6 +17,9 @@ namespace Itgspelprojekt.battle
 
         public void Update()
         {
+
+            
+
             // Anfaller
             if ((Keyboard.GetState().IsKeyDown(Keys.Enter) && mainBattleMenu.SelectorPositionX == 1 && mainBattleMenu.SelectorPositionY == 1))
             {
