@@ -158,6 +158,10 @@ namespace Itgspelprojekt
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            if (gamestate == Gamestate.exit)
+            {
+                Exit();
+            }
             meny.update(gameTime);
             // in game
             if (gamestate == Gamestate.ingame)
