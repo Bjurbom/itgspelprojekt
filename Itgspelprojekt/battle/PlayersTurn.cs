@@ -44,6 +44,7 @@ namespace Itgspelprojekt.battle
 
         private void Attack()
         {
+            Game1.battleOpponent.Health -= 10;
             
         }
     }
