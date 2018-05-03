@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
@@ -10,15 +11,18 @@ namespace Itgspelprojekt.battle
 {
     class PlayersTurn : NormalBattle
     {
+        //Tors playerTurns kod
+
+
         public PlayersTurn(Texture2D background, Texture2D inventoryMenu, Texture2D healthMenu, controlForUI menyn, List<UI> listOfUI) : base(background, inventoryMenu, healthMenu, menyn, listOfUI)
         {
 
         }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
 
-            
+            mainBattleMenu.Update(gameTime);
 
             // Anfaller
             if ((Keyboard.GetState().IsKeyDown(Keys.Enter) && mainBattleMenu.SelectorPositionX == 1 && mainBattleMenu.SelectorPositionY == 1))
@@ -45,9 +49,24 @@ namespace Itgspelprojekt.battle
 
 
         }
+        public void Draw(SpriteBatch spriteBatch)
+        {
+
+            //ritar ut all text
+            if (battleMenuAnimation.InPosition == true)
+            {
+                foreach (UI textItem in UIList)
+                {
+                    textItem.Draw(spriteBatch);
+                }
+
+
+            }
+        }
 
         private void Attack()
         {
+            turn = Turn.enemey;
             Game1.battleOpponent.Health -= 10;
             
         }
