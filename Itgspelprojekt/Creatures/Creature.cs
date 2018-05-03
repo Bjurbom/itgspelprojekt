@@ -14,7 +14,7 @@ namespace Itgspelprojekt.Creatures
         // Tommies och Tors Creature kod
 
         // Det här är en Creature i the Overworld. TODO: items, creatures in battle
-
+        private bool move;
         public Vector2 position, direction, targetPosition; // targetPosition should only be used to move in a straight line.
         protected float moveSpeed;
         protected Texture2D texture;
@@ -60,6 +60,18 @@ namespace Itgspelprojekt.Creatures
             }
         }
 
+        public bool Move
+        {
+            get
+            {
+                return move;
+            }
+            set
+            {
+                move = value;
+            }
+        }
+
 
 
         public Creature(string name, Vector2 position, float moveSpeed, Texture2D texture)
@@ -69,7 +81,7 @@ namespace Itgspelprojekt.Creatures
             this.targetPosition = new Vector2(position.X - position.X % 64, position.Y - position.Y % 64);
             this.moveSpeed = moveSpeed;
             this.texture = texture;
-
+            move = true;
 
             goingUp = true;
             goingDown = true;
@@ -90,31 +102,40 @@ namespace Itgspelprojekt.Creatures
         {
             hitbox = new Rectangle((int)position.X, (int)position.Y, 64, 64);
 
-            if (targetPosition.X - moveSpeed / 2 - 1 > position.X) // moveSpeed is used so that when there's one 'tick' of motion left, it can teleport to it's destination, regardless of what the movement speed is set to
-                direction.X = 1f;
-            else if (targetPosition.X + moveSpeed / 2 + 1 < position.X)
-                direction.X = -1f;
-            else
-            {
-                direction.X = 0;
-                position.X = targetPosition.X;
-
-                if (targetPosition.Y - moveSpeed / 2 - 1 > position.Y) // When X is correct, move on Y axis
-                    direction.Y = 1f;
-                else if (targetPosition.Y + moveSpeed / 2 + 1 < position.Y)
-                    direction.Y = -1f;
+            
+                if (targetPosition.X - moveSpeed / 2 - 1 > position.X) // moveSpeed is used so that when there's one 'tick' of motion left, it can teleport to it's destination, regardless of what the movement speed is set to
+                    direction.X = 1f;
+                else if (targetPosition.X + moveSpeed / 2 + 1 < position.X)
+                    direction.X = -1f;
                 else
                 {
-                    direction.Y = 0;
-                    position.Y = targetPosition.Y;
+                    direction.X = 0;
+                    position.X = targetPosition.X;
 
-                    if (futureTargetPositions.Count > 0)
+                if (move) // gör så att den stannar när den kommer intill fienden
+                {
+
+                    if (targetPosition.Y - moveSpeed / 2 - 1 > position.Y) // When X is correct, move on Y axis
+                        direction.Y = 1f;
+                    else if (targetPosition.Y + moveSpeed / 2 + 1 < position.Y)
+                        direction.Y = -1f;
+                    else
                     {
-                        targetPosition = futureTargetPositions[0];
-                        futureTargetPositions.RemoveAt(0);
+                        direction.Y = 0;
+                        position.Y = targetPosition.Y;
+
+                        if (futureTargetPositions.Count > 0)
+                        {
+                            targetPosition = futureTargetPositions[0];
+                            futureTargetPositions.RemoveAt(0);
+                        }
                     }
                 }
-            }
+
+                }
+            
+
+
 
             position += direction * moveSpeed;
         }

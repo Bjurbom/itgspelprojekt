@@ -118,7 +118,7 @@ namespace Itgspelprojekt
 
             gamestate = Gamestate.meny;
 
-            normalBattle = new NormalBattle(battle, menuBattle, healthMenuBattle, mainBattleMenu, UIList);
+            normalBattle = new NormalBattle(battle, menuBattle, healthMenuBattle, mainBattleMenu, UIList, player);
 
             base.Initialize();
         }
@@ -178,19 +178,15 @@ namespace Itgspelprojekt
                     creature.Update();
                     if (creature.canDoBattle && creature.Hitbox.Intersects(player.Hitbox))
                     {
-                        // Zoom in effekt
-                        camera.Zoom += 0.5f;
-                        camera.Rotation += 0.5f;
-
-                        if (camera.Zoom >= 30)
-                        {
+ 
                             gamestate = Gamestate.battle;
                             battleOpponent = creature;
-                        }
-
-                           
+                        
+                       
                     }
                 }
+                // återställer kamran
+               // CameraReset();
 
                 //hitdetection
                 foreach (CollisionTiles item in map.CollisionTiles)
@@ -212,6 +208,8 @@ namespace Itgspelprojekt
 
             base.Update(gameTime);
         }
+
+ 
 
 
         /// <summary>
@@ -282,6 +280,11 @@ namespace Itgspelprojekt
             {
                 camera.Rotation -= 0.1f;
             }
+        }
+        private void CameraReset()
+        {
+            camera.Zoom = 1;
+            camera.Rotation = 0;
         }
 
     }
