@@ -54,6 +54,7 @@ namespace Itgspelprojekt
             graphics.PreferredBackBufferHeight = 700;
             graphics.PreferredBackBufferWidth = 1280;
 
+            IsMouseVisible = true;
         }
 
 
@@ -161,6 +162,9 @@ namespace Itgspelprojekt
             // in game
             if (gamestate == Gamestate.ingame)
             {
+                //gör mussen synlig
+                IsMouseVisible = true;
+
                 player.PlayerUpdate();
                 player.Update();
                 CameraControls(); //camera controls
