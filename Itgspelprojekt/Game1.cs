@@ -71,8 +71,7 @@ namespace Itgspelprojekt
             map = new Map();
             pathfinder = new Pathfinder();
             camera = new Camera(graphics.GraphicsDevice.Viewport);
-
-
+            
 
             //för UI
             UIList = new List<UI>();
