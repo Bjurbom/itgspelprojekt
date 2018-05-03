@@ -27,6 +27,7 @@ namespace Itgspelprojekt.battle
             {
                 //ändrar gamestate så det blir tillbacka i spelet
                 Game1.gamestate = Gamestate.ingame;
+                Game1.battleOpponent.canDoBattle = false;
             }
             // inventory should go in here
             else if (Keyboard.GetState().IsKeyDown(Keys.Enter) && mainBattleMenu.SelectorPositionX == 2 && mainBattleMenu.SelectorPositionY == 1)

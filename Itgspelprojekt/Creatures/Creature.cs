@@ -25,6 +25,7 @@ namespace Itgspelprojekt.Creatures
         private int health;
         private Rectangle hitbox;
         protected List<Vector2> futureTargetPositions = new List<Vector2>();
+        public bool canDoBattle = true;
 
         // Tors properties
         public string Name
