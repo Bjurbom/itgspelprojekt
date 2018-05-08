@@ -15,9 +15,9 @@ namespace Itgspelprojekt.battle
     {
       
 
-        protected Turn turn;
+        static protected Turn turn;
         PlayersTurn playersTurn;
-        protected Player player;
+        Player player;
 
         public NormalBattle(Texture2D background,Texture2D inventoryMenu,Texture2D healthMenu, controlForUI menyn, List<UI> listOfUI, Player player) : base(background,inventoryMenu,healthMenu,menyn,listOfUI)
         {
@@ -72,13 +72,15 @@ namespace Itgspelprojekt.battle
             battleHealthbars.Draw(spriteBatch);
 
             //ritar ut backrunden 
-            mainBattleMenu.Draw(spriteBatch);
+
 
             if (battleMenuAnimation.InPosition == true)
             {
 
                 if (turn == Turn.player)
                 {
+                    mainBattleMenu.Draw(spriteBatch);
+
                     foreach (UI textItem in UIList)
                     {
                         textItem.Draw(spriteBatch);
@@ -86,7 +88,7 @@ namespace Itgspelprojekt.battle
                 }
                 else if (turn == Turn.enemey)
                 {
-
+                    
                 }
 
             }

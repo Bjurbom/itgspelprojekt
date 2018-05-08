@@ -19,6 +19,7 @@ namespace Itgspelprojekt.battle
             protected Texture2D battleTexture, menuBattle, healthMenuBattle;
             protected controlForUI mainBattleMenu;
             protected List<UI> UIList;
+            protected float damage;
 
             public Battle(Texture2D background, Texture2D inventoryMenu, Texture2D healthMenu, controlForUI menyn, List<UI> listOfUI)
             {

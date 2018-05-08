@@ -82,6 +82,7 @@ namespace Itgspelprojekt.Creatures
             this.moveSpeed = moveSpeed;
             this.texture = texture;
             move = true;
+            health = 100;
 
             goingUp = true;
             goingDown = true;

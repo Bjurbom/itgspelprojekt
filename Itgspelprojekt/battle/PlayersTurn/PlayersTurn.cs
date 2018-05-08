@@ -26,7 +26,16 @@ namespace Itgspelprojekt.battle
             // Anfaller
             if ((Keyboard.GetState().IsKeyDown(Keys.Enter) && mainBattleMenu.SelectorPositionX == 1 && mainBattleMenu.SelectorPositionY == 1))
             {
-                Attack();
+                if (Game1.battleOpponent.Health <= 0)
+                {
+                    Game1.gamestate = Gamestate.ingame;
+                    Game1.battleOpponent.canDoBattle = false;
+                }
+                else
+                {
+                    Attack();
+                }
+                
             }
             //flyr från stidern
             else if (Keyboard.GetState().IsKeyDown(Keys.Enter) && mainBattleMenu.SelectorPositionX == 2 && mainBattleMenu.SelectorPositionY == 2)
@@ -56,6 +65,7 @@ namespace Itgspelprojekt.battle
 
             turn = Turn.enemey;
             Game1.battleOpponent.Health -= 10;
+            
             
         }
     }
