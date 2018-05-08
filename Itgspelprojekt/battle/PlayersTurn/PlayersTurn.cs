@@ -69,16 +69,18 @@ namespace Itgspelprojekt.battle
 
             turn = Turn.enemey;
             Game1.battleOpponent.Health -= damage;
-         //   Write(new Vector2(500, 600), "du anfallde");
+            Write(new Vector2(500, 600), "du anfallde");
             
             
 
 
         }
 
-        private void Write(Vector2 location, string text)
+        public void Write(Vector2 location, string text)
         {
-       //     spriteBatch.DrawString(spriteFont, text, location, Color.Black);
+            spriteBatch.Begin();
+            spriteBatch.DrawString(spriteFont, text, location, Color.Black);
+            spriteBatch.End();
         }
     }
 }

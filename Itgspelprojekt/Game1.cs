@@ -178,8 +178,10 @@ namespace Itgspelprojekt
                     creature.Update();
                     if (creature.canDoBattle && creature.Hitbox.Intersects(player.Hitbox))
                     {
- 
-                            gamestate = Gamestate.battle;
+
+
+                        normalBattle = new NormalBattle(battle, menuBattle, healthMenuBattle, mainBattleMenu, UIList, player, nameInBattle, spriteBatch);
+                        gamestate = Gamestate.battle;
                             battleOpponent = creature;
                         
                        
