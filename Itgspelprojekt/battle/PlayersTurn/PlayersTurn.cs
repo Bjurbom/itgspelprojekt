@@ -12,9 +12,13 @@ namespace Itgspelprojekt.battle
 {
     class PlayersTurn : NormalBattle
     {
-        public PlayersTurn(Texture2D background, Texture2D inventoryMenu, Texture2D healthMenu, controlForUI menyn, List<UI> listOfUI, Player player) : base(background, inventoryMenu, healthMenu, menyn, listOfUI, player)
-        {
+        SpriteBatch spriteBatch;
+        SpriteFont spriteFont;
 
+        public PlayersTurn(Texture2D background, Texture2D inventoryMenu, Texture2D healthMenu, controlForUI menyn, List<UI> listOfUI, Player player, SpriteBatch spriteBatch,SpriteFont spriteFont) : base(background, inventoryMenu, healthMenu, menyn, listOfUI, player,spriteFont,spriteBatch)
+        {
+            this.spriteBatch = spriteBatch;
+            this.spriteFont = spriteFont;
         }
 
         public void Update(GameTime gameTime)
@@ -64,9 +68,17 @@ namespace Itgspelprojekt.battle
         {
 
             turn = Turn.enemey;
-            Game1.battleOpponent.Health -= 10;
+            Game1.battleOpponent.Health -= damage;
+         //   Write(new Vector2(500, 600), "du anfallde");
             
             
+
+
+        }
+
+        private void Write(Vector2 location, string text)
+        {
+       //     spriteBatch.DrawString(spriteFont, text, location, Color.Black);
         }
     }
 }

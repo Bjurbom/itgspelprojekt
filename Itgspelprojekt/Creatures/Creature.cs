@@ -22,7 +22,7 @@ namespace Itgspelprojekt.Creatures
         private string name;
         public int sizeX = 64, sizeY = 64;
         protected bool goingUp, goingDown, goingLeft, goingRight;
-        private int health;
+        private float health;
         private Rectangle hitbox;
         protected List<Vector2> futureTargetPositions = new List<Vector2>();
         public bool canDoBattle = true;
@@ -36,7 +36,7 @@ namespace Itgspelprojekt.Creatures
             }
         }
 
-        public int Health
+        public float Health
         {
             get
             {

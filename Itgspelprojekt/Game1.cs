@@ -118,7 +118,7 @@ namespace Itgspelprojekt
 
             gamestate = Gamestate.meny;
 
-            normalBattle = new NormalBattle(battle, menuBattle, healthMenuBattle, mainBattleMenu, UIList, player);
+            normalBattle = new NormalBattle(battle, menuBattle, healthMenuBattle, mainBattleMenu, UIList, player, nameInBattle,spriteBatch);
 
             base.Initialize();
         }

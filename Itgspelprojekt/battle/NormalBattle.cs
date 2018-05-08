@@ -16,14 +16,18 @@ namespace Itgspelprojekt.battle
       
 
         static protected Turn turn;
+        private SpriteBatch spriteBatch;
+        private SpriteFont spriteFont;
         PlayersTurn playersTurn;
         Player player;
 
-        public NormalBattle(Texture2D background,Texture2D inventoryMenu,Texture2D healthMenu, controlForUI menyn, List<UI> listOfUI, Player player) : base(background,inventoryMenu,healthMenu,menyn,listOfUI)
+        public NormalBattle(Texture2D background,Texture2D inventoryMenu,Texture2D healthMenu, controlForUI menyn, List<UI> listOfUI, Player player, SpriteFont spriteFont, SpriteBatch spriteBatch) : base(background,inventoryMenu,healthMenu,menyn,listOfUI)
         {
             //gör spelar börjar i striden
             this.player = player;
             turn = Turn.player;
+            this.spriteBatch = spriteBatch;
+            this.spriteFont = spriteFont;
         }
 
         /// <summary>
@@ -52,7 +56,7 @@ namespace Itgspelprojekt.battle
                 //om spelaren tur så skapas objecte samt kör update
                 if (turn == Turn.player)
                 {
-                    playersTurn = new PlayersTurn(battleTexture, menuBattle, healthMenuBattle, mainBattleMenu,UIList,player);
+                    playersTurn = new PlayersTurn(battleTexture, menuBattle, healthMenuBattle, mainBattleMenu,UIList,player,spriteBatch,spriteFont);
                     playersTurn.Update(gameTime);
                 }
 
@@ -71,8 +75,8 @@ namespace Itgspelprojekt.battle
             battleMenuAnimation.Draw(spriteBatch);
             battleHealthbars.Draw(spriteBatch);
 
-            //ritar ut backrunden 
-
+            
+            
 
             if (battleMenuAnimation.InPosition == true)
             {
@@ -93,6 +97,7 @@ namespace Itgspelprojekt.battle
 
             }
 
+            
           
 
         }
