@@ -51,14 +51,6 @@ namespace Itgspelprojekt.battle
 
         }
 
-        public void Draw(SpriteBatch spriteBatch)
-        {
-
-
-
-            
-        }
-
         private void Attack()
         {
 

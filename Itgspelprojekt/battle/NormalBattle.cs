@@ -48,8 +48,6 @@ namespace Itgspelprojekt.battle
             //när de landar i position så kan battle sekvensen sättas igång
             if (battleHealthbars.InPosition == true)
             {
-                
-
 
                 //om spelaren tur så skapas objecte samt kör update
                 if (turn == Turn.player)
