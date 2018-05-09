@@ -1,4 +1,5 @@
-﻿using Itgspelprojekt.Creatures;
+﻿using Itgspelprojekt.battle.PlayersTurn;
+using Itgspelprojekt.Creatures;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -37,7 +38,8 @@ namespace Itgspelprojekt.battle
                 }
                 else
                 {
-               
+                    Attack.AttackOnEnemy(player, Game1.battleOpponent);
+                    turn = Turn.enemey;
                 }
                 
             }

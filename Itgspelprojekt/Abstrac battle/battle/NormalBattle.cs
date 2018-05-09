@@ -19,9 +19,9 @@ namespace Itgspelprojekt.battle
         private SpriteBatch spriteBatch;
         private SpriteFont spriteFont;
         PlayerssTurn playersTurn;
-        Player player;
 
-        public NormalBattle(Texture2D background,Texture2D inventoryMenu,Texture2D healthMenu, controlForUI menyn, List<UI> listOfUI, Player player, SpriteFont spriteFont, SpriteBatch spriteBatch) : base(background,inventoryMenu,healthMenu,menyn,listOfUI)
+
+        public NormalBattle(Texture2D background,Texture2D inventoryMenu,Texture2D healthMenu, controlForUI menyn, List<UI> listOfUI, Player player, SpriteFont spriteFont, SpriteBatch spriteBatch) : base(background,inventoryMenu,healthMenu,menyn,listOfUI,player)
         {
             //gör spelar börjar i striden
             this.player = player;
