@@ -18,7 +18,7 @@ namespace Itgspelprojekt.battle
         static protected Turn turn;
         private SpriteBatch spriteBatch;
         private SpriteFont spriteFont;
-        PlayersTurn playersTurn;
+        PlayerssTurn playersTurn;
         Player player;
 
         public NormalBattle(Texture2D background,Texture2D inventoryMenu,Texture2D healthMenu, controlForUI menyn, List<UI> listOfUI, Player player, SpriteFont spriteFont, SpriteBatch spriteBatch) : base(background,inventoryMenu,healthMenu,menyn,listOfUI)
@@ -56,7 +56,7 @@ namespace Itgspelprojekt.battle
                 //om spelaren tur så skapas objecte samt kör update
                 if (turn == Turn.player)
                 {
-                    playersTurn = new PlayersTurn(battleTexture, menuBattle, healthMenuBattle, mainBattleMenu,UIList,player,spriteBatch,spriteFont);
+                    playersTurn = new PlayerssTurn(battleTexture, menuBattle, healthMenuBattle, mainBattleMenu,UIList,player,spriteBatch,spriteFont);
                     playersTurn.Update(gameTime);
                 }
 
@@ -68,7 +68,7 @@ namespace Itgspelprojekt.battle
         /// ritar ut allt som är inneblandad i denna klass
         /// </summary>
         /// <param name="spriteBatch"></param>
-        public void Draw(SpriteBatch spriteBatch)
+        virtual public void Draw(SpriteBatch spriteBatch)
         {
             //ritar ut animationerna / spritesen
             battleAnimation.Draw(spriteBatch);

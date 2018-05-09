@@ -25,9 +25,21 @@ namespace Itgspelprojekt.Creatures
         private float health;
         private Rectangle hitbox;
         protected List<Vector2> futureTargetPositions = new List<Vector2>();
+        private float damage;
         public bool canDoBattle = true;
 
         // Tors properties
+        public float Damage
+        {
+            get
+            {
+                return damage;
+            }
+            set
+            {
+                damage = value;
+            }
+        }
         public string Name
         {
             get

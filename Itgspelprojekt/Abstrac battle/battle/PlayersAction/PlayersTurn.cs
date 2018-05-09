@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace Itgspelprojekt.battle
 {
-    class PlayersTurn : NormalBattle
+    class PlayerssTurn : NormalBattle
     {
         SpriteBatch spriteBatch;
         SpriteFont spriteFont;
 
-        public PlayersTurn(Texture2D background, Texture2D inventoryMenu, Texture2D healthMenu, controlForUI menyn, List<UI> listOfUI, Player player, SpriteBatch spriteBatch,SpriteFont spriteFont) : base(background, inventoryMenu, healthMenu, menyn, listOfUI, player,spriteFont,spriteBatch)
+        public PlayerssTurn(Texture2D background, Texture2D inventoryMenu, Texture2D healthMenu, controlForUI menyn, List<UI> listOfUI, Player player, SpriteBatch spriteBatch,SpriteFont spriteFont) : base(background, inventoryMenu, healthMenu, menyn, listOfUI, player,spriteFont,spriteBatch)
         {
             this.spriteBatch = spriteBatch;
             this.spriteFont = spriteFont;
@@ -37,7 +37,7 @@ namespace Itgspelprojekt.battle
                 }
                 else
                 {
-                    Attack();
+               
                 }
                 
             }
@@ -64,23 +64,6 @@ namespace Itgspelprojekt.battle
 
         }
 
-        private void Attack()
-        {
 
-            turn = Turn.enemey;
-            Game1.battleOpponent.Health -= damage;
-            Write(new Vector2(500, 600), "du anfallde");
-            
-            
-
-
-        }
-
-        public void Write(Vector2 location, string text)
-        {
-            spriteBatch.Begin();
-            spriteBatch.DrawString(spriteFont, text, location, Color.Black);
-            spriteBatch.End();
-        }
     }
 }
