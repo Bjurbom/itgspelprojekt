@@ -10,24 +10,31 @@ using System.Threading.Tasks;
 
 namespace Itgspelprojekt.battle
 {
-    enum Turn { player, enemey }
+    enum Turn { player, enemey, middle}
+
+    //lägg till mer funktioner som  i denna enum
+    enum LastAction { Pattack, stats, healing}
+
+
     class NormalBattle : Battle
     {
-      
 
+        static protected LastAction lastAction;
         static protected Turn turn;
-        private SpriteBatch spriteBatch;
-        private SpriteFont spriteFont;
+     
         PlayerssTurn playersTurn;
+        //MiddleAction action;
+        
 
 
-        public NormalBattle(Texture2D background,Texture2D inventoryMenu,Texture2D healthMenu, controlForUI menyn, List<UI> listOfUI, Player player, SpriteFont spriteFont, SpriteBatch spriteBatch) : base(background,inventoryMenu,healthMenu,menyn,listOfUI,player)
+        public NormalBattle(Texture2D background,Texture2D inventoryMenu,Texture2D healthMenu, controlForUI menyn, List<UI> listOfUI, Player player, SpriteFont spriteFont, SpriteBatch spriteBatch) : base(background,inventoryMenu,healthMenu,menyn,listOfUI,player,spriteBatch,spriteFont)
         {
             //gör spelar börjar i striden
-            this.player = player;
             turn = Turn.player;
-            this.spriteBatch = spriteBatch;
-            this.spriteFont = spriteFont;
+
+            //inisiterar action action
+            //action = new MiddleAction(background,inventoryMenu,healthMenu,menyn,listOfUI,player,spriteFont,spriteBatch);
+
         }
 
         /// <summary>
@@ -89,6 +96,10 @@ namespace Itgspelprojekt.battle
                     {
                         textItem.Draw(spriteBatch);
                     }
+                }
+                else if (turn == Turn.middle)
+                {
+                    
                 }
                 else if (turn == Turn.enemey)
                 {

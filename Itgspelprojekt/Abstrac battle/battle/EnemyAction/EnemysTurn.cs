@@ -12,7 +12,7 @@ namespace Itgspelprojekt.battle.Enemy
     {
         public EnemysTurn(Texture2D background, Texture2D inventoryMenu, Texture2D healthMenu, controlForUI menyn, List<UI> listOfUI, Player player, SpriteFont spriteFont, SpriteBatch spriteBatch) : base(background, inventoryMenu, healthMenu, menyn, listOfUI, player, spriteFont, spriteBatch)
         {
-
+            
         }
     }
 }

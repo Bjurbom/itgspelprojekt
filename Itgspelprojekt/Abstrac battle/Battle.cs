@@ -20,9 +20,10 @@ namespace Itgspelprojekt.battle
         protected Player player;
         protected controlForUI mainBattleMenu;
         protected List<UI> UIList;
-        protected float damage;
+        protected SpriteBatch spriteBatch;
+        protected SpriteFont spriteFont;
 
-        public Battle(Texture2D background, Texture2D inventoryMenu, Texture2D healthMenu, controlForUI menyn, List<UI> listOfUI, Player player)
+        public Battle(Texture2D background, Texture2D inventoryMenu, Texture2D healthMenu, controlForUI menyn, List<UI> listOfUI, Player player, SpriteBatch spriteBatch, SpriteFont spriteFont)
         {
             //texture load
             battleTexture = background;
@@ -31,6 +32,10 @@ namespace Itgspelprojekt.battle
 
             //laddar in player
             this.player = player;
+
+            //laddar in sprites.
+            this.spriteBatch = spriteBatch;
+            this.spriteFont = spriteFont;
 
             //laddar in andra klasser samt lisor
             UIList = listOfUI;

@@ -39,7 +39,8 @@ namespace Itgspelprojekt.battle
                 else
                 {
                     Attack.AttackOnEnemy(player, Game1.battleOpponent);
-                    turn = Turn.enemey;
+                    turn = Turn.middle;
+                    lastAction = LastAction.Pattack;
                 }
                 
             }

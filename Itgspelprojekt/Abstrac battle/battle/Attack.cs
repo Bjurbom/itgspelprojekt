@@ -17,7 +17,7 @@ namespace Itgspelprojekt.battle.PlayersTurn
         /// <param name="reciver">den som kommer ta skada</param>
         static public void AttackOnEnemy(Creature giver, Creature reciver)
         {
-         reciver.Health -= giver.Damage;
+            reciver.Health -= giver.Damage;
         }
 
 
