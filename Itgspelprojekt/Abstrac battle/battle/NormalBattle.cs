@@ -66,6 +66,14 @@ namespace Itgspelprojekt.battle
                     playersTurn = new PlayerssTurn(battleTexture, menuBattle, healthMenuBattle, mainBattleMenu,UIList,player,spriteBatch,spriteFont);
                     playersTurn.Update(gameTime);
                 }
+                if (turn == Turn.middle)
+                {
+
+                    if (Keyboard.GetState().IsKeyDown(Keys.P))
+                    {
+                        turn = Turn.enemey;
+                    }
+                }
 
             }
 
@@ -99,7 +107,10 @@ namespace Itgspelprojekt.battle
                 }
                 else if (turn == Turn.middle)
                 {
-                    
+                    if (lastAction == LastAction.Pattack)
+                    {
+                        AttackOnEnemyDraw(spriteBatch);
+                    }
                 }
                 else if (turn == Turn.enemey)
                 {
@@ -111,6 +122,11 @@ namespace Itgspelprojekt.battle
             
           
 
+        }
+
+        private void AttackOnEnemyDraw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.DrawString(spriteFont, "Du anfalde och skadade " + player.Damage,new Vector2(800,550),Color.Black);
         }
     }
 }
