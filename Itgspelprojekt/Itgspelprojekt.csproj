@@ -45,6 +45,7 @@
     <Compile Include="Abstrac battle\battle\animationForBattle.cs" />
     <Compile Include="Abstrac battle\battle\controlForUI.cs" />
     <Compile Include="Abstrac battle\battle\EnemyAction\EnemysTurn.cs" />
+    <Compile Include="Abstrac battle\battle\Healthbars.cs" />
     <Compile Include="Abstrac battle\battle\NormalBattle.cs" />
     <Compile Include="Abstrac battle\battle\Attack.cs" />
     <Compile Include="Abstrac battle\battle\PlayersAction\PlayersTurn.cs" />

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Itgspelprojekt.battle
+namespace Itgspelprojekt.Abstrac_battle.battle
 {
     //Tors animation för object
     class animationForBattle

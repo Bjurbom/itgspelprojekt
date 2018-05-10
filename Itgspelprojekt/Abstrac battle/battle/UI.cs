@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 
-namespace Itgspelprojekt.battle
+namespace Itgspelprojekt.Abstrac_battle.battle
 {
     class UI
 

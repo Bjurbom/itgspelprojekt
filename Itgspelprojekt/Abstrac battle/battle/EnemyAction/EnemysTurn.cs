@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Itgspelprojekt.Creatures;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Itgspelprojekt.battle.Enemy
+namespace Itgspelprojekt.Abstrac_battle.battle
 {
     class EnemysTurn : NormalBattle
     {

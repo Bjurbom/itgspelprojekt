@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Itgspelprojekt.battle
+namespace Itgspelprojekt.Abstrac_battle.battle
 {
     enum Turn { player, enemey, middle}
 

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Itgspelprojekt.Creatures;
 
-namespace Itgspelprojekt.battle.PlayersTurn
+namespace Itgspelprojekt.Abstrac_battle.battle
 {
     static class Attack
     {

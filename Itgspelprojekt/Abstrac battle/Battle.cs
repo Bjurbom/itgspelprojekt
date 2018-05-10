@@ -1,6 +1,7 @@
 ﻿using Itgspelprojekt.Creatures;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Itgspelprojekt.Abstrac_battle.battle;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Itgspelprojekt.battle
+namespace Itgspelprojekt.Abstrac_battle
 {
 
     //Tors kod som kopplar battle

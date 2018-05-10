@@ -3,7 +3,7 @@ using Itgspelprojekt.Creatures;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Itgspelprojekt.battle;
+using Itgspelprojekt.Abstrac_battle.battle;
 using System.Collections.Generic;
 
 namespace Itgspelprojekt

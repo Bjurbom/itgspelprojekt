@@ -1,4 +1,4 @@
-﻿using Itgspelprojekt.battle.PlayersTurn;
+﻿
 using Itgspelprojekt.Creatures;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -9,17 +9,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Itgspelprojekt.battle
+namespace Itgspelprojekt.Abstrac_battle.battle
 {
     class PlayerssTurn : NormalBattle
     {
-        SpriteBatch spriteBatch;
-        SpriteFont spriteFont;
+
 
         public PlayerssTurn(Texture2D background, Texture2D inventoryMenu, Texture2D healthMenu, controlForUI menyn, List<UI> listOfUI, Player player, SpriteBatch spriteBatch,SpriteFont spriteFont) : base(background, inventoryMenu, healthMenu, menyn, listOfUI, player,spriteFont,spriteBatch)
         {
-            this.spriteBatch = spriteBatch;
-            this.spriteFont = spriteFont;
+
         }
 
         public void Update(GameTime gameTime)
