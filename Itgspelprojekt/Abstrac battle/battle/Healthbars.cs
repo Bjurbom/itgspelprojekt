@@ -5,14 +5,20 @@ using System.Text;
 using System.Threading.Tasks;
 using Itgspelprojekt.Abstrac_battle.battle;
 using Itgspelprojekt.Creatures;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Itgspelprojekt.Abstrac_battle.battle
 {
-    class Healthbars : NormalBattle
+    class Healthbars
     {
-        public Healthbars(Texture2D background, Texture2D inventoryMenu, Texture2D healthMenu, controlForUI menyn, List<UI> listOfUI, Player player, SpriteFont spriteFont, SpriteBatch spriteBatch) : base(background, inventoryMenu, healthMenu, menyn, listOfUI, player, spriteFont, spriteBatch)
+        //Tors kod
+
+        Rectangle healthbar;
+
+        public Healthbars(Creature creature, Vector2 position)
         {
+            // Add a class that will make a healthbar in sert location and size depending on the health and health remining
         }
     }
 }

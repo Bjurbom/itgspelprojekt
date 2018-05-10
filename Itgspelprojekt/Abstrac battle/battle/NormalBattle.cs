@@ -66,9 +66,10 @@ namespace Itgspelprojekt.Abstrac_battle.battle
                     playersTurn = new PlayerssTurn(battleTexture, menuBattle, healthMenuBattle, mainBattleMenu,UIList,player,spriteBatch,spriteFont);
                     playersTurn.Update(gameTime);
                 }
+                //transion till fiendens tur
                 if (turn == Turn.middle)
                 {
-
+                    //om man trycker på knappen så blir det fiendens tur
                     if (Keyboard.GetState().IsKeyDown(Keys.P))
                     {
                         turn = Turn.enemey;
