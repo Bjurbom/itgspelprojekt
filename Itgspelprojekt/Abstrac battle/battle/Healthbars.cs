@@ -15,10 +15,29 @@ namespace Itgspelprojekt.Abstrac_battle.battle
         //Tors kod
 
         Rectangle healthbar;
+        float health;
+        private float healthDiffrents;
+        float temp;
+        Vector2 position;
 
         public Healthbars(Creature creature, Vector2 position)
         {
-            // Add a class that will make a healthbar in sert location and size depending on the health and health remining
+            health = creature.Health;
+            this.position = position;
+
+            healthDiffrents = 200f / health;
+
         }
+
+        public void Update(Creature creature)
+        {
+            float temp;
+            temp = healthDiffrents * creature.Health;
+
+            healthbar = new Rectangle((int)position.X, (int)position.Y, (int)temp, 100);
+
+        }
+
+
     }
 }

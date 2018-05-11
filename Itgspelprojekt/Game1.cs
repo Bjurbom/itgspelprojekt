@@ -30,6 +30,7 @@ namespace Itgspelprojekt
         Texture2D fadeIn, battle, menuBattle, healthMenuBattle;
         SpriteFont nameInBattle;
         SpriteFont developerFont;
+        private Texture2D vitblock;
         List<UI> UIList;
         Vector2 selectorPosition;
         NormalBattle normalBattle;
@@ -86,6 +87,7 @@ namespace Itgspelprojekt
             healthMenuBattle = Content.Load<Texture2D>("healthMenu");
             nameInBattle = Content.Load<SpriteFont>("textForName");
             developerFont = Content.Load<SpriteFont>("Ffont");
+            vitblock = Content.Load<Texture2D>("vitblock");
 
 
             //battle animationer

@@ -21,6 +21,8 @@ namespace Itgspelprojekt.Abstrac_battle.battle
 
         static protected LastAction lastAction;
         static protected Turn turn;
+        Healthbars playersHealthbar;
+        Healthbars EnemysHealthbat;
      
         PlayerssTurn playersTurn;
         //MiddleAction action;
@@ -32,8 +34,7 @@ namespace Itgspelprojekt.Abstrac_battle.battle
             //gör spelar börjar i striden
             turn = Turn.player;
 
-            //inisiterar action action
-            //action = new MiddleAction(background,inventoryMenu,healthMenu,menyn,listOfUI,player,spriteFont,spriteBatch);
+            playersHealthbar = new Healthbars(player, new Vector2(100, 100));
 
         }
 
@@ -59,6 +60,7 @@ namespace Itgspelprojekt.Abstrac_battle.battle
             //när de landar i position så kan battle sekvensen sättas igång
             if (battleHealthbars.InPosition == true)
             {
+                playersHealthbar.Update(player);
 
                 //om spelaren tur så skapas objecte samt kör update
                 if (turn == Turn.player)
@@ -131,3 +133,8 @@ namespace Itgspelprojekt.Abstrac_battle.battle
         }
     }
 }
+
+
+
+
+//forsätt med att göra healthbar klassen
