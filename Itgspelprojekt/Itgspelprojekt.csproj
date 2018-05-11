@@ -57,15 +57,15 @@
     <Compile Include="Creatures\Player.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="inventory.cs" />
-    <Compile Include="level.cs" />
+    <Compile Include="Map generator\level.cs" />
     <Compile Include="meny.cs" />
     <Compile Include="meny item.cs" />
     <Compile Include="Object.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tiles\CollisionTiles.cs" />
-    <Compile Include="Tiles\Map.cs" />
-    <Compile Include="Tiles\Tiles.cs" />
+    <Compile Include="Map generator\CollisionTiles.cs" />
+    <Compile Include="Map generator\Map.cs" />
+    <Compile Include="Map generator\Tiles.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Extended, Version=1.0.617.0, Culture=neutral, processorArchitecture=MSIL">

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Itgspelprojekt
+namespace Itgspelprojekt.Map_generator
 {
     public abstract class Tiless
     {

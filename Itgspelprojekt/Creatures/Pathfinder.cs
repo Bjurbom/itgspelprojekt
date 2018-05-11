@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
-using Itgspelprojekt.Tiles;
+using Itgspelprojekt.Map_generator;
 
 namespace Itgspelprojekt.Creatures
 {

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Itgspelprojekt.Tiles
+namespace Itgspelprojekt.Map_generator
 {
     // Tors collision tiles
     public class CollisionTiles : Tiless

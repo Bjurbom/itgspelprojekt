@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Itgspelprojekt.Tiles;
+using Itgspelprojekt.Map_generator;
 
 namespace Itgspelprojekt.Creatures
 {

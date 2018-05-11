@@ -1,4 +1,4 @@
-﻿using Itgspelprojekt.Tiles;
+﻿using Itgspelprojekt.Map_generator;
 using Itgspelprojekt.Creatures;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -162,9 +162,13 @@ namespace Itgspelprojekt
             {
                 Exit();
             }
-            meny.update(gameTime);
+            else if (gamestate == Gamestate.meny)
+            {
+                meny.update(gameTime);
+            }
+
             // in game
-            if (gamestate == Gamestate.ingame)
+            else if (gamestate == Gamestate.ingame)
             {
                 //gör mussen synlig
                 IsMouseVisible = true;
