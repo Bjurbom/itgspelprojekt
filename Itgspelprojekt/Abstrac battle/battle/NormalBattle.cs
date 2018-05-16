@@ -21,9 +21,9 @@ namespace Itgspelprojekt.Abstrac_battle.battle
 
         static protected LastAction lastAction;
         static protected Turn turn;
+
         Healthbars playersHealthbar;
         Healthbars EnemysHealthbat;
-     
         PlayerssTurn playersTurn;
 
         
@@ -119,6 +119,10 @@ namespace Itgspelprojekt.Abstrac_battle.battle
                     if (lastAction == LastAction.Pattack)
                     {
                         AttackOnEnemyDraw(spriteBatch);
+                    }
+                    else if (lastAction == LastAction.stats)
+                    {
+
                     }
                 }
                 else if (turn == Turn.enemey)

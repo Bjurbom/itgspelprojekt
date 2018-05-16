@@ -106,7 +106,7 @@ namespace Itgspelprojekt
             errorMessage += pathfinder.errorMessage;
             pathfinder.errorMessage = string.Empty;
 
-            player = new Player("bob", new Vector2(896, 896), 10, Content.Load<Texture2D>("knuc"), creatures.creatures);
+            player = new Player("bob", new Vector2(896, 896), 10, Content.Load<Texture2D>("knuc"), creatures.creatures,20f);
 
             //battle UI Main
             UIList.Add(new UI(new Vector2(170, 90), nameInBattle, player.Name));

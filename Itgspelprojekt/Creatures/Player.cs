@@ -16,10 +16,10 @@ namespace Itgspelprojekt.Creatures
     {
         private List<Creature> creatures;
 
-        public Player(string name, Vector2 position, float moveSpeed, Texture2D texture, List<Creature> creatures) : base(name, position, moveSpeed, texture)
+        public Player(string name, Vector2 position, float moveSpeed, Texture2D texture, List<Creature> creatures, float damage) : base(name, position, moveSpeed, texture)
         {
             this.creatures = creatures;
-
+            this.Damage = damage;
         }
 
         public void PlayerUpdate()
