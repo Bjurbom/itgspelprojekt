@@ -25,6 +25,7 @@ namespace Itgspelprojekt.Abstrac_battle.battle
         Healthbars playersHealthbar;
         Healthbars EnemysHealthbat;
         PlayerssTurn playersTurn;
+        EnemysTurn enemysTurn;
 
         
 
@@ -73,11 +74,23 @@ namespace Itgspelprojekt.Abstrac_battle.battle
                 //transion till fiendens tur
                 if (turn == Turn.middle)
                 {
+
+                    if (Game1.battleOpponent.Health <= 0)
+                    {
+                        Game1.battleOpponent.canDoBattle = false;
+                        Game1.gamestate = Gamestate.ingame;
+                    }
+
                     //om man trycker på knappen så blir det fiendens tur
                     if (Keyboard.GetState().IsKeyDown(Keys.P))
                     {
                         turn = Turn.enemey;
                     }
+                }
+                if (turn == Turn.enemey)
+                {
+                    enemysTurn = new EnemysTurn(battleTexture, menuBattle, healthMenuBattle, mainBattleMenu, UIList, player,spriteFont,spriteBatch);
+                    enemysTurn.Update(gameTime);
                 }
 
             }
