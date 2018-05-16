@@ -21,7 +21,7 @@ namespace Itgspelprojekt
 
             public Meny(ContentManager bilder)
             {
-                //laddar in alla bilder
+                //laddar in alla bilder och sätter positionen 
                 menytexture = bilder.Load<Texture2D>("ITGGO paint");
                 position = new Vector2(0, 0);
 
@@ -51,8 +51,8 @@ namespace Itgspelprojekt
                 mouseState = Mouse.GetState();
                 foreach (Meny_item item in items)
                 {
-                    if (item.Hitbox.Intersects(item.Mhitbox))
-                    {
+                    if (item.Hitbox.Intersects(item.Mhitbox)) // tittar om muspekaren och items texturerna intersektar 
+                {
                         item.chosen = true;
 
                         if (mouseState.LeftButton == ButtonState.Pressed)
