@@ -178,8 +178,9 @@ namespace Itgspelprojekt
             }
             else if (gamestate == Gamestate.settings)
             {
-                object[] output = settingsMenu.Update(Mouse.GetState());
-                debugMode = output[0] as string == "true" ? true : false ;
+                Settings settings = settingsMenu.Update(Mouse.GetState());
+                debugMode = settings.debugActive;
+                // change resolution here and stuff
             }
 
             // in game

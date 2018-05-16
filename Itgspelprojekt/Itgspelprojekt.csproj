@@ -58,6 +58,7 @@
     <Compile Include="Game1.cs" />
     <Compile Include="inventory.cs" />
     <Compile Include="Map generator\level.cs" />
+    <Compile Include="Menus\Settings.cs" />
     <Compile Include="Menus\SettingsMenu.cs" />
     <Compile Include="meny.cs" />
     <Compile Include="meny item.cs" />

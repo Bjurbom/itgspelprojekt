@@ -30,7 +30,7 @@ namespace Itgspelprojekt.Menus
             debugPosition = new Vector2(200, 300);
         }
 
-        public object[] Update(MouseState ms)
+        public Settings Update(MouseState ms)
         {
             int mx = ms.Position.X;
             int my = ms.Position.Y;
@@ -41,9 +41,15 @@ namespace Itgspelprojekt.Menus
             else
                 debugSelected = false;
 
-            object[] output = new object[1];
-            output[0] = debugActive.ToString() as object;
-            return output;
+            Vector2 resolution = Vector2.Zero;
+
+            Settings settings = new Settings
+            {
+                debugActive = debugActive,
+                resolution = resolution
+            };
+
+            return settings;            
         }
 
         public void Draw(SpriteBatch spriteBatch)
