@@ -25,7 +25,7 @@ namespace Itgspelprojekt.Abstrac_battle.battle
         Healthbars EnemysHealthbat;
      
         PlayerssTurn playersTurn;
-        //MiddleAction action;
+
         
 
 
@@ -34,7 +34,8 @@ namespace Itgspelprojekt.Abstrac_battle.battle
             //gör spelar börjar i striden
             turn = Turn.player;
 
-            playersHealthbar = new Healthbars(player, new Vector2(100, 100));
+            playersHealthbar = new Healthbars(player, new Vector2(150, 140),Color.Green);
+            EnemysHealthbat = new Healthbars(Game1.battleOpponent, new Vector2(1100, 120), Color.Red);
 
         }
 
@@ -61,6 +62,7 @@ namespace Itgspelprojekt.Abstrac_battle.battle
             if (battleHealthbars.InPosition == true)
             {
                 playersHealthbar.Update(player);
+                EnemysHealthbat.Update(Game1.battleOpponent);
 
                 //om spelaren tur så skapas objecte samt kör update
                 if (turn == Turn.player)
@@ -98,6 +100,10 @@ namespace Itgspelprojekt.Abstrac_battle.battle
 
             if (battleMenuAnimation.InPosition == true)
             {
+                spriteBatch.DrawString(spriteFont, player.Name, new Vector2(170, 90), Color.Black);
+
+                playersHealthbar.Draw(spriteBatch);
+                EnemysHealthbat.Draw(spriteBatch);
 
                 if (turn == Turn.player)
                 {

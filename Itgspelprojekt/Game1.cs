@@ -120,7 +120,7 @@ namespace Itgspelprojekt
 
             gamestate = Gamestate.meny;
 
-            normalBattle = new NormalBattle(battle, menuBattle, healthMenuBattle, mainBattleMenu, UIList, player, nameInBattle,spriteBatch);
+
 
             base.Initialize();
         }
@@ -185,10 +185,10 @@ namespace Itgspelprojekt
                     if (creature.canDoBattle && creature.Hitbox.Intersects(player.Hitbox))
                     {
 
-
+                        battleOpponent = creature;
                         normalBattle = new NormalBattle(battle, menuBattle, healthMenuBattle, mainBattleMenu, UIList, player, nameInBattle, spriteBatch);
                         gamestate = Gamestate.battle;
-                            battleOpponent = creature;
+                            
                         
                        
                     }

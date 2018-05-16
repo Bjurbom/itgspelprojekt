@@ -46,7 +46,7 @@ namespace Itgspelprojekt.Abstrac_battle.battle
             interval = 150;
         }
 
-        // properties för var pekare
+        // properties för var pekare är
         #region
         public int SelectorPositionX
         {
