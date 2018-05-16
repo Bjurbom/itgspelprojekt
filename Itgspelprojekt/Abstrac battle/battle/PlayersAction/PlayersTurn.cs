@@ -15,7 +15,7 @@ namespace Itgspelprojekt.Abstrac_battle.battle
     {
 
 
-        public PlayerssTurn(Texture2D background, Texture2D inventoryMenu, Texture2D healthMenu, controlForUI menyn, List<UI> listOfUI, Player player, SpriteBatch spriteBatch,SpriteFont spriteFont) : base(background, inventoryMenu, healthMenu, menyn, listOfUI, player,spriteFont,spriteBatch)
+        public PlayerssTurn(Texture2D background, Texture2D inventoryMenu, Texture2D healthMenu, controlForUI menyn, List<UI> listOfUI, Player player, SpriteBatch spriteBatch, SpriteFont spriteFont) : base(background, inventoryMenu, healthMenu, menyn, listOfUI, player, spriteFont, spriteBatch)
         {
 
         }
@@ -40,7 +40,7 @@ namespace Itgspelprojekt.Abstrac_battle.battle
                     turn = Turn.middle;
                     lastAction = LastAction.Pattack;
                 }
-                
+
             }
             //flyr från stidern
             else if (Keyboard.GetState().IsKeyDown(Keys.Enter) && mainBattleMenu.SelectorPositionX == 2 && mainBattleMenu.SelectorPositionY == 2)
@@ -49,7 +49,7 @@ namespace Itgspelprojekt.Abstrac_battle.battle
                 Game1.gamestate = Gamestate.ingame;
                 Game1.battleOpponent.canDoBattle = false;
 
-                
+
             }
             // inventory should go in here
             else if (Keyboard.GetState().IsKeyDown(Keys.Enter) && mainBattleMenu.SelectorPositionX == 2 && mainBattleMenu.SelectorPositionY == 1)
@@ -57,8 +57,14 @@ namespace Itgspelprojekt.Abstrac_battle.battle
 
             }
             //get information about the creature
-            else if(Keyboard.GetState().IsKeyDown(Keys.Enter) && mainBattleMenu.SelectorPositionX == 1 && mainBattleMenu.SelectorPositionY == 2)
+            else if (Keyboard.GetState().IsKeyDown(Keys.Enter) && mainBattleMenu.SelectorPositionX == 1 && mainBattleMenu.SelectorPositionY == 2)
             {
+
+                lastAction = LastAction.stats;
+
+
+
+                turn = Turn.middle;
 
             }
 
