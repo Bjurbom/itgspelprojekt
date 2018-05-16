@@ -1,5 +1,6 @@
 ﻿using Itgspelprojekt.Map_generator;
 using Itgspelprojekt.Creatures;
+using Itgspelprojekt.Menus;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -36,6 +37,9 @@ namespace Itgspelprojekt
         Vector2 selectorPosition;
         NormalBattle normalBattle;
         Meny meny;
+        SettingsMenu settingsMenu;
+        bool debugMode;
+        
      
 
         string errorMessage;
@@ -73,11 +77,13 @@ namespace Itgspelprojekt
             map = new Map();
             pathfinder = new Pathfinder();
             camera = new Camera(graphics.GraphicsDevice.Viewport);
+            debugMode = false;
             
 
             //för UI
             UIList = new List<UI>();
             selectorPosition = new Vector2(730, 550);
+            settingsMenu = new SettingsMenu(Content);
 
 
             //laddar in textures / text
@@ -169,6 +175,11 @@ namespace Itgspelprojekt
             else if (gamestate == Gamestate.meny)
             {
                 meny.update(gameTime);
+            }
+            else if (gamestate == Gamestate.settings)
+            {
+                object[] output = settingsMenu.Update(Mouse.GetState());
+                debugMode = output[0] as string == "true" ? true : false ;
             }
 
             // in game
@@ -265,6 +276,10 @@ namespace Itgspelprojekt
                 spriteBatch.Begin();
                 meny.Draw(spriteBatch);
                 spriteBatch.End();
+            }
+            if (gamestate == Gamestate.settings)
+            {
+                settingsMenu.Draw(spriteBatch);
             }
 
             // TODO: Add your drawing code here
