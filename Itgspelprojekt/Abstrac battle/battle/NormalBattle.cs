@@ -23,11 +23,13 @@ namespace Itgspelprojekt.Abstrac_battle.battle
         static protected LastAction lastAction;
         static protected Turn turn;
 
+        protected KeyboardState oldState, newState;
+
         Healthbars playersHealthbar;
         Healthbars EnemysHealthbat;
         PlayerssTurn playersTurn;
         EnemysTurn enemysTurn;
-        KeyboardState oldState, newState;
+      
         
 
 
@@ -80,7 +82,7 @@ namespace Itgspelprojekt.Abstrac_battle.battle
                     if (lastAction == LastAction.stats)
                     {
 
-                        if (newState != oldState)
+                        if (newState.IsKeyDown(Keys.Enter) && oldState.IsKeyUp(Keys.Enter))
                         {
                             turn = Turn.enemey;
                         }
@@ -94,7 +96,7 @@ namespace Itgspelprojekt.Abstrac_battle.battle
                         }
 
                         //om man trycker på knappen så blir det fiendens tur
-                        if (Keyboard.GetState().IsKeyDown(Keys.P))
+                        if (newState.IsKeyDown(Keys.Enter) && oldState.IsKeyUp(Keys.Enter))
                         {
                             turn = Turn.enemey;
                         }
