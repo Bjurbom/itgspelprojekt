@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Itgspelprojekt.Abstrac_battle.battle;
 using System.Collections.Generic;
+using MonoGame.Extended;
 
 namespace Itgspelprojekt
 {
@@ -34,7 +35,8 @@ namespace Itgspelprojekt
         List<UI> UIList;
         Vector2 selectorPosition;
         NormalBattle normalBattle;
-        Meny meny; 
+        Meny meny;
+     
 
         string errorMessage;
 
@@ -57,8 +59,6 @@ namespace Itgspelprojekt
 
             IsMouseVisible = true;
         }
-
-
 
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
@@ -159,6 +159,8 @@ namespace Itgspelprojekt
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+
+    
 
             if (gamestate == Gamestate.exit)
             {

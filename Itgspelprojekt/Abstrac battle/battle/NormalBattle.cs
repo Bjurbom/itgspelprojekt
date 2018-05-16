@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MonoGame.Extended;
 
 namespace Itgspelprojekt.Abstrac_battle.battle
 {
@@ -26,7 +27,7 @@ namespace Itgspelprojekt.Abstrac_battle.battle
         Healthbars EnemysHealthbat;
         PlayerssTurn playersTurn;
         EnemysTurn enemysTurn;
-
+        KeyboardState oldState, newState;
         
 
 
@@ -49,6 +50,8 @@ namespace Itgspelprojekt.Abstrac_battle.battle
         /// <param name="gameTime"></param>
         public void Update(Camera camera, GameTime gameTime) 
         {
+            newState = Keyboard.GetState();
+
             //sätter kamran till strandard
             camera.Update(new Vector2(battleTexture.Width / 2, battleTexture.Height / 2));
             camera.Zoom = 1;
@@ -74,18 +77,30 @@ namespace Itgspelprojekt.Abstrac_battle.battle
                 //transion till fiendens tur
                 if (turn == Turn.middle)
                 {
-
-                    if (Game1.battleOpponent.Health <= 0)
+                    if (lastAction == LastAction.stats)
                     {
-                        Game1.battleOpponent.canDoBattle = false;
-                        Game1.gamestate = Gamestate.ingame;
+
+                        if (newState != oldState)
+                        {
+                            turn = Turn.enemey;
+                        }
+                    }
+                    else if (lastAction == LastAction.Pattack)
+                    {
+                        if (Game1.battleOpponent.Health <= 0)
+                        {
+                            Game1.battleOpponent.canDoBattle = false;
+                            Game1.gamestate = Gamestate.ingame;
+                        }
+
+                        //om man trycker på knappen så blir det fiendens tur
+                        if (Keyboard.GetState().IsKeyDown(Keys.P))
+                        {
+                            turn = Turn.enemey;
+                        }
                     }
 
-                    //om man trycker på knappen så blir det fiendens tur
-                    if (Keyboard.GetState().IsKeyDown(Keys.P))
-                    {
-                        turn = Turn.enemey;
-                    }
+ 
                 }
                 if (turn == Turn.enemey)
                 {
@@ -94,6 +109,8 @@ namespace Itgspelprojekt.Abstrac_battle.battle
                 }
 
             }
+
+            oldState = newState;
 
         }
 

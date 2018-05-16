@@ -61,9 +61,6 @@ namespace Itgspelprojekt.Abstrac_battle.battle
             {
 
                 lastAction = LastAction.stats;
-
-
-
                 turn = Turn.middle;
 
             }
