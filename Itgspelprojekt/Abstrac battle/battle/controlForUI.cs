@@ -125,9 +125,11 @@ namespace Itgspelprojekt.Abstrac_battle.battle
         {
             spriteBatch.DrawString(font, ">", selectorPosition, Color.Black);
 
-            //Temp
+            //debug
+            /*
             spriteBatch.DrawString(font, Convert.ToString(selectorPositionX), new Vector2(300, 300), Color.Black);
             spriteBatch.DrawString(font, Convert.ToString(selectorPositionY), new Vector2(300, 350), Color.Black);
+            */
         }
     }
 }

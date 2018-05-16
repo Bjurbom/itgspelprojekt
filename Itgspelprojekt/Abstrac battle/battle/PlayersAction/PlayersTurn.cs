@@ -13,7 +13,7 @@ namespace Itgspelprojekt.Abstrac_battle.battle
 {
     class PlayerssTurn : NormalBattle
     {
-
+        
 
         public PlayerssTurn(Texture2D background, Texture2D inventoryMenu, Texture2D healthMenu, controlForUI menyn, List<UI> listOfUI, Player player, SpriteBatch spriteBatch, SpriteFont spriteFont) : base(background, inventoryMenu, healthMenu, menyn, listOfUI, player, spriteFont, spriteBatch)
         {
@@ -22,12 +22,13 @@ namespace Itgspelprojekt.Abstrac_battle.battle
 
         public void Update(GameTime gameTime)
         {
+            newState = Keyboard.GetState();
 
             //menyn
             mainBattleMenu.Update(gameTime);
 
             // Anfaller
-            if ((Keyboard.GetState().IsKeyDown(Keys.Enter) && mainBattleMenu.SelectorPositionX == 1 && mainBattleMenu.SelectorPositionY == 1))
+            if ((newState.IsKeyDown(Keys.Enter) && oldState.IsKeyUp(Keys.Enter) && mainBattleMenu.SelectorPositionX == 1 && mainBattleMenu.SelectorPositionY == 1))
             {
                 if (Game1.battleOpponent.Health <= 0)
                 {
@@ -36,14 +37,14 @@ namespace Itgspelprojekt.Abstrac_battle.battle
                 }
                 else
                 {
-                    Attack.AttackOnEnemy(player, Game1.battleOpponent);
+                    Attack.AttackOnEnemy(player, Game1.battleOpponent); 
                     turn = Turn.middle;
                     lastAction = LastAction.Pattack;
                 }
 
             }
             //flyr från stidern
-            else if (Keyboard.GetState().IsKeyDown(Keys.Enter) && mainBattleMenu.SelectorPositionX == 2 && mainBattleMenu.SelectorPositionY == 2)
+            else if ((newState.IsKeyDown(Keys.Enter) && oldState.IsKeyUp(Keys.Enter) && mainBattleMenu.SelectorPositionX == 2 && mainBattleMenu.SelectorPositionY == 2))
             {
                 //ändrar gamestate så det blir tillbacka i spelet
                 Game1.gamestate = Gamestate.ingame;
@@ -52,12 +53,12 @@ namespace Itgspelprojekt.Abstrac_battle.battle
 
             }
             // inventory should go in here
-            else if (Keyboard.GetState().IsKeyDown(Keys.Enter) && mainBattleMenu.SelectorPositionX == 2 && mainBattleMenu.SelectorPositionY == 1)
+            else if ((newState.IsKeyDown(Keys.Enter) && oldState.IsKeyUp(Keys.Enter) && mainBattleMenu.SelectorPositionX == 2 && mainBattleMenu.SelectorPositionY == 1))
             {
 
             }
             //get information about the creature
-            else if (Keyboard.GetState().IsKeyDown(Keys.Enter) && mainBattleMenu.SelectorPositionX == 1 && mainBattleMenu.SelectorPositionY == 2)
+            else if ((newState.IsKeyDown(Keys.Enter) && oldState.IsKeyUp(Keys.Enter) && mainBattleMenu.SelectorPositionX == 1 && mainBattleMenu.SelectorPositionY == 2))
             {
 
                 lastAction = LastAction.stats;
@@ -65,8 +66,10 @@ namespace Itgspelprojekt.Abstrac_battle.battle
 
             }
 
-
+            oldState = newState;
         }
+
+        
 
 
     }

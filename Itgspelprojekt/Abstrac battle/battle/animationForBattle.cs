@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,6 +48,11 @@ namespace Itgspelprojekt.Abstrac_battle.battle
             {
                 inPosition = true;
             }
+
+          /*  if (Keyboard.GetState().IsKeyDown(Keys.Enter))
+            {
+                currentPosition = endPosition;
+            }*/
         }
 
         public void Draw(SpriteBatch spriteBatch)
