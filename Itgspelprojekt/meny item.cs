@@ -25,7 +25,7 @@ namespace Itgspelprojekt
 
 
             }
-            public Rectangle Hitbox
+            public Rectangle Hitbox // hitboxen för texturerna som man  klickar på 
             {
                 get
                 {
@@ -39,7 +39,7 @@ namespace Itgspelprojekt
                 }
             }
 
-            public Rectangle Mhitbox
+            public Rectangle Mhitbox // hitboxen för muspekaren så att den vet när den är på items textuterna 
             {
                 get
                 {
