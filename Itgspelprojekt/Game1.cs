@@ -17,8 +17,7 @@ namespace Itgspelprojekt
 
     public enum Gamestate { ingame, battle,exit,meny,settings };
 
-
-
+    
     public class Game1 : Game
     {
 
@@ -190,15 +189,12 @@ namespace Itgspelprojekt
                     creature.Update();
                     if (creature.canDoBattle && creature.Hitbox.Intersects(player.Hitbox))
                     {
-
                         battleOpponent = creature;
                         normalBattle = new NormalBattle(battle, menuBattle, healthMenuBattle, mainBattleMenu, UIList, player, nameInBattle, spriteBatch);
-                        gamestate = Gamestate.battle;
-                            
-                        
-                       
+                        gamestate = Gamestate.battle;                       
                     }
                 }
+
                 // återställer kamran
                // CameraReset();
 
@@ -217,7 +213,7 @@ namespace Itgspelprojekt
             {
                 normalBattle.Update(camera, gameTime);
             }
-            
+
 
             base.Update(gameTime);
         }
@@ -254,9 +250,9 @@ namespace Itgspelprojekt
             
             spriteBatch.Begin(); // No camera transform in this spriteBatch.
 
-            if (gamestate == Gamestate.ingame)
+            if (gamestate == Gamestate.ingame && debugMode == true)
                 spriteBatch.DrawString(developerFont, player.position.ToString() + "   " + errorMessage, new Vector2(0, 0), Color.Black); // errorMessage = String.Empty if no error has occured.
-            else if (gamestate == Gamestate.battle)
+            else if (gamestate == Gamestate.battle && debugMode == true)
                 spriteBatch.DrawString(developerFont, errorMessage, new Vector2(0, 0), Color.Black); // errorMessage = String.Empty if no error has occured.
 
             if (gamestate == Gamestate.settings)
