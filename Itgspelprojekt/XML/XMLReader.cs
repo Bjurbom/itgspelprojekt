@@ -7,16 +7,53 @@ using System.Xml;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input; // unnecessary
+using Itgspelprojekt.Creatures;
 
-namespace Itgspelprojekt.Creatures
+namespace Itgspelprojekt.XML
 {
-    class Creatures
+    class XMLReader
     {
         string creaturesFile = string.Empty;
         public List<Creature> creatures = new List<Creature>();
 
-        // Tommies mirakulösa XML-läsande ko
-        
+        // Tommies mirakulösa XML-läsande kod
+
+        public List<List<int>> ReadResolutions()
+        {
+            List<List<int>> resolutions = new List<List<int>>();
+
+            XmlReaderSettings settings = new XmlReaderSettings
+            {
+                DtdProcessing = DtdProcessing.Parse
+            };
+            XmlReader reader = XmlReader.Create("XML/Resolutions.xml", settings);
+
+            try
+            {
+                reader.MoveToContent();
+                // Parse the file and display each of the nodes.
+                while (reader.Read())
+                {
+                    while (reader.ReadToFollowing("resolution") != false)
+                    {
+                        string s = reader.ReadElementContentAsString();
+
+                        string[] resolution = s.Split(','); // Split position, e.g. "1337, 420" into "1337" and " 420", both of which can be correctly parsed as floats
+                        resolutions.Add(new List<int>());
+                        resolutions[resolutions.Count - 1].Add(int.Parse(resolution[0]));
+                        resolutions[resolutions.Count - 1].Add(int.Parse(resolution[1]));
+                    }
+                }
+                reader.Dispose();
+                return resolutions;
+            }
+#pragma warning disable CS0168 // Variable is declared but never used
+            catch (Exception e)
+#pragma warning restore CS0168 // Variable is declared but never used
+            {
+                return resolutions;
+            }
+        }
 
         public string ParseCreaturesFile(Microsoft.Xna.Framework.Content.ContentManager contentManager)
         {
@@ -31,7 +68,7 @@ namespace Itgspelprojekt.Creatures
                 {
                     DtdProcessing = DtdProcessing.Parse
                 };
-                XmlReader reader = XmlReader.Create("creatures/creatures.xml", settings);
+                XmlReader reader = XmlReader.Create("XML/creatures.xml", settings);
 
                 reader.MoveToContent();
                 // Parse the file and display each of the nodes.
@@ -53,6 +90,7 @@ namespace Itgspelprojekt.Creatures
                                       moveSpeed, contentManager.Load<Texture2D>(texture)));
                     }
                 }
+                reader.Dispose();
             }
             catch (Exception ex)
             {

@@ -10,6 +10,7 @@ namespace Itgspelprojekt.Menus
     class Settings
     {
         public bool debugActive;
-        public Vector2 resolution;
+        public int[] resolution;
+        public bool goBack;
     }
 }

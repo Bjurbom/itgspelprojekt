@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XML>
+  <!-- Tommies intressanta XML fil-->
+  <Resolutions>
+    <resolution> 1280, 700 </resolution>
+    <resolution> 1536, 864 </resolution>
+    <resolution> 1680, 1050 </resolution>
+    <resolution> 1920, 1080 </resolution>
+    <resolution> 540, 400 </resolution>
+    <resolution> 720, 576 </resolution>
+    <resolution> 1000, 690 </resolution>
+  </Resolutions>
+</XML>

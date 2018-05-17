@@ -477,7 +477,6 @@ namespace Itgspelprojekt.Creatures
     class Node
     {
         public int precedingNodeX, precedingNodeY;
-        public float distanceLeft; // using the pythagorean theorem. tile = 64x64. Currently unused.
         public int distanceTraversed = 2000000000; // in amount of nodes. tile = 1x1
         public double distance; // distanceLeft+distanceTraversed.
         public bool isOpen = true; // if false, node is a dead end

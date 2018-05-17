@@ -52,7 +52,7 @@
     <Compile Include="Abstrac battle\battle\UI.cs" />
     <Compile Include="Camera.cs" />
     <Compile Include="Creatures\Creature.cs" />
-    <Compile Include="Creatures\Creatures.cs" />
+    <Compile Include="XML\XMLReader.cs" />
     <Compile Include="Creatures\Pathfinder.cs" />
     <Compile Include="Creatures\Player.cs" />
     <Compile Include="Game1.cs" />
@@ -89,10 +89,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Creatures\Creatures.xml">
+    <None Include="XML\Resolutions.XML">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="XML\Creatures.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
-    </Content>
+    </None>
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>

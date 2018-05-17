@@ -1,10 +1,11 @@
 ﻿using Itgspelprojekt.Map_generator;
 using Itgspelprojekt.Creatures;
 using Itgspelprojekt.Menus;
+using Itgspelprojekt.XML;
+using Itgspelprojekt.Abstrac_battle.battle;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Itgspelprojekt.Abstrac_battle.battle;
 using System.Collections.Generic;
 using MonoGame.Extended;
 
@@ -28,7 +29,7 @@ namespace Itgspelprojekt
         Map map;
         Pathfinder pathfinder;
         Player player;
-        Creatures.Creatures creatures;
+        XMLReader creatures;
         Texture2D fadeIn, battle, menuBattle, healthMenuBattle;
         SpriteFont nameInBattle;
         SpriteFont developerFont;
@@ -40,16 +41,11 @@ namespace Itgspelprojekt
         SettingsMenu settingsMenu;
         bool debugMode;
         
-     
-
         string errorMessage;
-
-
+        
         public static Gamestate gamestate;
         public static Creature battleOpponent;
-
-
-
+        
         controlForUI mainBattleMenu;
 
 
@@ -72,20 +68,16 @@ namespace Itgspelprojekt
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-
             map = new Map();
             pathfinder = new Pathfinder();
             camera = new Camera(graphics.GraphicsDevice.Viewport);
             debugMode = false;
             
-
             //för UI
             UIList = new List<UI>();
             selectorPosition = new Vector2(730, 550);
             settingsMenu = new SettingsMenu(Content);
-
-
+            
             //laddar in textures / text
             fadeIn = Content.Load<Texture2D>("blackspace");
             battle = Content.Load<Texture2D>("backroundForBattle");
@@ -94,21 +86,20 @@ namespace Itgspelprojekt
             nameInBattle = Content.Load<SpriteFont>("textForName");
             developerFont = Content.Load<SpriteFont>("Ffont");
             vitblock = Content.Load<Texture2D>("vitblock");
-
-
+            
             //battle animationer
             battleAnimation = new animationForBattle(battle, new Vector2(0, 0), new Vector2(0, 0));
             battleMenuAnimation = new animationForBattle(menuBattle, new Vector2(1200, 1200), new Vector2(-1, -1));
             battleHealthbars = new animationForBattle(healthMenuBattle, new Vector2(1200, 0), new Vector2(-1, 60));
 
-
-
-            creatures = new Creatures.Creatures();
+            // creature loading and some testing pathfinding
+            creatures = new XMLReader();
             errorMessage = creatures.ParseCreaturesFile(Content);
             creatures.creatures[0].MoveTo(pathfinder.Pathfind(creatures.creatures[0].position, new Vector2(128, 832), 0));
             creatures.creatures[1].MoveTo(pathfinder.Pathfind(creatures.creatures[1].position, new Vector2(2496, 256), 0));
             creatures.creatures[2].MoveTo(pathfinder.Pathfind(creatures.creatures[2].position, new Vector2(2432, 256), 0));
             creatures.creatures[3].MoveTo(pathfinder.Pathfind(creatures.creatures[3].position, new Vector2(2368, 256), 0));
+
             errorMessage += pathfinder.errorMessage;
             pathfinder.errorMessage = string.Empty;
 
@@ -122,11 +113,9 @@ namespace Itgspelprojekt
             UIList.Add(new UI(new Vector2(850, 600), nameInBattle, "Run"));
 
             mainBattleMenu = new controlForUI(nameInBattle, new Vector2(740, 550), 2, 2);
-
-
+            
             gamestate = Gamestate.meny;
-
-
+            
 
             base.Initialize();
         }
@@ -143,8 +132,6 @@ namespace Itgspelprojekt
             map.Generate(level.map, 64);
             meny = new Meny(Content);
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            // TODO: use this.Content to load your game content here
         }
 
         /// <summary>
@@ -166,8 +153,6 @@ namespace Itgspelprojekt
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-    
-
             if (gamestate == Gamestate.exit)
             {
                 Exit();
@@ -178,9 +163,16 @@ namespace Itgspelprojekt
             }
             else if (gamestate == Gamestate.settings)
             {
-                Settings settings = settingsMenu.Update(Mouse.GetState());
+                Settings settings = settingsMenu.Update(Keyboard.GetState(), Mouse.GetState());
                 debugMode = settings.debugActive;
-                // change resolution here and stuff
+                if (graphics.PreferredBackBufferWidth != settings.resolution[0] | graphics.PreferredBackBufferWidth != settings.resolution[1])
+                {
+                    graphics.PreferredBackBufferWidth = settings.resolution[0];
+                    graphics.PreferredBackBufferHeight = settings.resolution[1];
+                    graphics.ApplyChanges();
+                }
+                if (settings.goBack)
+                    gamestate = Gamestate.meny;
             }
 
             // in game
@@ -225,13 +217,10 @@ namespace Itgspelprojekt
             {
                 normalBattle.Update(camera, gameTime);
             }
-
-            // TODO: Add your update logic here
+            
 
             base.Update(gameTime);
         }
-
- 
 
 
         /// <summary>
@@ -270,6 +259,11 @@ namespace Itgspelprojekt
             else if (gamestate == Gamestate.battle)
                 spriteBatch.DrawString(developerFont, errorMessage, new Vector2(0, 0), Color.Black); // errorMessage = String.Empty if no error has occured.
 
+            if (gamestate == Gamestate.settings)
+            {
+                settingsMenu.Draw(spriteBatch);
+            }
+
             spriteBatch.End();
 
             if(gamestate == Gamestate.meny)
@@ -277,10 +271,6 @@ namespace Itgspelprojekt
                 spriteBatch.Begin();
                 meny.Draw(spriteBatch);
                 spriteBatch.End();
-            }
-            if (gamestate == Gamestate.settings)
-            {
-                settingsMenu.Draw(spriteBatch);
             }
 
             // TODO: Add your drawing code here
