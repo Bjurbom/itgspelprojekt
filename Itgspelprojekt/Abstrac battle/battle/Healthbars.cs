@@ -20,7 +20,10 @@ namespace Itgspelprojekt.Abstrac_battle.battle
         private float healthDiffrents;
         Vector2 position;
         Color color;
-        Texture2D texture;
+
+        /// <summary>
+        /// gjort en healthbar klass som kommer ha samma storlek oavsett hur mycket man behöver
+        /// </summary>
 
         public Healthbars(Creature creature, Vector2 position, Color color)
         {
@@ -42,7 +45,7 @@ namespace Itgspelprojekt.Abstrac_battle.battle
             //tar healthen och får den att ha samma storlek
             temp = healthDiffrents * creature.Health;
 
-            
+            //skapar rektangeln
             healthbar = new Rectangle((int)position.X, (int)position.Y, (int)temp, 20);
 
         }

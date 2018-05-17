@@ -23,13 +23,14 @@ namespace Itgspelprojekt.Abstrac_battle.battle
         static protected LastAction lastAction;
         static protected Turn turn;
 
-        protected KeyboardState oldState, newState;
+        static protected KeyboardState oldState, newState;
 
         Healthbars playersHealthbar;
         Healthbars EnemysHealthbat;
         PlayerssTurn playersTurn;
         EnemysTurn enemysTurn;
-      
+
+        int timer;
         
 
 
@@ -40,6 +41,7 @@ namespace Itgspelprojekt.Abstrac_battle.battle
 
             playersHealthbar = new Healthbars(player, new Vector2(150, 140),Color.Green);
             EnemysHealthbat = new Healthbars(Game1.battleOpponent, new Vector2(1100, 120), Color.Red);
+             playersTurn = new PlayerssTurn(battleTexture, menuBattle, healthMenuBattle, mainBattleMenu, UIList, player, spriteBatch, spriteFont);
 
         }
 
@@ -52,8 +54,7 @@ namespace Itgspelprojekt.Abstrac_battle.battle
         /// <param name="gameTime"></param>
         public void Update(Camera camera, GameTime gameTime) 
         {
-            newState = Keyboard.GetState();
-
+           
             //sätter kamran till strandard
             camera.Update(new Vector2(battleTexture.Width / 2, battleTexture.Height / 2));
             camera.Zoom = 1;
@@ -65,44 +66,60 @@ namespace Itgspelprojekt.Abstrac_battle.battle
             battleHealthbars.Update(gameTime);
 
             //när de landar i position så kan battle sekvensen sättas igång
-            if (battleHealthbars.InPosition == true)
+            if (battleMenuAnimation.InPosition == true)
             {
+
+                newState = Keyboard.GetState();
+
                 playersHealthbar.Update(player);
                 EnemysHealthbat.Update(Game1.battleOpponent);
+               
 
                 //om spelaren tur så skapas objecte samt kör update
                 if (turn == Turn.player)
                 {
-                    playersTurn = new PlayerssTurn(battleTexture, menuBattle, healthMenuBattle, mainBattleMenu,UIList,player,spriteBatch,spriteFont);
                     playersTurn.Update(gameTime);
+                    oldState = newState;
                 }
                 //transion till fiendens tur
                 if (turn == Turn.middle)
                 {
-                    if (lastAction == LastAction.stats)
+                    newState = Keyboard.GetState();
+
+
+                    if (newState.IsKeyDown(Keys.Enter) && oldState.IsKeyUp(Keys.Enter))
                     {
 
-                        if (newState.IsKeyDown(Keys.Enter) && oldState.IsKeyUp(Keys.Enter))
+                        if (lastAction == LastAction.stats)
                         {
-                            turn = Turn.enemey;
+
+                            if (Keyboard.GetState().IsKeyDown(Keys.Enter))
+                            {
+                                turn = Turn.enemey;
+
+                            }
+                        }
+                        else if (lastAction == LastAction.Pattack)
+                        {
+                            if (Game1.battleOpponent.Health <= 0)
+                            {
+                                Game1.battleOpponent.canDoBattle = false;
+                                Game1.gamestate = Gamestate.ingame;
+                            }
+
+                            //om man trycker på knappen så blir det fiendens tur
+                            if (Keyboard.GetState().IsKeyDown(Keys.Enter))
+                            {
+                                turn = Turn.enemey;
+                                oldState = Keyboard.GetState();
+                            }
                         }
                     }
-                    else if (lastAction == LastAction.Pattack)
-                    {
-                        if (Game1.battleOpponent.Health <= 0)
-                        {
-                            Game1.battleOpponent.canDoBattle = false;
-                            Game1.gamestate = Gamestate.ingame;
-                        }
 
-                        //om man trycker på knappen så blir det fiendens tur
-                        if (newState.IsKeyDown(Keys.Enter) && oldState.IsKeyUp(Keys.Enter))
-                        {
-                            turn = Turn.enemey;
-                        }
-                    }
 
- 
+                    oldState = newState;
+
+
                 }
                 if (turn == Turn.enemey)
                 {
@@ -110,9 +127,10 @@ namespace Itgspelprojekt.Abstrac_battle.battle
                     enemysTurn.Update(gameTime);
                 }
 
+                
             }
 
-            oldState = newState;
+           
 
         }
 
@@ -136,6 +154,7 @@ namespace Itgspelprojekt.Abstrac_battle.battle
 
                 playersHealthbar.Draw(spriteBatch);
                 EnemysHealthbat.Draw(spriteBatch);
+
 
                 if (turn == Turn.player)
                 {

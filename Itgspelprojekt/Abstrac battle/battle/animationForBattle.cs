@@ -25,6 +25,7 @@ namespace Itgspelprojekt.Abstrac_battle.battle
             inPosition = false;
         }
 
+        //property
         public bool InPosition
         {
             get
@@ -35,6 +36,7 @@ namespace Itgspelprojekt.Abstrac_battle.battle
 
         public void Update(GameTime gameTime)
         {
+            //gjorde en simple addering av position (kunde ha gjort bättre)
             if (currentPosition.X >= endPosition.X)
             {
                 currentPosition.X += endPosition.X * 4;
@@ -44,6 +46,7 @@ namespace Itgspelprojekt.Abstrac_battle.battle
                 currentPosition.Y += endPosition.Y * 4;
             }
 
+            //gör så när den är i position så vet man det
             if (currentPosition.Y <= endPosition.Y && currentPosition.X <= endPosition.X)
             {
                 inPosition = true;
@@ -55,6 +58,7 @@ namespace Itgspelprojekt.Abstrac_battle.battle
             }*/
         }
 
+        //ritar ut
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(sprite, currentPosition, Color.White);

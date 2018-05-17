@@ -13,8 +13,8 @@ namespace Itgspelprojekt.Abstrac_battle.battle
 {
     class PlayerssTurn : NormalBattle
     {
-        
 
+        //Tors kod
         public PlayerssTurn(Texture2D background, Texture2D inventoryMenu, Texture2D healthMenu, controlForUI menyn, List<UI> listOfUI, Player player, SpriteBatch spriteBatch, SpriteFont spriteFont) : base(background, inventoryMenu, healthMenu, menyn, listOfUI, player, spriteFont, spriteBatch)
         {
 
@@ -27,49 +27,57 @@ namespace Itgspelprojekt.Abstrac_battle.battle
             //menyn
             mainBattleMenu.Update(gameTime);
 
-            // Anfaller
-            if ((newState.IsKeyDown(Keys.Enter) && oldState.IsKeyUp(Keys.Enter) && mainBattleMenu.SelectorPositionX == 1 && mainBattleMenu.SelectorPositionY == 1))
+
+            if (newState.IsKeyDown(Keys.Enter) && oldState.IsKeyUp(Keys.Enter))
             {
-                if (Game1.battleOpponent.Health <= 0)
+                // Anfaller
+                if ((Keyboard.GetState().IsKeyDown(Keys.Enter) && mainBattleMenu.SelectorPositionX == 1 && mainBattleMenu.SelectorPositionY == 1))
                 {
+                    if (Game1.battleOpponent.Health <= 0)
+                    {
+                        Game1.gamestate = Gamestate.ingame;
+                        Game1.battleOpponent.canDoBattle = false;
+                    }
+                    else
+                    {
+                        Attack.AttackOnEnemy(player, Game1.battleOpponent);
+                        turn = Turn.middle;
+                        lastAction = LastAction.Pattack;
+                    }
+
+                }
+                //flyr från stidern
+                else if ((Keyboard.GetState().IsKeyDown(Keys.Enter) && mainBattleMenu.SelectorPositionX == 2 && mainBattleMenu.SelectorPositionY == 2))
+                {
+                    //ändrar gamestate så det blir tillbacka i spelet
                     Game1.gamestate = Gamestate.ingame;
                     Game1.battleOpponent.canDoBattle = false;
+
+
                 }
-                else
+                // inventory should go in here
+                else if ((Keyboard.GetState().IsKeyDown(Keys.Enter) && mainBattleMenu.SelectorPositionX == 2 && mainBattleMenu.SelectorPositionY == 1))
                 {
-                    Attack.AttackOnEnemy(player, Game1.battleOpponent); 
-                    turn = Turn.middle;
-                    lastAction = LastAction.Pattack;
+
                 }
+                //get information about the creature
+                else if ((Keyboard.GetState().IsKeyDown(Keys.Enter) && mainBattleMenu.SelectorPositionX == 1 && mainBattleMenu.SelectorPositionY == 2))
+                {
 
-            }
-            //flyr från stidern
-            else if ((newState.IsKeyDown(Keys.Enter) && oldState.IsKeyUp(Keys.Enter) && mainBattleMenu.SelectorPositionX == 2 && mainBattleMenu.SelectorPositionY == 2))
-            {
-                //ändrar gamestate så det blir tillbacka i spelet
-                Game1.gamestate = Gamestate.ingame;
-                Game1.battleOpponent.canDoBattle = false;
+                    lastAction = LastAction.stats;
+                    turn = Turn.middle;
 
-
-            }
-            // inventory should go in here
-            else if ((newState.IsKeyDown(Keys.Enter) && oldState.IsKeyUp(Keys.Enter) && mainBattleMenu.SelectorPositionX == 2 && mainBattleMenu.SelectorPositionY == 1))
-            {
-
-            }
-            //get information about the creature
-            else if ((newState.IsKeyDown(Keys.Enter) && oldState.IsKeyUp(Keys.Enter) && mainBattleMenu.SelectorPositionX == 1 && mainBattleMenu.SelectorPositionY == 2))
-            {
-
-                lastAction = LastAction.stats;
-                turn = Turn.middle;
-
+                }
             }
 
             oldState = newState;
+
+
+
+
         }
 
-        
+
 
 
     }

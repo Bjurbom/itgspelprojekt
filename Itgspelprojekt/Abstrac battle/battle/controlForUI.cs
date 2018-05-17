@@ -47,7 +47,7 @@ namespace Itgspelprojekt.Abstrac_battle.battle
         }
 
         // properties för var pekare är
-        #region
+        #region properties
         public int SelectorPositionX
         {
             get
@@ -63,7 +63,7 @@ namespace Itgspelprojekt.Abstrac_battle.battle
                 return selectorPositionY;
             }
         }
-        #endregion
+        #endregion 
 
         /// <summary>
         /// Denna klass upptaterar pekaren samt ändrar positionen för den. 
@@ -72,11 +72,14 @@ namespace Itgspelprojekt.Abstrac_battle.battle
         /// <param name="gameTime"></param>
         public void Update(GameTime gameTime)
         {
+            //gör att den upptaterar den saktar
             if (elapsedTime > interval)
             {
-
+                //resetar timern 
                 elapsedTime -= interval;
 
+                //musspekar rörelsen samt andra variabler påverkan
+                #region musspekarlogik
                 if (Keyboard.GetState().IsKeyDown(Keys.W))
                 {
                     if (selectorPositionY != 1)
@@ -112,9 +115,10 @@ namespace Itgspelprojekt.Abstrac_battle.battle
                     }
 
                 }
+                #endregion
             }
 
-            
+
             // upptaterar klockan med milli sekunder
             elapsedTime += gameTime.ElapsedGameTime.TotalMilliseconds;
 
