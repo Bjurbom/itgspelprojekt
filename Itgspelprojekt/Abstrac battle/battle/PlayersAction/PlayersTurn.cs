@@ -11,13 +11,13 @@ using System.Threading.Tasks;
 
 namespace Itgspelprojekt.Abstrac_battle.battle
 {
-    class PlayerssTurn : NormalBattle
+    class PlayerssTurn : Battle
     {
 
         //Tors kod
-        public PlayerssTurn(Texture2D background, Texture2D inventoryMenu, Texture2D healthMenu, controlForUI menyn, List<UI> listOfUI, Player player, SpriteBatch spriteBatch, SpriteFont spriteFont) : base(background, inventoryMenu, healthMenu, menyn, listOfUI, player, spriteFont, spriteBatch)
+        public PlayerssTurn(Texture2D background, Texture2D inventoryMenu, Texture2D healthMenu, controlForUI menyn, List<UI> listOfUI, Player player, SpriteBatch spriteBatch, SpriteFont spriteFont) : base(background, inventoryMenu, healthMenu, menyn, listOfUI, player, spriteBatch,spriteFont)
         {
-
+            //felet är klassen laddas in på fel ställe
         }
 
         public void Update(GameTime gameTime)
@@ -31,7 +31,7 @@ namespace Itgspelprojekt.Abstrac_battle.battle
             if (newState.IsKeyDown(Keys.Enter) && oldState.IsKeyUp(Keys.Enter))
             {
                 // Anfaller
-                if ((Keyboard.GetState().IsKeyDown(Keys.Enter) && mainBattleMenu.SelectorPositionX == 1 && mainBattleMenu.SelectorPositionY == 1))
+                if (( mainBattleMenu.SelectorPositionX == 1 && mainBattleMenu.SelectorPositionY == 1))
                 {
                     if (Game1.battleOpponent.Health <= 0)
                     {

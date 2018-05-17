@@ -15,6 +15,9 @@ namespace Itgspelprojekt.Abstrac_battle
     //Tors kod som kopplar battle
     abstract class Battle
     {
+        static protected LastAction lastAction;
+        static protected Turn turn;
+
         //variabler som örvs av subklasser
         protected animationForBattle battleAnimation, battleMenuAnimation, battleHealthbars;
         protected Texture2D battleTexture, menuBattle, healthMenuBattle;
@@ -23,6 +26,7 @@ namespace Itgspelprojekt.Abstrac_battle
         protected List<UI> UIList;
         protected SpriteBatch spriteBatch;
         protected SpriteFont spriteFont;
+        protected KeyboardState oldState, newState;
 
         public Battle(Texture2D background, Texture2D inventoryMenu, Texture2D healthMenu, controlForUI menyn, List<UI> listOfUI, Player player, SpriteBatch spriteBatch, SpriteFont spriteFont)
         {

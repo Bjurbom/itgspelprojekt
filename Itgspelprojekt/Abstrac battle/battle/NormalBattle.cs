@@ -20,19 +20,10 @@ namespace Itgspelprojekt.Abstrac_battle.battle
     class NormalBattle : Battle
     {
 
-        static protected LastAction lastAction;
-        static protected Turn turn;
-
-        static protected KeyboardState oldState, newState;
-
         Healthbars playersHealthbar;
         Healthbars EnemysHealthbat;
         PlayerssTurn playersTurn;
         EnemysTurn enemysTurn;
-
-        int timer;
-        
-
 
         public NormalBattle(Texture2D background,Texture2D inventoryMenu,Texture2D healthMenu, controlForUI menyn, List<UI> listOfUI, Player player, SpriteFont spriteFont, SpriteBatch spriteBatch) : base(background,inventoryMenu,healthMenu,menyn,listOfUI,player,spriteBatch,spriteFont)
         {
@@ -41,7 +32,7 @@ namespace Itgspelprojekt.Abstrac_battle.battle
 
             playersHealthbar = new Healthbars(player, new Vector2(150, 140),Color.Green);
             EnemysHealthbat = new Healthbars(Game1.battleOpponent, new Vector2(1100, 120), Color.Red);
-             playersTurn = new PlayerssTurn(battleTexture, menuBattle, healthMenuBattle, mainBattleMenu, UIList, player, spriteBatch, spriteFont);
+            playersTurn = new PlayerssTurn(battleTexture, menuBattle, healthMenuBattle, mainBattleMenu, UIList, player, spriteBatch, spriteFont);
 
         }
 
@@ -73,19 +64,25 @@ namespace Itgspelprojekt.Abstrac_battle.battle
 
                 playersHealthbar.Update(player);
                 EnemysHealthbat.Update(Game1.battleOpponent);
-               
+                
 
                 //om spelaren tur så skapas objecte samt kör update
                 if (turn == Turn.player)
                 {
+                    
                     playersTurn.Update(gameTime);
                     oldState = newState;
                 }
                 //transion till fiendens tur
-                if (turn == Turn.middle)
+                else if (turn == Turn.middle)
                 {
                     newState = Keyboard.GetState();
 
+                    if (Game1.battleOpponent.Health <= 0)
+                    {
+                        Game1.battleOpponent.canDoBattle = false;
+                        Game1.gamestate = Gamestate.ingame;
+                    }
 
                     if (newState.IsKeyDown(Keys.Enter) && oldState.IsKeyUp(Keys.Enter))
                     {
@@ -101,11 +98,7 @@ namespace Itgspelprojekt.Abstrac_battle.battle
                         }
                         else if (lastAction == LastAction.Pattack)
                         {
-                            if (Game1.battleOpponent.Health <= 0)
-                            {
-                                Game1.battleOpponent.canDoBattle = false;
-                                Game1.gamestate = Gamestate.ingame;
-                            }
+
 
                             //om man trycker på knappen så blir det fiendens tur
                             if (Keyboard.GetState().IsKeyDown(Keys.Enter))
@@ -121,7 +114,7 @@ namespace Itgspelprojekt.Abstrac_battle.battle
 
 
                 }
-                if (turn == Turn.enemey)
+                else if (turn == Turn.enemey)
                 {
                     enemysTurn = new EnemysTurn(battleTexture, menuBattle, healthMenuBattle, mainBattleMenu, UIList, player,spriteFont,spriteBatch);
                     enemysTurn.Update(gameTime);
@@ -182,10 +175,6 @@ namespace Itgspelprojekt.Abstrac_battle.battle
                 }
 
             }
-
-            
-          
-
         }
 
         private void AttackOnEnemyDraw(SpriteBatch spriteBatch)
