@@ -182,7 +182,7 @@ namespace Itgspelprojekt
 
                 player.PlayerUpdate();
                 player.Update();
-                CameraControls(); //camera controls
+       //         CameraControls(); //camera controls
 
                 foreach (Creature creature in creatures.creatures)
                 {
