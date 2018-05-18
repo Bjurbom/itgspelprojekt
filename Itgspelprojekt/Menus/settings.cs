@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 
 namespace Itgspelprojekt.Menus
 {
-    class Settings
+    class Settings // this class is used to pass the output of Settings.Update() to the caller
     {
         public bool debugActive;
         public int[] resolution;
