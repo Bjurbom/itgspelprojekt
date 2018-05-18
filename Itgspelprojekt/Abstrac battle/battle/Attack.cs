@@ -9,7 +9,7 @@ namespace Itgspelprojekt.Abstrac_battle.battle
 {
     static class Attack
     {
-        //Tors simpla statiska attack på fiende som kan användas globalt
+        //Tors simpla statiska attack på fiende
 
         /// <summary>
         /// gör en statisk klass som kan användas när en varelse anfaller en annan varalse

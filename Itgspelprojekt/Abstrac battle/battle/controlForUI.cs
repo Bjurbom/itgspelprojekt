@@ -22,7 +22,7 @@ namespace Itgspelprojekt.Abstrac_battle.battle
         protected double elapsedTime, interval;
 
         /// <summary>
-        /// 
+        /// sätter in inställningarna
         /// </summary>
         /// <param name="positionForCursior"> position för var pekaren ska va</param>
         /// <param name="sizeX"> storlek med X axen</param>

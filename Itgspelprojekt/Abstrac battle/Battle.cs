@@ -11,10 +11,17 @@ using System.Threading.Tasks;
 
 namespace Itgspelprojekt.Abstrac_battle
 {
-
     //Tors kod som kopplar battle
+
+    //enums skappas
+    enum Turn { player, enemey, middle }
+    enum LastAction { Pattack, stats, healing }
+
+
+ 
     abstract class Battle
     {
+        //sätter några enum
         static protected LastAction lastAction;
         static protected Turn turn;
 

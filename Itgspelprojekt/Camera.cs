@@ -23,6 +23,7 @@ namespace Itgspelprojekt
         float zoom = 1;
         float rotation = 0;
 
+        #region Properties
         public Matrix Transform
         {
             get
@@ -64,6 +65,7 @@ namespace Itgspelprojekt
             set
             {
                 zoom = value;
+                //gör så att man kan inte zooma ut föralltid (kan ändras)
                 if (zoom < 0.1f)
                 {
                     zoom = 0.1f;
@@ -82,16 +84,20 @@ namespace Itgspelprojekt
                 rotation = value;
             }
         }
+        #endregion
 
+        
         public Camera(Viewport viewport)
         {
             this.viewport = viewport;
         }
 
         public void Update(Vector2 position)
-        {
+        {   
+            //får centern av spelet
             center = new Vector2(position.X + 32, position.Y + 32);
 
+            //kamra rörelserna
             transform = Matrix.CreateTranslation(new Vector3(-center.X, -center.Y, 0)) * Matrix.CreateRotationZ(Rotation) * Matrix.CreateScale(Zoom, Zoom, 0) * Matrix.CreateTranslation(new Vector3(viewport.Width / 2, viewport.Height / 2, 0));
          }
 

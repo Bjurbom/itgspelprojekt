@@ -11,10 +11,10 @@ using MonoGame.Extended;
 
 namespace Itgspelprojekt.Abstrac_battle.battle
 {
-    enum Turn { player, enemey, middle}
+   
 
     //lägg till mer funktioner som  i denna enum
-    enum LastAction { Pattack, stats, healing}
+    
 
 
     class NormalBattle : Battle
