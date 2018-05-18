@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Xml;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input; // unnecessary
 using Itgspelprojekt.Creatures;
 
 namespace Itgspelprojekt.XML
@@ -18,7 +17,11 @@ namespace Itgspelprojekt.XML
 
         // Tommies mirakulösa XML-läsande kod
 
-        public List<List<int>> ReadResolutions()
+        /// <summary>
+        /// Read the resolutions from Resolutions.XML and output them as a list of (lists of 2 integers each)
+        /// </summary>
+        /// <returns></returns>
+        public List<List<int>> ReadResolutions() // Code herein should be pretty self-explanatory
         {
             List<List<int>> resolutions = new List<List<int>>();
 
@@ -31,14 +34,14 @@ namespace Itgspelprojekt.XML
             try
             {
                 reader.MoveToContent();
-                // Parse the file and display each of the nodes.
+
                 while (reader.Read())
                 {
                     while (reader.ReadToFollowing("resolution") != false)
                     {
                         string s = reader.ReadElementContentAsString();
 
-                        string[] resolution = s.Split(','); // Split position, e.g. "1337, 420" into "1337" and " 420", both of which can be correctly parsed as floats
+                        string[] resolution = s.Split(','); // Split resolution into two seperate integers that can be individually parsed.
                         resolutions.Add(new List<int>());
                         resolutions[resolutions.Count - 1].Add(int.Parse(resolution[0]));
                         resolutions[resolutions.Count - 1].Add(int.Parse(resolution[1]));
@@ -55,7 +58,13 @@ namespace Itgspelprojekt.XML
             }
         }
 
-        public string ParseCreaturesFile(Microsoft.Xna.Framework.Content.ContentManager contentManager)
+        /// <summary>
+        /// Read the creatures from Creatures.XML and add them to the creatures list which Game1 takes them from.
+        /// Returns an error message, if there was one. Else returns string.empty
+        /// </summary>
+        /// <param name="contentManager"></param>
+        /// <returns></returns>
+        public string ParseCreaturesFile(Microsoft.Xna.Framework.Content.ContentManager contentManager) // this code should also be fairly self-explanatory
         {
             try
             {
@@ -71,7 +80,7 @@ namespace Itgspelprojekt.XML
                 XmlReader reader = XmlReader.Create("XML/creatures.xml", settings);
 
                 reader.MoveToContent();
-                // Parse the file and display each of the nodes.
+
                 while (reader.Read())
                 {
                     while (reader.ReadToFollowing("Creature") != false)
@@ -85,9 +94,9 @@ namespace Itgspelprojekt.XML
                         reader.ReadToFollowing("startingPosition");
                         position = reader.ReadElementContentAsString();
 
-                        string[] pos = position.Split(','); // Split position, e.g. "1337, 420" into "1337" and " 420", both of which can be correctly parsed as floats
-                        creatures.Add(new Creature(name, new Vector2(float.Parse(pos[0]), float.Parse(pos[1])),
-                                      moveSpeed, contentManager.Load<Texture2D>(texture)));
+                        string[] pos = position.Split(','); // Split position into two seperate floats that can be individually parsed
+                        creatures.Add(new Creature(name, new Vector2(float.Parse(pos[0]), float.Parse(pos[1])), // name, position
+                                      moveSpeed, contentManager.Load<Texture2D>(texture))); // moveSpeed, texture
                     }
                 }
                 reader.Dispose();

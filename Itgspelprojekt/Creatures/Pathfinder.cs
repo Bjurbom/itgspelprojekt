@@ -12,13 +12,13 @@ namespace Itgspelprojekt.Creatures
     {
         // Tommies fina pathfinding kod
 
-        List<List<Node>> node = new List<List<Node>>(); // public so the distance to each tile can be written on the map, for debugging and because it looks interesting :)
+        private List<List<Node>> node = new List<List<Node>>();
 
         List<int> distancesX = new List<int>(); // these lists are used by A*
         List<int> distancesY = new List<int>();
         List<double> distancesDistance = new List<double>();
 
-        public string errorMessage = String.Empty;
+        public string errorMessage = String.Empty; // This is appended to the string errorMessage in Game1, which is displayed in the top-left corner of the game
 
 
         /// <summary>
@@ -74,9 +74,10 @@ namespace Itgspelprojekt.Creatures
             int activeX = startPosX;
             int activeY = startPosY;
 
-            if (activeX < 1 | activeX >= level.map.GetLength(1) | activeY < 1 | activeY >= level.map.GetLength(0))
+            if (startPosX < 1 | startPosX >= level.map.GetLength(1) | startPosY < 1 | startPosY >= level.map.GetLength(0) |
+                endPosX < 1 | endPosX >= level.map.GetLength(1) | endPosY < 1 | endPosY >= level.map.GetLength(0))
             {
-                throw new Exception("lol y u make start pos so near the edge of the map bro. Don't make start pos on map edge bRo.");
+                throw new Exception("Pathfinding start or end is on the map edge. Add padding to the map to fix this.");
             }
 
             int loopCounter = 0; // This counter is used to throw exceptions when the game gets stuck in endless loops.
@@ -147,7 +148,7 @@ namespace Itgspelprojekt.Creatures
 
                 if (loopCounter >= 3000)
                 {
-                    throw new Exception("got stuck in a (presumably) never-ending loop.");
+                    throw new Exception("Got stuck in a (presumably) never-ending loop.");
                 }
 
             }
@@ -194,7 +195,7 @@ namespace Itgspelprojekt.Creatures
 
                 if (loopCounter >= 400)
                 {
-                    throw new Exception("got stuck in a (presumably) never-ending loop.");
+                    throw new Exception("Got stuck in a (presumably) never-ending loop.");
                 }
             }
             while (coordinates[coordinates.Count - 1] != new Vector2(startPosX * 64, startPosY * 64)); // while the start position has not been added to the list
@@ -204,14 +205,16 @@ namespace Itgspelprojekt.Creatures
             return coordinates;
         }
 
-        // Sorts the distances lists, with lower distance values being closer to the end of the lists.
+        /// <summary>
+        /// Sorts the distances lists, with lower distance values being closer to the end of the lists.
+        /// </summary>
         private void SortDistances()
         {
             for (int i = distancesDistance.Count - 1; i > 0; i--) // sort the lists from end to beginning.
             {
-                if (distancesDistance[i] > distancesDistance[i - 1])
+                if (distancesDistance[i] > distancesDistance[i - 1]) // Swap distancesLists[i] with distancesLists[i-1]
                 {
-                    double d = distancesDistance[i - 1]; // Swap distancesLists[i] with distancesLists[i-1]
+                    double d = distancesDistance[i - 1];
                     distancesDistance[i - 1] = distancesDistance[i];
                     distancesDistance[i] = d;
                     int x = distancesX[i - 1];
@@ -225,8 +228,15 @@ namespace Itgspelprojekt.Creatures
                     break;
             }
         }
-        
-        // This method calculates the value of a single node in the A* algorithm.
+
+
+        /// <summary>
+        /// This method calculates the value of a single node in the A* algorithm.
+        /// </summary>
+        /// <param name="valueX"></param>
+        /// <param name="valueY"></param>
+        /// <param name="targetX"></param>
+        /// <param name="targetY"></param>
         public void CalculateAStarNode(int valueX, int valueY, int targetX, int targetY)
         {
             if (node[valueX][valueY].calculated) // if the node has already been calculated
@@ -271,7 +281,13 @@ namespace Itgspelprojekt.Creatures
 
         }
 
-
+        /// <summary>
+        /// Old pathfinding algorithm.
+        /// </summary>
+        /// <param name="startingPosition"></param>
+        /// <param name="endPosition"></param>
+        /// <param name="useCalDiamond"></param>
+        /// <returns></returns>
         public List<Vector2> OldPathfinding(Vector2 startingPosition, Vector2 endPosition, bool useCalDiamond)
         {
             int startPosX = (int)((startingPosition.X + 1) / 64); // Convert coordinates so that one tile is 1x1 large.
@@ -318,7 +334,7 @@ namespace Itgspelprojekt.Creatures
                 coordinates.Add(new Vector2(lastX * 64, lastY * 64));
                 if (loopCounter >= 1000)
                 {
-                    throw new Exception("got stuck in a (presumably) never-ending loop.");
+                    throw new Exception("Got stuck in a (presumably) never-ending loop.");
                 }
             }
             while (coordinates[coordinates.Count - 1] != new Vector2(startPosX * 64, startPosY * 64)); // while the start position has not been added to the list
@@ -328,7 +344,7 @@ namespace Itgspelprojekt.Creatures
         }
 
         /// <summary>
-        /// Calculate the route in the shape of a diamond.
+        /// Old pathfinding algorithm. Calculates the route in the shape of a diamond.
         /// </summary>
         /// <param name="node"></param>
         /// <param name="endPosX"></param>
@@ -361,7 +377,7 @@ namespace Itgspelprojekt.Creatures
 
                 if (loopCounter > 20)
                 {
-                    throw new Exception("got stuck in a (presumably) never-ending loop.");
+                    throw new Exception("Got stuck in a (presumably) never-ending loop.");
                 }
             }
             while (node[endPosX][endPosY].distanceTraversed == int.MaxValue);
@@ -408,17 +424,19 @@ namespace Itgspelprojekt.Creatures
                 }
             }
         }
-
-        // This method is used by the older pathfinding algorithms, CalRoutes and CalDiamond
-        // It sets the nodes precedingNode values to the neighbouring node with the lowest distanceTraversed, ...
-        // ... and sets the nodes own distanceTraversed to equal that nodes distanceTraversed + 1
-
+        
+        /// <summary>
+        /// This method is used by the older pathfinding algorithms, CalRoutes and CalDiamond
+        /// It sets the nodes precedingNode values to the neighbouring node with the lowest distanceTraversed, and sets the nodes own distanceTraversed to equal that nodes distanceTraversed + 1
+        /// </summary>
+        /// <param name="i"></param>
+        /// <param name="j"></param>
         private void CalculateNodeValue(int i, int j)
         {
             if (i < 1 | i >= level.map.GetLength(1) - 1 | j < 1 | j >= level.map.GetLength(0) - 1) // prevents out-of-range exceptions. Unnecessary for CalRoutes, only CalDiamond
             { } // do nothing
 
-            else if (!node[i][j].isOpen || // if node[i][j] is closed, i.e.not accessible
+            else if (!node[i][j].isOpen || // if node[i][j] is closed, i.e.not accessible, i.e. this node is a wall
                node[i][j].distanceTraversed <= node[i + 1][j].distanceTraversed && // if node[i][j].distanceTraversed is lower than all of its neighbours' distanceTraversed
                node[i][j].distanceTraversed <= node[i - 1][j].distanceTraversed &&
                node[i][j].distanceTraversed <= node[i][j + 1].distanceTraversed &&
@@ -478,8 +496,8 @@ namespace Itgspelprojekt.Creatures
     {
         public int precedingNodeX, precedingNodeY;
         public int distanceTraversed = 2000000000; // in amount of nodes. tile = 1x1
-        public double distance; // distanceLeft+distanceTraversed.
-        public bool isOpen = true; // if false, node is a dead end
+        public double distance; // distance left + distanceTraversed.
+        public bool isOpen = true; // A* uses this to remember if a node has been partially calculated. Older algorithms use it to remember if node is a wall.
         public bool calculated = false; // Indicates whether or not the nodes values (precedingNode, distanceLeft, distanceTraversed) have already been calculated.
         public int tileTypeID; // what type of tile is on the map at this node
 
