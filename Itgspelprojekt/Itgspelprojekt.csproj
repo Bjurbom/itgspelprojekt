@@ -50,6 +50,7 @@
     <Compile Include="Abstrac battle\battle\Attack.cs" />
     <Compile Include="Abstrac battle\battle\PlayersAction\PlayersTurn.cs" />
     <Compile Include="Abstrac battle\battle\UI.cs" />
+    <Compile Include="Bas klass.cs" />
     <Compile Include="Camera.cs" />
     <Compile Include="Creatures\Creature.cs" />
     <Compile Include="XML\XMLReader.cs" />

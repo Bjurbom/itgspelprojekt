@@ -8,11 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 namespace Itgspelprojekt 
 {
-        class Meny_item //kalle
+        class Meny_item : Bas_klass //kalle
         {
             public bool chosen = false;
-            Texture2D texture, textureChosen;
-            Vector2 position;
             public Gamestate state;
 
 

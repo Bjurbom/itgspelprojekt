@@ -10,13 +10,10 @@ using System.Threading.Tasks;
 
 namespace Itgspelprojekt
 {
-        class Meny //kalle
+        class Meny : Bas_klass //kalle
 
         {
             MouseState mouseState;
-
-            Texture2D menytexture;
-            Vector2 position;
             public List<Meny_item> items = new List<Meny_item>();
 
             public Meny(ContentManager bilder)
