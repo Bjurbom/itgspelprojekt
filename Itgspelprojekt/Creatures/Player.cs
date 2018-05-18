@@ -73,11 +73,14 @@ namespace Itgspelprojekt.Creatures
             goingDown = false;
         }
 
+        //När nån av rectanlarna intersektar med en av collisionTilesen (går alltid)
         public void PlayerHitdetection(CollisionTiles item, Camera camera)
         {
             Collision(item, camera);
         }
 
+        //hitboxen
+        #region Hitbox
         private void Collision(CollisionTiles item, Camera camera)
         {
             if (hitboxUp.Intersects(item.Rectangle))
@@ -132,6 +135,10 @@ namespace Itgspelprojekt.Creatures
             }
             if (Hitbox.Intersects(item.Rectangle))
             {
+                //protoyp för att test battle mod
+                //används inte
+                
+                /*
                 if (item.Id == 3)
                 {
                     // Zoom in effekt
@@ -151,9 +158,12 @@ namespace Itgspelprojekt.Creatures
                     }
 
                 }
-                
+               */ 
 
             }
+            #endregion
+
+
         }
     }
 }
